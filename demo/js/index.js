@@ -83,19 +83,20 @@
 		return _array.length ? Math.floor(Math.random() * _array.length) : -1;
 	}
 
-	var randomNameArray = ['沙县旅馆团','宿舍旷课军团','光棍和尚社'];
+	var randomNameArray = ['沙县旅馆团', '宿舍旷课军团', '光棍和尚社'];
 
-	var userName ; //用户名
+	var userName; //用户名
 
 	//b1======
 
 	//随机获取名字
-	function randomUserName(){
+	function randomUserName() {
 		var _random = getRandomIndex(randomNameArray);
 		userName = randomNameArray[_random];
 		$('.search__input').val(userName);
 		console.log('userName:', userName);
 	}
+
 	randomUserName();
 
 
@@ -117,15 +118,15 @@
 	}
 
 	//获取输入文本框长度
-	function getStringLength(str,maxstrlen) {
+	function getStringLength(str, maxstrlen) {
 		var myLen = 0;
 		var i = 0;
-		for (; (i < maxstrlen) ; i++) {
+		for (; (i < maxstrlen); i++) {
 			console.log(i);
 			console.log(str.charCodeAt(i));
-			if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128){
+			if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128) {
 				myLen++;
-			}else{
+			} else {
 				myLen += 2;
 			}
 		}
@@ -161,7 +162,7 @@
 	});
 
 	//文本框
-	$('.search__input').on('keyup',function(e){
+	$('.search__input').on('keyup', function (e) {
 		console.log(e.key);
 		//console.log(e.keyCode);
 		//
@@ -171,22 +172,22 @@
 
 		//console.log(this.value);
 		//getStringLength(this.value,16);
-		limit(this,16);
+		limit(this, 16);
 		//return false;
 	});
 
 	//冒险按钮
-	$('.search__submit').on('click',function(){
-	  userName = $.trim($('.search__input').val());
+	$('.search__submit').on('click', function () {
+		userName = $.trim($('.search__input').val());
 
-	  if(!userName){
-		  $('.autoText').html('请输入完整团队名称!');
-		  showWinFrame('.auto-win');
-	  }else{
-		  //next page
-	  }
+		if (!userName) {
+			$('.autoText').html('请输入完整团队名称!');
+			showWinFrame('.auto-win');
+		} else {
+			//next page
+		}
 
-	  return false;
+		return false;
 	});
 
 
@@ -246,16 +247,16 @@
 	});
 
 
-	$('.part').on('click',function(){
-	    $('.b3-userName')[0].innerHTML = '“' + userName + '”';
+	$('.part').on('click', function () {
+		$('.b3-userName')[0].innerHTML = '“' + userName + '”';
 		showWinFrame('.b3-win');
-	  return false;
+		return false;
 	});
 
 	//next to page
-	$('.b3-win-btn').on('click',function(){
+	$('.b3-win-btn').on('click', function () {
 
-	  return false;
+		return false;
 	});
 
 	//b3======
@@ -401,7 +402,7 @@
 	var taskStep = 0;         // 任务完成度
 	var $rotes = $('.rote');  // 中间人物
 	//返回已经完成任务度
-	function getTaskProgress(){
+	function getTaskProgress() {
 		return $('.task-progress').find('.cur').length;
 	}
 
@@ -413,7 +414,7 @@
 	//返回正确答案数组
 	function getAnswerArray(typeString) {
 		var _temp = [];
-		$('.rotes').find('[data-group="' + typeString + '"]').each(function(){
+		$('.rotes').find('[data-group="' + typeString + '"]').each(function () {
 			_temp.push(this.getAttribute('data-group'))
 		});
 		return _temp.toString();
@@ -421,11 +422,10 @@
 
 
 	//重置状态
-	function resetSelectIco(){
+	function resetSelectIco() {
 		answerArray = [];
-		$('.skill').attr('data-state','0');
+		$('.skill').attr('data-state', '0');
 	}
-
 
 
 	$('.rotes').on('click', 'a', function () {
@@ -437,12 +437,12 @@
 		console.log('taskStep:', taskStep);
 
 
-		if(taskStep > 2){
+		if (taskStep > 2) {
 			console.log('已经完成任务');
-		}else{
+		} else {
 
-			 _state = this.getAttribute("data-state");   //点击状态
-			 _answerValue = this.getAttribute("data-group");   // 任务a,b,c 的数组答案
+			_state = this.getAttribute("data-state");   //点击状态
+			_answerValue = this.getAttribute("data-group");   // 任务a,b,c 的数组答案
 			//console.log(this, _state);
 
 
@@ -457,33 +457,61 @@
 				//pop
 				this.setAttribute("data-state", "0");
 				if (_answerValue) {
-					answerArray.pop(_answerValue)
+					for (var i = 0, l = answerArray.length; i < l; i++) {
+						//(function (i) {
+						console.log('answerArray[i]:', i, answerArray[i]);
+						if (answerArray[i] === _answerValue) {
+							answerArray.splice(i, 1);
+							break;
+						}
+						//})(i)
+					}
+					console.log('answerArray:', answerArray);
+					//answerArray.pop(_answerValue)
 				}
 			}
 
-			console.log('answerArray:',answerArray.toString());
-			console.log('all:',getAnswerArray('a'));
+			console.log('answerArray:', answerArray.toString());
 
-			switch (taskStep){
+
+			switch (taskStep) {
 				case 0:
+					console.log('all:', getAnswerArray('a'));
 					if (answerArray.toString() === getAnswerArray('a')) {
 						$('.task-progress').children().eq(0).addClass('cur');
 						resetSelectIco();
 						$rotes.eq(0).hide();
-						$rotes.eq(1).css({'visibility':'visible'});
+						$rotes.eq(1).css({'visibility': 'visible'});
+						$('.select-tips').css({'visibility': 'hidden'});
+					} else {
+						if (answerArray.length >= 3) {
+							$('.select-tips').css({'visibility': 'visible'});
+						} else {
+							$('.select-tips').css({'visibility': 'hidden'});
+						}
+
 					}
 					//
 					break;
 				case 1:
+					console.log('all:', getAnswerArray('b'));
 					if (answerArray.toString() === getAnswerArray('b')) {
 						$('.task-progress').children().eq(1).addClass('cur');
 						resetSelectIco();
 						$rotes.eq(1).hide();
-						$rotes.eq(2).css({'visibility':'visible'});
+						$rotes.eq(2).css({'visibility': 'visible'});
+						$('.select-tips').css({'visibility': 'hidden'});
+					} else {
+						if (answerArray.length >= 3) {
+							$('.select-tips').css({'visibility': 'visible'});
+						} else {
+							$('.select-tips').css({'visibility': 'hidden'});
+						}
 					}
 					//
 					break;
 				case 2:
+					console.log('all:', getAnswerArray('c'));
 					if (answerArray.toString() === getAnswerArray('c')) {
 						$('.task-progress').children().eq(2).addClass('cur');
 						resetSelectIco();
@@ -494,6 +522,13 @@
 
 						//显示结果按钮
 						$('.j-result-btn').show();
+						$('.select-tips').css({'visibility': 'hidden'});
+					} else {
+						if (answerArray.length >= 3) {
+							$('.select-tips').css({'visibility': 'visible'});
+						} else {
+							$('.select-tips').css({'visibility': 'hidden'});
+						}
 					}
 					//
 					break;
@@ -503,11 +538,7 @@
 			}
 
 
-
-
 		}
-
-
 
 
 		//check
@@ -528,12 +559,26 @@
 	});
 
 
-
 	//设置随机职业结果
-	function setJob(){
-		var _random =  Math.floor(Math.random() * 5); //获取 0 ~ 5 随机数
+	function setJob() {
+		var _random = Math.floor(Math.random() * 5); //获取 0 ~ 5 随机数
 		$('.jobs').eq(_random).show();
 	}
+
+	//分享按钮
+	//$('.share-code')
+	$('.share-code').on('click', function () {
+		var $share = $('.share-bar');
+		console.log($share.is(":hidden"));
+		if ($share.is(":hidden")) {
+			$share.show();
+			//$share.css({'visibility': 'hidden'});
+		} else {
+			$share.hide();
+			//$share.css({'visibility': 'visible'});
+		}
+		return false;
+	});
 
 });
 

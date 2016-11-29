@@ -74,7 +74,7 @@ body { background-color: #f0f0f0; }
 .block1 .job-tips__text:after { right: 0; background-image: url(../images/fr.png); }
 .block1 .job-tips .text-cont { box-sizing: border-box; position: relative; z-index: 2; padding: 11px 10px 0 10px; width: 220px; height: 86px; text-align: justify; line-height: 1.35; opacity: 0; -webkit-transition: opacity .3s ease-out; transition: opacity .3s ease-out; visibility: hidden; }
 .block1 .job-full-ico { position: absolute; top: -12px; left: 50%; z-index: 3; margin-left: -56px; width: 112px; -webkit-transform: rotate(0deg); -ms-transform: rotate(0deg); transform: rotate(0deg); -webkit-transition: opacity .3s ease-out,-webkit-transform .3s ease-out; transition: opacity .3s ease-out,transform .3s ease-out; }
-.block1 .job-icoLeft, .block1 .job-icoRight { position: absolute; top: 0; width: 0; visibility: hidden; height: 86px; background-color: rgba(254, 216, 83, 0.34); -webkit-transition: all .3s ease-out; transition: all .3s ease-out; }
+.block1 .job-icoLeft, .block1 .job-icoRight { position: absolute; top: 0; width: 0; visibility: hidden; height: 86px; background-color: rgba(249, 226, 172, 0.56); -webkit-transition: all .3s ease-out; transition: all .3s ease-out; }
 .block1 .job-icoLeft:before, .block1 .job-icoRight:before { content: ''; position: absolute; top: -12px; width: 58px; height: 111px; }
 .block1 .job-icoLeft { left: 50%; }
 .block1 .job-icoLeft:before { left: -57px; background: url(../images/job-icoLeft.png) no-repeat 0 50%; }
@@ -216,9 +216,10 @@ body { background-color: #f0f0f0; }
 .block4 .text { padding-top: 18px; font-size: 14px; line-height: 1.6; color: #b18e6e; }
 .block4 .text .highlight { color: #fbe101; }
 .block4 .rotes { position: absolute; top: 205px; left: 126px; width: 450px; height: 451px; }
+.block4 .rotes .select-tips { position: absolute; top: 128px; left: 50%; margin-left: -81px; width: 162px; height: 140px; visibility: hidden; }
 .block4 .rotes .rote { position: absolute; top: 0; left: 0; visibility: hidden; }
 .block4 .rotes .rote:first-child { visibility: visible; }
-.block4 .result-btn { display: none; position: absolute; top: 692px; left: 818px; width: 280px; height: 48px; line-height: 48px; font-size: 22px; text-align: center; color: #b18e6e; cursor: pointer; background: url(../images/result-btn.png); }
+.block4 .result-btn { display: none; position: absolute; top: 546px; left: 795px; width: 280px; height: 48px; line-height: 48px; font-size: 22px; text-align: center; color: #b18e6e; cursor: pointer; background: url(../images/result-btn.png); }
 .block4 .skill { position: absolute; width: 89px; height: 89px; cursor: pointer; }
 .block4 .skill .skill-des { visibility: hidden; box-sizing: border-box; position: absolute; z-index: 8; top: -126px; left: -46px; padding: 8px 14px 0 18px; width: 244px; height: 131px; text-align: justify; opacity: 0; -webkit-transition: opacity .3s linear; transition: opacity .3s linear; background: url(../images/skill-des-bg.png); }
 .block4 .skill .skill-name { display: block; line-height: 1.8; color: #f9e286; font-size: 20px; }
@@ -239,7 +240,7 @@ body { background-color: #f0f0f0; }
 .block4 .skill.skill10 { top: 52px; left: -55px; }
 .block4 .skill.skill11 { top: -49px; left: 47px; }
 .block4 .skill.skill12 { top: -87px; left: 182px; }
-.block4 .task-progress { position: absolute; bottom: 223px; right: 96px; }
+.block4 .task-progress { position: absolute; bottom: 102px; right: 72px; }
 .block4 .task-progress:before { content: ''; position: absolute; top: -40px; left: -118px; width: 99px; height: 90px; background: url(../images/b4-task-btn.png) no-repeat 0 0; }
 .block4 .task-progress > li { float: left; margin-right: 3px; width: 86px; height: 18px; background-color: #fff; }
 .block4 .task-progress > li.cur { background-color: #04fdb4; }
@@ -264,7 +265,7 @@ body { background-color: #f0f0f0; }
 #rwt_share { float: none; margin: 0; padding: 0; height: auto; width: auto; overflow: hidden; }
 #rwt_share:after { content: ''; display: table; clear: both; }
 
-body .share-bar { position: absolute; top: 370px; left: 360px; height: auto; }
+body .share-bar { display: none; position: absolute; top: 370px; left: 360px; height: auto; }
 body .share-bar > span { display: none; font-size: 12px; padding-bottom: 16px; }
 body .share-bar .rwt_share a { position: static; margin-right: 7px; margin-bottom: 7px; padding-top: 44px; width: 46px; height: 38px; text-indent: initial; cursor: pointer; text-align: center; color: #51371e; font-size: 12px; white-space: nowrap; background-repeat: no-repeat; background-position: 50% 0; -webkit-transition: all .2s ease-out; transition: all .2s ease-out; }
 body .share-bar .rwt_share .weixin-ico { background-image: url(../images/weixin-ico.png); }
