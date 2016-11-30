@@ -13,16 +13,18 @@
 	//	}
 	//});
 
-	function cretaMask() {
+	function cretaMask(callback) {
 		window.$mask = window.$mask || $('<div class="mask" style="position: absolute;top:0;left: 0;right: 0;bottom: 0;z-index:9;min-width: 100%;background-color: rgb(0, 0, 0);opacity: .8;"></div>');
 		$mask.css({"height": $(document).height()});
 		$('body').append($mask);
 		$mask.on('click', function () {
 			hideWinFrame();
+			if(callback && typeof callback === 'function'){
+				callback();
+			}
 		});
 		$mask.fadeIn();
 	}
-
 //隐藏窗口
 	function hideWinFrame() {
 		$mask.fadeOut();
@@ -41,24 +43,6 @@
 		});
 		$('.j-win').fadeOut();
 	});
-
-
-	//$('.button__rotate-get').on('click',function(){
-	//    showWinFrame('.win__share');
-	//  return false;
-	//});
-	/*
-
-	 $('.button__rotate-tao,.button__rotate-get,.j_get_btn').on('click',function(){
-	 showWinFrame('.win__code');
-	 return false;
-	 });
-
-	 $('.button__rotate-end').on('click',function(){
-	 showWinFrame('.win__end');
-	 return false;
-	 });
-	 */
 
 
 	//返回顶部
@@ -83,10 +67,24 @@
 		return _array.length ? Math.floor(Math.random() * _array.length) : -1;
 	}
 
+	//滚动指定位置
+	function toScroll(id,callback){
+		var $target = $(id);
+		$target.show();
+		setTimeout(function(){
+			$('html,body').animate({"scrollTop":$target.offset().top});
+			if(callback && typeof callback === 'function'){
+				callback();
+			}
+		},300);
+	}
+
+
 	var randomNameArray = ['沙县旅馆团', '宿舍旷课军团', '光棍和尚社'];
 
 	var userName; //用户名
 
+	var openViewTab = 1; //默认打开的是挑战 tab页
 	//b1======
 
 	//随机获取名字
@@ -138,7 +136,14 @@
 		$('.video-rotate').addClass('ani-paused');
 		$('body').css('overflow', 'hidden');
 		// $('.mask, .video').show();
-		showWinFrame('.video');
+		//showWinFrame('.video');
+		cretaMask(function(){
+			$('#video').empty();
+			$('.video-rotate').removeClass('ani-paused');
+			$('body').css('overflow', 'visible');
+		});
+		$('.video').show();
+
 		createVideo({
 			id: "video",
 			autoplay: true,
@@ -184,6 +189,7 @@
 			$('.autoText').html('请输入完整团队名称!');
 			showWinFrame('.auto-win');
 		} else {
+			toScroll('#nav2');
 			//next page
 		}
 
@@ -196,13 +202,16 @@
 	//b2========
 	//任务
 	$('.b2-bt1').on('click', function () {
-
+		showWinFrame('.ta-task-win');
 		return false;
 	});
 
 	//秘境
 	$('.b2-bt2').on('click', function () {
-
+		toScroll('#nav3',function(){
+			openViewTab = 2;
+			p3init();
+		});
 		return false;
 	});
 
@@ -211,19 +220,29 @@
 
 
 	//b3======
+	function p3init() {
+		$('.b3-box').mstab({
+			"event": "click",
+			"hd": ".switch-tabs",
+			"hdElement": "a",
+			"view": openViewTab,
+			"cont": ".switch-cont .in-cont",
+			"callback":function(index){
+				console.log(index);
+				if(index === 0 && typeof slider_btn === 'undefined'){
+					touchSlidingBox({
+						id: 'slider',
+						operate: 'slider_btn'
+					});
+					console.log('创建slider---by:mstab');
+				}
+			}
+		});
+	}
 
-	$('.b3-box').mstab({
-		"event": "click",
-		"hd": ".switch-tabs",
-		"hdElement": "a",
-		"cont": ".switch-cont .in-cont"
-	});
 
 
-	touchSlidingBox({
-		id: 'slider',
-		operate: 'slider_btn'
-	});
+
 
 
 	$('.b3-video-btn').on('click', function () {
@@ -240,14 +259,19 @@
 		return false;
 	});
 
-
+	//-----任务挑战
 	$('.answer-list').on('click', 'a', function () {
 		$(this).addClass('cur').siblings().removeClass('cur');
+		var value = this.getAttribute("data-answer");
+		if (value === 'b') {
+			 $('.part-box').attr('data-state','show');
+		}
+
 		return false;
 	});
 
-
-	$('.part').on('click', function () {
+	//礼包按钮
+	$('.part-btn').on('click', function () {
 		$('.b3-userName')[0].innerHTML = '“' + userName + '”';
 		showWinFrame('.b3-win');
 		return false;
@@ -255,7 +279,8 @@
 
 	//next to page
 	$('.b3-win-btn').on('click', function () {
-
+		hideWinFrame();
+		toScroll('#nav4');
 		return false;
 	});
 
@@ -330,22 +355,69 @@
 		taList.eq(index).addClass('cur').siblings().removeClass('cur');
 	}
 
-
+	console.log('slider_btn:', typeof slider_btn);
 	$('.ta-bar').on('click', 'a', function () {
-		showWinFrame('.ta-win');
-		return false;
-	});
+		var _type = this.getAttribute("data-type");
+		var _winString = '';
+		var openWin = !0;
+		switch (_type){
+			case 'mx': //冒险
+				_winString = '.ta-' + 'mx' + '-win';
+				$('.b2-userName')[0].innerHTML = '“' + userName + '”';
+				break;
+			case 'tz': //挑战
+				openWin = !1;
+				toScroll('#nav3',function(){
+					openViewTab = 1;
+					p3init();
 
+					if(typeof slider_btn === 'undefined'){
+						touchSlidingBox({
+							id: 'slider',
+							operate: 'slider_btn'
+						});
+						console.log('创建slider-:by--> 挑战');
+					}
+					//touchSlidingBox({
+					//	id: 'slider',
+					//	operate: 'slider_btn'
+					//});
 
-	//-----任务挑战
-	$('.answer-list').on('click', 'a', function () {
-		var value = this.getAttribute("data-answer");
-		if (value === 'b') {
-			console.log('答对了!');
+					console.log('slider_btn:', slider_btn);
+				});
+				break;
+			case 'ts':  //天神
+				_winString = '.ta-' + 'ts' + '-win';
+				break;
+			case 'yx':  //英雄
+				_winString = '.ta-' + 'yx' + '-win';
+				break;
+			case 'gh':  //公会
+				_winString = '.ta-' + 'gh' + '-win';
+				break;
+			case 'bjx':  //补给箱
+				_winString = '.ta-' + 'bjx' + '-win';
+				break;
+			default:
+				break;
+		}
+		if(openWin){
+			showWinFrame(_winString);
 		}
 		return false;
 	});
 
+
+
+	/*$('.answer-list').on('click', 'a', function () {
+		var value = this.getAttribute("data-answer");
+		if (value === 'b') {
+			//console.log('答对了!');
+			showWinFrame('.b3-win')
+		}
+		return false;
+	});
+*/
 
 	//------------b4
 	//---对话流程

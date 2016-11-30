@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title></title>
+    <!--@block:full-->
+    <script type="text/javascript">
+        var win_width = window.innerWidth || document.documentElement.clientWidth;
+        var win_height = window.innerHeight || document.documentElement.clientHeight;
+        var radio = win_height / win_width;
+        //1.425
+        radio = radio < 1.48 ? 1.625 : radio > 1.625 ? 1.625 : radio;
+        var maxwidth = win_height / radio;
+        if (win_height / win_width <= radio) {
+            win_width = maxwidth;
+        }
+        document.documentElement.style.fontSize = (win_width / 800 > 1 ? 1 : win_width / 800) * 100 + 'px';
+    </script>
+    <!--@end-->
+	<!-- @block:load-style -->
+    <style>
+        body{background-color:#000;}
+        /*html{font-size:100px;}*/
+        .main{position:relative;z-index:0;width:100%;height:100%;overflow:hidden;margin:0 auto;box-sizing:border-box;-webkit-box-sizing:border-box;}
+        .load-page{position:absolute;top:0;left:0;right:0;bottom:0;z-index:9999;background-color:#fff;font-family:'Microsoft YaHei'}
+        .loading-mode{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-100%);transform:translate(-50%,-100%);width:5.56rem;text-align:center}
+        .loading-bar{position:relative;box-sizing:border-box;margin:1rem auto .2rem;padding:0.1rem;width:5.56rem;height:1rem;text-align:left;overflow:hidden}
+        .loading-bar:before{content:'';position:absolute;top:0;left:0;z-index:2;width:100%;height:100%;background:url(images/load-bg.png) no-repeat 0 0;background-size:contain}
+        .loading-bars{position:relative;border-radius:12px 0 0 12px;height:100%;background:#DADADA;overflow:hidden}
+        .load-text{color:#fff;font-size:.36rem}
+        .load-text{box-sizing:border-box;position:absolute;top:0;left:0;z-index:0;padding-top:.16rem;padding-left:.2rem;width:100%;height:100%;background-color:#F25657}
+        .logo{display:block;margin:0 auto;padding-top:.7rem;width:2.85rem}
+        .logo img{width:2.85rem;}
+        .animated{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.animated.infinite{-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite}
+        .animated.hinge{-webkit-animation-duration:2s;animation-duration:2s}
+    </style>
+	<!-- @end -->
+    <link rel="stylesheet" href="css/index.css"/>
+</head>
+<body>
+<!--主要页面-->
+<div class="main swiper-container">
+    <!--加载层-->
+	<!-- @block:load-page -->
+    <div class="load-page">
+        <div class="loading-mode">
+            <div class="loading-bar">
+                <div class="loading-bars" id="loading_bars">
+                    <p class="load-text"><span class="bf" id="percent_num">0</span>%</p>
+                </div>
+            </div>
+            <a href="http://www.appgame.com/" class="logo"><img src="images/appgame.png" alt=""></a>
+        </div>
+    </div>
+    <!-- @end -->
+
+    <!--音乐按钮-->
+    <!-- @block:music -->
+    <div class="music-box">
+        <a class="music-btn music-rotate-ani close"></a>
+    </div>
+    <!-- @end -->
+</div><!--main/-->
+<script src="js/jquery.min.js"></script>
+<!--<script src="http://img01.static.appgame.com/libs/jsCommon/jquery/1.8.3/jquery.min.js"></script>-->
+<script type="text/javascript">
+    var loadOptions = {
+        container: ".main",
+        slow: true,//开启缓慢显示进度，默认 false
+        slowtime: 50,//缓慢显示进度的时间间隔，默认 50
+        setRem: true,//使用rem单位
+        setWidth: true,//设置最大宽度
+        maxWidth: 800,//最大宽度
+        maxRadio: 1.625,//最大页面比例
+        minRadio: 1.48,//最小页面比例
+        radio: 1.625,//页面比例：1300:800
+        resize: true,//自适应
+        fullpage: false,//是否适应fullpage插件
+        autoHeight: false //尽量适应全屏
+    };
+    $(function(){
+        var $p_num = $("#percent_num"),
+                $l_bars =  $('#loading_bars');
+        $("body").loading({
+            onload:function(pre){//加载中的回调，每加载完一张图片调用一次
+                $p_num.html(pre);
+                $l_bars.width(pre+'%');
+            },
+            complete:function(pre){//加载完成的回调
+//                $('.load-page').fadeOut(700,function(){
+//                    $('#hide_loading').remove();
+//                    swiperAnimate(temp_swiper);
+//                });
+            }
+        });
+    });
+</script>
+<!--<script type="text/javascript" src="http://img01.static.appgame.com/libs/jsCommon/load/load.min.js"></script>-->
+<script type="text/javascript" src="js/jquery-loading.1.8.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/swiper.animate1.0.2.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<!--<script type="text/javascript" src="http://h5.static.myappgame.com/common/WeixinApi.js"></script>
+<script type="text/javascript">
+    var wxData = {
+        appId:'' ,//appid，可不用这项
+        imgUrl:'http://hd.appgame.com/wp-content/uploads/sites/55/2015/11/xlj-share-img.jpg', // 缩略图地址
+        link: 'http://hd.appgame.com/act/xlj2015/',// 链接地址
+        desc: '鬼吹灯》系列影片《寻龙诀》上映在即，你是否也有成为摸金校尉，挑战盗墓的勇气？' ,// 详细描述
+        title: '铭记四字诀 让你成为盗墓大师'// 标题
+    };
+    WeixinApi.ready(function (Api) {
+        // 分享的回调
+        var wxCallbacks = {
+            ready : function() {
+            },
+            cancel : function(resp) {
+            },
+            fail : function(resp) {
+            },
+            confirm : function(resp) {
+            },
+            all : function(resp) {
+            }
+        };
+        Api.generalShare(wxData, wxCallbacks);
+        Api.shareToFriend(wxData, wxCallbacks);
+        Api.shareToTimeline(wxData, wxCallbacks);
+        Api.shareToWeibo(wxData, wxCallbacks);
+    });
+</script>
+<script src="http://img01.static.appgame.com/libs/jsCommon/analytics/appgame-analytics.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?1a40f4ead9052a25004f11b85a82b91b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>-->
+</body>
+</html>

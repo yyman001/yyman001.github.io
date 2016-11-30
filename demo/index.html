@@ -16,7 +16,7 @@
 </head>
 <body>
 <!--<img src="images_v1/share-img.png" style="position: absolute;left: -9999px;opacity: 0;"/>-->
-<div class="block-wrap block1">
+<div id="nav1" class="block-wrap block1">
     <div class="q-code">
         <img src="images/q-code.png" alt="">
         <p class="q-code-text">更多福利礼包等你来拿</p>
@@ -127,7 +127,7 @@
 </div>
 
 
-<div class="block-wrap block2">
+<div id="nav2" class="block-wrap block2">
     <div class="block">
 
         <div class="q-code">
@@ -144,9 +144,7 @@
             <a href="" class="tab tab4 cur"></a>
         </div>
 
-        <!--任务按钮,秘籍-->
-        <a href="" class="b2-bt1 cur"><img src="images/b2-btn1.png" alt=""></a>
-        <a href="" class="b2-bt2 cur"><img src="images/b2-btn2.png" alt=""></a>
+
 
         <div class="ta-text">
             <a href="javascript:void(0);" class="prev-btn ta-prev"></a>
@@ -170,19 +168,24 @@
             <li class="ta5"></li>
         </ul>
 
+        <!--任务按钮,秘籍-->
+        <a href="" class="b2-bt1 cur"><img src="images/b2-btn1.png" alt=""></a>
+        <a href="" class="b2-bt2 cur"><img src="images/b2-btn2.png" alt=""></a>
+
+        <!--工具条-->
         <div class="ta-bar">
             <a class="ta-btn" title="冒险" data-type="mx"><img src="images/ta-btn1.png" alt=""></a>
             <a class="ta-btn cur" title="挑战" data-type="tz"><img src="images/ta-btn2.png" alt=""></a>
-            <a class="ta-btn" title="天神" data-type="msg"><img src="images/ta-btn3.png" alt=""></a>
-            <a class="ta-btn" title="英雄" data-type="msg"><img src="images/ta-btn4.png" alt=""></a>
-            <a class="ta-btn" title="公会" data-type="msg"><img src="images/ta-btn5.png" alt=""></a>
-            <a class="ta-btn" title="补给箱" data-type="msg"><img src="images/ta-btn6.png" alt=""></a>
+            <a class="ta-btn" title="天神" data-type="ts"><img src="images/ta-btn3.png" alt=""></a>
+            <a class="ta-btn" title="英雄" data-type="yx"><img src="images/ta-btn4.png" alt=""></a>
+            <a class="ta-btn" title="公会" data-type="gh"><img src="images/ta-btn5.png" alt=""></a>
+            <a class="ta-btn" title="补给箱" data-type="bjx"><img src="images/ta-btn6.png" alt=""></a>
         </div>
 
     </div>
 </div>
 
-<div class="block-wrap block3">
+<div id="nav3" class="block-wrap block3">
     <div class="block">
 
         <div class="b3-box">
@@ -282,10 +285,11 @@
                     <a class="answer-btn" title="秘境" data-answer="c">秘境</a>
                 </div>
 
-                <div class="part" title="点击开启">
-                    <a class="part-btn slider-right"><img src="images/part_btn.png" alt=""></a>
+                <div class="part-box" title="点击开启" data-state="hide">
+                    <img class="part" src="images/part.png" alt="">
+                    <!--slider-right-->
+                    <a class="part-btn"><img src="images/part-slide-tips.png" alt=""></a>
                 </div>
-
             </div>
 
 
@@ -297,7 +301,7 @@
     </div>
 </div>
 
-<div class="block-wrap block4">
+<div id="nav4" class="block-wrap block4">
     <i class="b4-box-bg"></i>
     <div class="block">
         <div class="dialos">
@@ -455,6 +459,13 @@
     </div>
 </div>
 
+<div class="footer-wrap">
+    <div class="footer">
+        <a href="http://www.appgame.com/" target="_blank" class="f-logo"><img src="http://jlz.appgame.com/wp-content/themes/gamezone-jlz-1/images/logo.png" class="autoimg" alt=""></a>
+        <p>All Rights Reserved by AppGame ©<a href="http://www.appgame.com/" target="_blank">任玩堂</a></p>
+        <p><a href="http://www.appgame.com/" target="_blank">任玩堂</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.appgame.com/archives/category/hot-video" target="_blank">视频</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://app.appgame.com/" target="_blank">游戏库</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://h5.appgame.com/" target="_blank">小游戏</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://hd.appgame.com/" target="_blank">活动</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://gl.appgame.com/" target="_blank">攻略大全</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://bbs.appgame.com/" target="_blank">论坛</a></p>
+    </div>
+</div>
 <!--b2 工具条 提示窗口-->
 
 <div class="ta-win j-win auto-win">
@@ -464,12 +475,51 @@
     </div>
 </div>
 
-<div class="ta-win j-win">
+<!--冒险-->
+<div class="ta-win j-win ta-mx-win">
     <a class="close-btn J_close_btn"></a>
     <div class="ta-cont">
-        <!--<p>天选者需要到大冒险的天神岛才可以获得神明的庇护。</p>-->
+        <p>需求 <b class="b2-userName"></b>旅团升到下一级后开启冒险</p>
+    </div>
+</div>
+
+<!--天神-->
+<div class="ta-win j-win ta-ts-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p>天选者需要到大冒险的天神岛才可以获得神明的庇护。</p>
+        <p class="last">加油吧，少年！</p>
+    </div>
+</div>
+<!--英雄-->
+<div class="ta-win j-win ta-yx-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
         <p>我们在冒险中的神明岛等待您，少年加快脚步，快点过来吧！</p>
-        <p>加油吧，少年！</p>
+    </div>
+</div>
+
+<!--公会-->
+<div class="ta-win j-win ta-gh-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p>加入或创建公会，通过捐献获得和求助获得所需物品。</p>
+    </div>
+</div>
+
+<!--补给箱-->
+<div class="ta-win j-win ta-bjx-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p>玩家可以通过奖券或钻石进行抽奖，钻石十连抽必得英雄。</p>
+    </div>
+</div>
+
+<!--任务-->
+<div class="ta-win ta-task-win j-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p>进入冒险后会接到不同委托人的任务，完成任务可获得一份惊喜哦！</p>
     </div>
 </div>
 
@@ -490,7 +540,6 @@
     </div>
     <a class="b3-win-btn"><img src="images/b3-win-btn.png"></a>
 </div>
-
 
 <!--最后测试结果弹窗-->
 <div class="testEnd-win j-win">
@@ -558,7 +607,17 @@
 </div>
 
 
+<script>
+    //pc
+    var generalNavOpt = {
+        width:1200,
+        hideWidth:540
+    };
+</script>
+<script src="js/generalNav.min.js"></script>
+<!--<script src="http://img01.static.appgame.com/libs/jsCommon/nav/generalNav/generalNav.min.js"></script>-->
 <script type="text/javascript" src="js/jquery.min.js"></script>
+
 <!--<script src="http://img01.static.appgame.com/libs/jsCommon/player/player.min.js"></script>-->
 <script src="js/player.min.js"></script>
 <!--<script type="text/javascript" src="js/vconsole.min.js"></script>-->
@@ -581,16 +640,5 @@
 </script>
 <script type="text/javascript" src="js/appgame.share.min.js"></script>
 <!--<script type="text/javascript" src="http://www.appgame.com/lib/jsCommon/appgame.share.min.js"></script>-->
-<script type="text/javascript">
-//    $('.job').click(function(){
-//
-//
-//    })
-
-
-
-
-</script>
-
 </body>
 </html>

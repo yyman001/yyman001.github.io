@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="{{keywords}}">
+    <meta name="description" content="{{description}}">
+    <title>{{title}}</title>
+    <!--@import:load-style-->
+    <link rel="stylesheet" href="css/index.css"/>
+    <link rel="stylesheet" href="css/swiper.min.css"/>
+    <style>
+        .p1{
+            background-color: #2a509a;
+        }
+        .p2{
+            background-color: #007aff;
+        }
+        .p3{
+            background-color: #3B3838;
+        }
+    </style>
+</head>
+<body>
+<img src="images/{{imgUrl}}" style="position: absolute;left: -9999px;opacity: 0;"/>
+<!--主要页面-->
+<div class="main swiper-container">
+    <!--加载层-->
+    <!-- @import:load-page -->
+    <div class="swiper-wrapper">
+        <!-- 第一屏-->
+         <!-- @import:page1 -->
+        <div class="swiper-slide page1">
+            <a href="" class="home-btn"><img src="images/home-btn.png" alt=""></a>
+
+            <a class="video-btn" typeid="youku" sid="XMTc2NjQwODI4OA=="><i class="video-rotate rotate-ani"></i></a>
+
+            <div class="search">
+                <p class="tips">拒绝萌萌哒  旅团应该有一个屌炸天的队名</p>
+                <input type="text" class="search__input" value="光棍和尚社">
+                <a href="" class="search__submit"></a>
+            </div>
+        </div>
+        <div class="swiper-slide p2"></div>
+        <div class="swiper-slide p3"></div>
+        <!-- 第二屏-->
+        <!-- @import:page2 -->
+
+        <!-- 第三屏-->
+        <!-- @import:page3 -->
+    </div>
+
+
+    <!--
+       弹窗组:
+       t1:游戏规则
+       t2:激活码
+       t3:谢谢参与
+       t4:获得了抽奖的机会
+       t5:抽中QB
+       -->
+    <div class="mask"></div>
+     <!-- @import:win1 -->
+     <!-- @import:win2 -->
+</div><!--main/-->
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+    var loadOptions = {
+        container: ".main",
+        slow: false,//开启缓慢显示进度，默认 false
+        slowtime: 50,//缓慢显示进度的时间间隔，默认 50
+        setRem: true,//使用rem单位
+        setWidth: true,//设置最大宽度
+        maxWidth: 800,//最大宽度
+        maxRadio: 1.625,//最大页面比例
+        minRadio: 1.48,//最小页面比例
+        radio: 1.625,//页面比例：1300:800
+        resize: true,//自适应
+        fullpage: false,//是否适应fullpage插件
+        autoHeight: true //尽量适应全屏
+    };
+    $(function(){
+        var $p_num = $("#percent_num"),
+                $l_bars =  $('#loading_bars');
+        $("body").loading({
+            onload:function(pre){//加载中的回调，每加载完一张图片调用一次
+                $p_num.html(pre);
+                $l_bars.width(pre+'%');
+            },
+            complete:function(pre){//加载完成的回调
+                $('.load-page').hide();
+                $('#hide_loading').remove();
+               // swiperAnimate(temp_swiper);
+            }
+        });
+    });
+</script>
+<script type="text/javascript" src="js/jquery-loading.1.8.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/swiper.animate1.0.2.min.js"></script>
+<script type="text/javascript">
+    var temp_swiper = null;
+    var mySwiper = null;
+
+     mySwiper = new Swiper('.swiper-container', {
+        direction: 'vertical',
+        onInit: function(swiper){ //Swiper2.x的初始化是onFirstInit
+           // swiperAnimateCache(swiper); //隐藏动画元素
+            temp_swiper = swiper;
+        },
+        onSlideChangeEnd: function(swiper){
+            //swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+        }
+    });
+
+    //箭头点击事件
+    $('.arrow-down').on('click', function () {
+        toNextPage();
+    });
+
+    //跳到下一屏
+    function toNextPage(){
+        if(mySwiper.activeIndex !== 2){
+            mySwiper.slideTo(mySwiper.activeIndex+1, 1000, function (swiper) {
+               // swiperAnimate(swiper);
+            });
+        }
+    }
+
+</script>
+<!--<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="http://h5.static.myappgame.com/common/WeixinApi.js"></script>
+<script type="text/javascript">
+    var wxData = {
+        appId:'' ,//appid，可不用这项
+        imgUrl:'', // 缩略图地址
+        link: '',// 链接地址
+        desc: '天天喂宠物，码上到手！' ,// 详细描述
+        title: '日本趣味手游《智龙迷城》强势来袭，海量QB周边等你来拿'// 标题
+
+    };
+    WeixinApi.ready(function (Api) {
+        // 分享的回调
+        var wxCallbacks = {
+            ready : function() {
+            },
+            cancel : function(resp) {
+            },
+            fail : function(resp) {
+            },
+            confirm : function(resp) {
+            },
+            all : function(resp) {
+            }
+        };
+        Api.generalShare(wxData, wxCallbacks);
+        Api.shareToFriend(wxData, wxCallbacks);
+        Api.shareToTimeline(wxData, wxCallbacks);
+        Api.shareToWeibo(wxData, wxCallbacks);
+    });
+</script>
+<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-4716123-13']);
+    _gaq.push(['_setDomainName', '.appgame.com']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = 'http://analytics.static.appgame.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+<script src="http://img01.static.appgame.com/libs/jsCommon/analytics/appgame-analytics.js"></script>-->
+</body>
+</html>

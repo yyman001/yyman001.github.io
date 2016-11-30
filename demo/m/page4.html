@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title></title>
+    <script type="text/javascript">
+        var win_width = window.innerWidth || document.documentElement.clientWidth;
+        var win_height = window.innerHeight || document.documentElement.clientHeight;
+        var radio = win_height / win_width;
+        //1.425
+        radio = radio < 1.48 ? 1.625 : radio > 1.625 ? 1.625 : radio;
+        var maxwidth = win_height / radio;
+        if (win_height / win_width <= radio) {
+            win_width = maxwidth;
+        }
+        document.documentElement.style.fontSize = (win_width / 800 > 1 ? 1 : win_width / 800) * 100 + 'px';
+    </script>
+    <style>
+        body{background-color:#000;}
+        .main{position:relative;z-index:0;width:100%;height:100%;overflow:hidden;margin:0 auto;box-sizing:border-box;-webkit-box-sizing:border-box;}
+        .load-page{position:absolute;top:0;left:0;right:0;bottom:0;z-index:9999;background-color:#fff;font-family:'Microsoft YaHei'}
+        .loading-mode{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-100%);transform:translate(-50%,-100%);width:5.56rem;text-align:center}
+        .loading-bar{position:relative;box-sizing:border-box;margin:1rem auto .2rem;padding:0.1rem;width:5.56rem;height:1rem;text-align:left;overflow:hidden}
+        .loading-bar:before{content:'';position:absolute;top:0;left:0;z-index:2;width:100%;height:100%;background:url(images/load-bg.png) no-repeat 0 0;background-size:contain}
+        .loading-bars{position:relative;border-radius:12px 0 0 12px;height:100%;background:#DADADA;overflow:hidden}
+        .load-text{color:#fff;font-size:.36rem}
+        .load-text{box-sizing:border-box;position:absolute;top:0;left:0;z-index:0;padding-top:.16rem;padding-left:.2rem;width:100%;height:100%;background-color:#F25657}
+        .logo{display:block;margin:0 auto;padding-top:.7rem;width:2.85rem}
+        .logo img{width:2.85rem;}
+        .animated{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.animated.infinite{-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite}
+        .animated.hinge{-webkit-animation-duration:2s;animation-duration:2s}
+
+        .swiper-slide:nth-child(n+2){display:block;z-index:1;visibility:visible}
+    </style>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/index.css"/>
+    <!--<link rel="stylesheet" href="css/animate.css">-->
+</head>
+<body>
+<!--<img src="http://hd.appgame.com/wp-content/uploads/sites/55/2015/11/xlj-share-img.jpg" style="position: absolute;left: -9999px;opacity: 0;"/>-->
+<!--主要页面-->
+<div class="main swiper-container">
+    <!--加载层-->
+    <div class="load-page">
+        <div class="loading-mode">
+            <div class="loading-bar">
+                <div class="loading-bars" id="loading_bars">
+                    <p class="load-text"><span class="bf" id="percent_num">0</span>%</p>
+                </div>
+            </div>
+            <a href="http://www.appgame.com/" class="logo"></a>
+        </div>
+    </div>
+
+    <!--音乐按钮-->
+    <div class="music-box">
+        <a class="music-btn music-rotate-ani close"></a>
+    </div>
+<!-- @block:page4 -->
+    <div class="swiper-slide page4">
+
+        <!--对话内容-->
+        <div class="dialos">
+            <img src="images/red-tips.png" alt="感叹号!" class="red-tips j-step1-msg">
+
+            <img src="images/dialo1.png" alt="省略号" class="dialo npc j-step2-msg">
+            <img src="images/dialo1.png" alt="省略号" class="dialo player j-step1-msg j-step3-msg">
+            <img src="images/dialo2.png" alt="省略号" class="dialo2 j-step1-msg">
+
+            <img src="images/dialo-p2.png" alt="有什么需要协助的吗？" class="dialo-answer j-step2-player-dialog">
+            <img class="j-step3-npc-dialog dialo-answer3" src="images/dialo-p3.png" alt="黑暗之神的信徒正在天神 岛周边搞破坏，将天神的 天命全部都打乱了。现在 急需人手过去协助分类， 我有其它要事在身，你可 以帮我">
+            <img src="images/dialo-p4.png" alt="请放心，我现在就过去 帮忙！" class="dialo-answer j-step3-player-dialog">
+
+            <!--<div class="dialogue-btns">-->
+            <img class="dialogue-btn j-step1-btn" src="images/dialogue-btn1.png" alt="开始对话" style="display:block;" title="开始对话">
+            <img class="dialogue-btn j-step2-btn" src="images/dialogue-btn2.png" alt="点击此处,继续" title="继续">
+            <img class="dialogue-btn j-step3-btn" src="images/dialogue-btn3.png" alt="点击此处,接受任务" title="接受任务">
+            <img class="dialogue-btn j-step4-btn" src="images/dialogue-btn4.png" alt="您已经接受了“天神的烦恼”任务！">
+
+        </div>
+
+
+        <div class="b4-box">
+            <img src="images/p4-title.png" alt="" class="p4-title">
+            <!--人物-->
+            <div class="rotes">
+                <img class="rote" src="images/rote1.png" alt="火神">
+                <img class="rote" src="images/rote2.png" alt="大地神">
+                <img class="rote" src="images/rote3.png" alt="死神">
+
+                <img src="images/no-right.png" alt="答案不正确" class="select-tips">
+            </div>
+
+            <!--选择技能-->
+            <div class="skill-box">
+                <a class="skill skill1" data-group="d">
+                    <img src="images/skill1.png" alt="怒不可遏">
+                </a>
+
+                <a class="skill skill2" data-group="b">
+                    <img src="images/skill2.png" alt="艾尔伯恩军官">
+                </a>
+
+                <a class="skill skill3" data-group="c">
+                    <img src="images/skill3.png" alt="落雷">
+                </a>
+
+                <a class="skill skill4" data-group="a">
+                    <img src="images/skill4.png" alt="疾风乱流">
+                </a>
+
+                <a class="skill skill5" data-group="b">
+                    <img src="images/skill5.png" alt="湖新镇牧师">
+                </a>
+
+                <a class="skill skill6" data-group="c">
+                    <img src="images/skill6.png" alt="战斗号角">
+                </a>
+
+                <a class="skill skill7" data-group="c">
+                    <img src="images/skill7.png" alt="暗影吞噬">
+                </a>
+
+                <a class="skill skill8" data-group="a">
+                    <img src="images/skill8.png" alt="圣光普照">
+                </a>
+
+                <a class="skill skill9" data-group="d">
+                    <img src="images/skill9.png" alt="时不我待">
+                </a>
+
+                <a class="skill skill10" data-group="b">
+                    <img src="images/skill10.png" alt="温德尔元帅">
+                </a>
+
+                <a class="skill skill11" data-group="d">
+                    <img src="images/skill11.png" alt="幸运日">
+                </a>
+
+                <a class="skill skill12" data-group="a">
+                    <img src="images/skill12.png" alt="治愈">
+                </a>
+            </div>
+
+            <!--描述-->
+
+            <div class="text-des" data-state="show">
+                <a class="task-btn"></a>
+                <h3 class="text-title">天选者来测测您在冒险旅行中所担当的角色吧，或许你就是一坑货！</h3>
+                <p class="text">根据天神的意愿，协助他们选出相应的天命吧！<b class="highlight">完成三个任务</b>即可获得称号~</p>
+                <p class="text">独创天神天命系统可在战斗过程中释放，多方面协助英雄作战，增加了游戏的可玩....... <a href="" class="highlight">了解更多</a></p>
+            </div>
+
+            <a class="result-btn j-result-btn" title="查看测试结果"><img src="images/result-btn.png" alt=""></a>
+
+            <!--任务进度条-->
+            <ul class="task-progress">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+        </div>
+
+
+    </div>
+<!-- @end -->
+</div><!--main/-->
+
+<!--最后测试结果弹窗-->
+<div class="testEnd-win j-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="win-cont">
+        <h2 class="win-title">恭喜<b class="j-userName"></b>旅团完成了<b>“天神的烦恼”</b>任务</h2>
+        <p>经过检测你在冒险旅途中职业为：</p>
+        <div class="result-job">
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-1.jpg" alt="">
+                <h3 class="result-job-name">战士</h3>
+                <p class="result-job-des">拥有较强的责任心和领导能力，勇敢地走在队伍的最前面。同时您还非常懂得照顾女性同伴，男友力MAX。</p>
+            </div>
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-2.jpg" alt="">
+                <h3 class="result-job-name">游侠</h3>
+                <p class="result-job-des">阳光帅气，一表正气。还拥有较强的输出能力，经常在战场上打得非常兴奋，被队友坑了还一脸呆萌的样子。</p>
+            </div>
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-3.jpg" alt="">
+                <h3 class="result-job-name">黑魔导</h3>
+                <p class="result-job-des">有时调皮捣蛋，喜欢捉弄身边的队友，但面对战斗你会瞬间变得成熟稳重，使用魔法帮助队友化险为夷。</p>
+            </div>
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-4.jpg" alt="">
+                <h3 class="result-job-name">骑士</h3>
+                <p class="result-job-des">队伍中的坦克，敢作敢当，做事情很有担当能力。当队伍遇到困难有你挡着，队友们只负责逃，不折不扣的背锅王。</p>
+            </div>
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-5.jpg" alt="">
+                <h3 class="result-job-name">刺客</h3>
+                <p class="result-job-des">虽然您外表冷漠寡言，其实内心确实狂热的。同时您的头脑灵敏，喜欢打自己的小算盘，没办法解决困难时，带头逃跑的就是您。</p>
+            </div>
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-6.jpg" alt="">
+                <h3 class="result-job-name">白魔导</h3>
+                <p class="result-job-des">温柔善良，做事情有条不紊，而且非常喜欢帮助别人。作为一名奶妈，经常解救临危的队友，所以在旅团中非常受欢迎。</p>
+            </div>
+
+        </div>
+
+       <!-- <div class="share-bar">
+            <span>分享到</span>
+            <div class="rwt_share" id="rwt_share">
+                <a class="rwts_weixin weixin-ico" data-cmd="weixin" title="分享到微信">微信</a>
+                <a class="rwts_qzone qzone-ico" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+                <a class="rwts_tsina tsina-ico" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+                <a class="rwts_tqq tqq-ico" data-cmd="tqq" title="分享到QQ微博">QQ好友</a>
+            </div>
+        </div>-->
+        <div class="share-group">
+            <p>邀请你的小伙伴一起加入冒险吧~</p>
+            <a class="play-again-btn"><img src="images/play-again-btn.png" alt="再玩一次"></a>
+            <a class="share-code-btn"><img src="images/share-code-btn.png" alt="分享二维码"></a>
+        </div>
+
+    </div>
+</div>
+
+
+<!--<audio preload="preload" controls id="car_audio" src="bgmusic2.mp3" loop></audio>-->
+<script src="js/jquery.min.js"></script>
+<!--<script src="http://img01.static.appgame.com/libs/jsCommon/jquery/1.8.3/jquery.min.js"></script>-->
+<script type="text/javascript">
+    var loadOptions = {
+        container: ".main",
+        slow: false,//开启缓慢显示进度，默认 false
+        slowtime: 50,//缓慢显示进度的时间间隔，默认 50
+        setRem: true,//使用rem单位
+        setWidth: true,//设置最大宽度
+        maxWidth: 800,//最大宽度
+        maxRadio: 1.625,//最大页面比例
+        minRadio: 1.55,//最小页面比例
+        radio: 1.625,//页面比例：1300:800
+        resize: true,//自适应
+        fullpage: false,//是否适应fullpage插件
+        autoHeight: false //尽量适应全屏
+    };
+    $(function(){
+        var $p_num = $("#percent_num"),
+                $l_bars =  $('#loading_bars');
+        $("body").loading({
+            onload:function(pre){//加载中的回调，每加载完一张图片调用一次
+                $p_num.html(pre);
+                $l_bars.width(pre+'%');
+            },
+            complete:function(pre){//加载完成的回调
+                $('.load-page').fadeOut(700,function(){
+                    $('#hide_loading').remove();
+//                    _APP.step1();
+                });
+            }
+        });
+    });
+</script>
+<!--<script type="text/javascript" src="http://img01.static.appgame.com/libs/jsCommon/load/load.min.js"></script>-->
+<script type="text/javascript" src="js/jquery-loading.1.8.min.js"></script>
+<script type="text/javascript" src="js/jquery.css3callbacks.1.0.1.js"></script>
+<!--<script type="text/javascript" src="js/jquery.gsap.js"></script>-->
+<!--<script type="text/javascript" src="js/TweenLite.js"></script>-->
+<!--<script type="text/javascript" src="js/TimelineLite.js"></script>-->
+<!--<script type="text/javascript" src="js/EasePack.js"></script>-->
+<!--<script type="text/javascript" src="js/swiper.min.js"></script>-->
+<!--<script type="text/javascript" src="js/swiper.animate1.0.2.min.js"></script>-->
+<script type="text/javascript" src="js/index.js"></script>
+<!--<script type="text/javascript" src="http://h5.static.myappgame.com/common/WeixinApi.js"></script>
+<script type="text/javascript">
+    var wxData = {
+        appId:'' ,//appid，可不用这项
+        imgUrl:'http://hd.appgame.com/wp-content/uploads/sites/55/2015/11/xlj-share-img.jpg', // 缩略图地址
+        link: 'http://hd.appgame.com/act/xlj2015/',// 链接地址
+        desc: '鬼吹灯》系列影片《寻龙诀》上映在即，你是否也有成为摸金校尉，挑战盗墓的勇气？' ,// 详细描述
+        title: '铭记四字诀 让你成为盗墓大师'// 标题
+    };
+    WeixinApi.ready(function (Api) {
+        // 分享的回调
+        var wxCallbacks = {
+            ready : function() {
+            },
+            cancel : function(resp) {
+            },
+            fail : function(resp) {
+            },
+            confirm : function(resp) {
+            },
+            all : function(resp) {
+            }
+        };
+        Api.generalShare(wxData, wxCallbacks);
+        Api.shareToFriend(wxData, wxCallbacks);
+        Api.shareToTimeline(wxData, wxCallbacks);
+        Api.shareToWeibo(wxData, wxCallbacks);
+    });
+</script>
+<script src="http://img01.static.appgame.com/libs/jsCommon/analytics/appgame-analytics.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?1a40f4ead9052a25004f11b85a82b91b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>-->
+</body>
+</html>
