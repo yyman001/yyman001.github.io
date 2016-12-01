@@ -19,12 +19,13 @@
 		$('body').append($mask);
 		$mask.on('click', function () {
 			hideWinFrame();
-			if(callback && typeof callback === 'function'){
+			if (callback && typeof callback === 'function') {
 				callback();
 			}
 		});
 		$mask.fadeIn();
 	}
+
 //隐藏窗口
 	function hideWinFrame() {
 		$mask.fadeOut();
@@ -68,15 +69,15 @@
 	}
 
 	//滚动指定位置
-	function toScroll(id,callback){
+	function toScroll(id, callback) {
 		var $target = $(id);
 		$target.show();
-		setTimeout(function(){
-			$('html,body').animate({"scrollTop":$target.offset().top});
-			if(callback && typeof callback === 'function'){
+		setTimeout(function () {
+			$('html,body').animate({"scrollTop": $target.offset().top});
+			if (callback && typeof callback === 'function') {
 				callback();
 			}
-		},300);
+		}, 3000);
 	}
 
 
@@ -137,7 +138,7 @@
 		$('body').css('overflow', 'hidden');
 		// $('.mask, .video').show();
 		//showWinFrame('.video');
-		cretaMask(function(){
+		cretaMask(function () {
 			$('#video').empty();
 			$('.video-rotate').removeClass('ani-paused');
 			$('body').css('overflow', 'visible');
@@ -208,7 +209,7 @@
 
 	//秘境
 	$('.b2-bt2').on('click', function () {
-		toScroll('#nav3',function(){
+		toScroll('#nav3', function () {
 			openViewTab = 2;
 			p3init();
 		});
@@ -227,9 +228,9 @@
 			"hdElement": "a",
 			"view": openViewTab,
 			"cont": ".switch-cont .in-cont",
-			"callback":function(index){
+			"callback": function (index) {
 				console.log(index);
-				if(index === 0 && typeof slider_btn === 'undefined'){
+				if (index === 0 && typeof slider_btn === 'undefined') {
 					touchSlidingBox({
 						id: 'slider',
 						operate: 'slider_btn'
@@ -239,10 +240,6 @@
 			}
 		});
 	}
-
-
-
-
 
 
 	$('.b3-video-btn').on('click', function () {
@@ -264,14 +261,14 @@
 		$(this).addClass('cur').siblings().removeClass('cur');
 		var value = this.getAttribute("data-answer");
 		if (value === 'b') {
-			 $('.part-box').attr('data-state','show');
+			$('.part-box').css({"visibility": "visible"}).attr('data-state', 'show');
 		}
 
 		return false;
 	});
 
 	//礼包按钮
-	$('.part-btn').on('click', function () {
+	$('.part-box').on('click', function () {
 		$('.b3-userName')[0].innerHTML = '“' + userName + '”';
 		showWinFrame('.b3-win');
 		return false;
@@ -328,7 +325,6 @@
 		var $this = $(this);
 		var _index = $this.index();
 
-		//console.log(_index);
 		_index++;
 		index = _index;//++
 		tabSwitch(_index);
@@ -360,18 +356,18 @@
 		var _type = this.getAttribute("data-type");
 		var _winString = '';
 		var openWin = !0;
-		switch (_type){
+		switch (_type) {
 			case 'mx': //冒险
 				_winString = '.ta-' + 'mx' + '-win';
 				$('.b2-userName')[0].innerHTML = '“' + userName + '”';
 				break;
 			case 'tz': //挑战
 				openWin = !1;
-				toScroll('#nav3',function(){
+				toScroll('#nav3', function () {
 					openViewTab = 1;
 					p3init();
 
-					if(typeof slider_btn === 'undefined'){
+					if (typeof slider_btn === 'undefined') {
 						touchSlidingBox({
 							id: 'slider',
 							operate: 'slider_btn'
@@ -394,30 +390,25 @@
 				break;
 			case 'gh':  //公会
 				_winString = '.ta-' + 'gh' + '-win';
+				index = 1;
+				tabSwitch(index);
+				$('.ta').find('.cur').removeClass('cur');
 				break;
 			case 'bjx':  //补给箱
 				_winString = '.ta-' + 'bjx' + '-win';
+				index = 0;
+				tabSwitch(index);
+				$('.ta').find('.cur').removeClass('cur');
 				break;
 			default:
 				break;
 		}
-		if(openWin){
+		if (openWin) {
 			showWinFrame(_winString);
 		}
 		return false;
 	});
 
-
-
-	/*$('.answer-list').on('click', 'a', function () {
-		var value = this.getAttribute("data-answer");
-		if (value === 'b') {
-			//console.log('答对了!');
-			showWinFrame('.b3-win')
-		}
-		return false;
-	});
-*/
 
 	//------------b4
 	//---对话流程
@@ -644,10 +635,8 @@
 		console.log($share.is(":hidden"));
 		if ($share.is(":hidden")) {
 			$share.show();
-			//$share.css({'visibility': 'hidden'});
 		} else {
 			$share.hide();
-			//$share.css({'visibility': 'visible'});
 		}
 		return false;
 	});

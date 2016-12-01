@@ -19,7 +19,7 @@
 		$('body').append($mask);
 		$mask.on('click', function () {
 			hideWinFrame();
-			if(callback && typeof callback === 'function'){
+			if (callback && typeof callback === 'function') {
 				callback();
 			}
 		});
@@ -141,7 +141,7 @@
 		$('.video-rotate').addClass('ani-paused');
 		$('body').css('overflow', 'hidden');
 		// $('.mask, .video').show();
-		cretaMask(function(){
+		cretaMask(function () {
 			$('#video').empty();
 			$('.video-rotate').removeClass('ani-paused');
 		});
@@ -184,6 +184,8 @@
 			showWinFrame('.auto-win');
 		} else {
 			//next page
+			unlock();
+			toNextPage();
 		}
 
 		return false;
@@ -195,6 +197,7 @@
 	//b2========
 	//任务
 	$('.b2-bt1').on('click', function () {
+		hideTabWin();
 		showWinFrame('.ta-task-win');
 		return false;
 	});
@@ -219,10 +222,7 @@
 	//});
 
 
-	//touchSlidingBox({
-	//	id: 'slider',
-	//	operate: 'slider_btn'
-	//});
+	slider_btn = new touchSliding('slider', {speed: 600, timeout: 3000000, mouseWheel: !1})
 
 
 	$('.b3-video-btn').on('click', function () {
@@ -240,13 +240,19 @@
 	});
 
 
+	//-----任务挑战
 	$('.answer-list').on('click', 'a', function () {
 		$(this).addClass('cur').siblings().removeClass('cur');
+		var value = this.getAttribute("data-answer");
+		if (value === 'b') {
+			$('.answer-box').hide();
+			$('.part-box').css({"visibility": "visible"}).attr('data-state', 'show');
+		}
 		return false;
 	});
 
 
-	$('.part').on('click', function () {
+	$('.part-box').on('click', function () {
 		$('.b3-userName')[0].innerHTML = '“' + userName + '”';
 		showWinFrame('.b3-win');
 		return false;
@@ -254,7 +260,9 @@
 
 	//next to page
 	$('.b3-win-btn').on('click', function () {
-
+		hideWinFrame();
+		unlock();
+		toNextPage();
 		return false;
 	});
 
@@ -264,6 +272,15 @@
 
 
 	var index = 0;
+
+
+	function showTabWin() {
+		$('.ta-text').attr('data-state', 'show');
+	}
+
+	function hideTabWin() {
+		$('.ta-text').attr('data-state', 'hide');
+	}
 
 	//上一个
 	$('.ta-prev').on('click', function () {
@@ -302,10 +319,17 @@
 		var $this = $(this);
 		var _index = $this.index();
 
-		//console.log(_index);
+
 		_index++;
-		index = _index;//++
-		tabSwitch(_index);
+		index = _index;
+		console.log(_index);
+
+		if (index !== 1) {
+			console.log('tab');
+			tabSwitch(_index);
+			showTabWin();
+		}
+
 		if (_index) {
 			tabSwitch2(_index - 1);
 		} else {
@@ -334,44 +358,51 @@
 		var _type = this.getAttribute("data-type");
 		var openWin = !0;
 		var _winString = '';
-		switch (_type){
+		switch (_type) {
 			case 'mx': //冒险
 				_winString = '.ta-' + 'mx' + '-win';
 				$('.b2-userName')[0].innerHTML = '“' + userName + '”';
+				//hideTabWin();
 				break;
 			case 'tz': //挑战
 				openWin = !1;
+				hideTabWin();
+				unlock();
+				toNextPage();
 				//_winString = '.ta-' + 'mx' + '-win';
 				break;
 			case 'ts':  //天神
 				_winString = '.ta-' + 'ts' + '-win';
+				//hideTabWin();
 				break;
 			case 'yx':  //英雄
 				_winString = '.ta-' + 'yx' + '-win';
+				//hideTabWin();
 				break;
 			case 'gh':  //公会
-				_winString = '.ta-' + 'gh' + '-win';
+				openWin = !1;
+				index = 1;
+				tabSwitch(index);
+				$('.ta').find('.cur').removeClass('cur');
+				showTabWin();
+				//_winString = '.ta-' + 'gh' + '-win';
 				break;
 			case 'bjx':  //补给箱
-				_winString = '.ta-' + 'bjx' + '-win';
+				openWin = !1;
+				index = 0;
+				tabSwitch(index);
+				$('.ta').find('.cur').removeClass('cur');
+				showTabWin();
+				//_winString = '.ta-' + 'bjx' + '-win';
 				break;
 			default:
 				break;
 		}
-		if(openWin){
+		if (openWin) {
+			hideTabWin();
 			showWinFrame(_winString);
 		}
 
-		return false;
-	});
-
-
-	//-----任务挑战
-	$('.answer-list').on('click', 'a', function () {
-		var value = this.getAttribute("data-answer");
-		if (value === 'b') {
-			console.log('答对了!');
-		}
 		return false;
 	});
 
@@ -420,7 +451,7 @@
 			//$('.j-step4-btn').hide();
 			$('.b4-box-bg').show();
 			$('.b4-box').show();
-		}, 500);
+		}, 3000);
 
 		return false;
 	});
@@ -457,25 +488,25 @@
 	}
 
 	//p2介绍面板
-	$('.up-down-btn').on('click',function(){
+	$('.up-down-btn').on('click', function () {
 		var _state = $('.ta-text').attr('data-state');
-		if(_state === 'show'){
-			$('.ta-text').attr('data-state','hide');
-		}else{
-			$('.ta-text').attr('data-state','show');
+		if (_state === 'show') {
+			$('.ta-text').attr('data-state', 'hide');
+		} else {
+			$('.ta-text').attr('data-state', 'show');
 		}
-	  return false;
+		return false;
 	});
 
 	//秒速面板
-	$('.task-btn').on('click',function(){
+	$('.task-btn').on('click', function () {
 		var _state = $('.text-des').attr('data-state');
-		if(_state === 'show'){
-			$('.text-des').attr('data-state','hide');
-		}else{
-			$('.text-des').attr('data-state','show');
+		if (_state === 'show') {
+			$('.text-des').attr('data-state', 'hide');
+		} else {
+			$('.text-des').attr('data-state', 'show');
 		}
-	  return false;
+		return false;
 	});
 
 	$('.skill-box').on('click', 'a', function () {
@@ -601,9 +632,9 @@
 		return false;
 	});
 
-	$('.j-userName')[0].innerHTML = '“' + userName + '”';
-	setJob();
-	showWinFrame('.testEnd-win');
+	//$('.j-userName')[0].innerHTML = '“' + userName + '”';
+	//setJob();
+	//showWinFrame('.testEnd-win');
 
 	//---------查看结果
 	$('.j-result-btn').on('click', function () {
@@ -619,18 +650,15 @@
 		$('.jobs').hide().eq(_random).show();
 	}
 
+	//再玩一次
+	$('.play-again-btn').on('click', function () {
+		console.log('再玩一次');
+		return false;
+	});
+
 	//分享按钮
-	//$('.share-code')
-	$('.share-code').on('click', function () {
-		var $share = $('.share-bar');
-		console.log($share.is(":hidden"));
-		if ($share.is(":hidden")) {
-			$share.show();
-			//$share.css({'visibility': 'hidden'});
-		} else {
-			$share.hide();
-			//$share.css({'visibility': 'visible'});
-		}
+	$('.share-code-btn').on('click', function () {
+
 		return false;
 	});
 

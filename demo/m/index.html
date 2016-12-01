@@ -8,6 +8,18 @@
     <meta name="keywords" content="{{keywords}}">
     <meta name="description" content="{{description}}">
     <title>{{title}}</title>
+    <script type="text/javascript">
+        var win_width = window.innerWidth || document.documentElement.clientWidth;
+        var win_height = window.innerHeight || document.documentElement.clientHeight;
+        var radio = win_height / win_width;
+        //1.425
+        radio = radio < 1.55 ? 1.625 : radio > 1.625 ? 1.625 : radio;
+        var maxwidth = win_height / radio;
+        if (win_height / win_width <= radio) {
+            win_width = maxwidth;
+        }
+        document.documentElement.style.fontSize = (win_width / 800 > 1 ? 1 : win_width / 800) * 100 + 'px';
+    </script>
     <!--@import:load-style-->
     <link rel="stylesheet" href="css/index.css"/>
     <link rel="stylesheet" href="css/swiper.min.css"/>
@@ -24,13 +36,13 @@
     </style>
 </head>
 <body>
-<img src="images/{{imgUrl}}" style="position: absolute;left: -9999px;opacity: 0;"/>
+<!--<img src="images/{{imgUrl}}" style="position: absolute;left: -9999px;opacity: 0;"/>-->
 <!--主要页面-->
 <div class="main swiper-container">
     <!--加载层-->
     <!-- @import:load-page -->
     <div class="swiper-wrapper">
-        <!-- 第一屏-->
+        <!-- 第1屏-->
          <!-- @import:page1 -->
         <div class="swiper-slide page1">
             <a href="" class="home-btn"><img src="images/home-btn.png" alt=""></a>
@@ -43,28 +55,366 @@
                 <a href="" class="search__submit"></a>
             </div>
         </div>
-        <div class="swiper-slide p2"></div>
-        <div class="swiper-slide p3"></div>
-        <!-- 第二屏-->
-        <!-- @import:page2 -->
 
-        <!-- 第三屏-->
-        <!-- @import:page3 -->
+        <!-- 第2屏-->
+        <div class="swiper-slide page2">
+            <!--任务按钮,秘籍-->
+            <a href="" class="b2-bt1 cur"><img src="images/b2-btn1.png" alt=""></a>
+            <a href="" class="b2-bt2 cur"><img src="images/b2-btn2.png" alt=""></a>
+
+            <!--tabWin-->
+            <div class="ta-text" data-state="hide">
+                <a href="javascript:void(0);" class="prev-btn ta-prev"></a>
+                <a href="javascript:void(0);" class="next-btn ta-next"></a>
+                <a class="up-down-btn"></a>
+                <div class="ta-cont">
+                    <img class="text-img" src="images/p1.png" alt="">
+                    <img class="text-img" src="images/p2.png" alt="">
+                    <img class="text-img" src="images/p3.png" alt="">
+                    <img class="text-img" src="images/p4.png" alt="">
+                    <img class="text-img" src="images/p5.png" alt="">
+                    <img class="text-img" src="images/p6.png" alt="">
+                </div>
+            </div>
+
+            <ul class="ta">
+                <li class="ta1"></li>
+                <li class="ta2"></li>
+                <li class="ta3"></li>
+                <li class="ta4"></li>
+                <li class="ta5"></li>
+            </ul>
+
+            <div class="ta-bar">
+                <a class="ta-btn" title="冒险" data-type="mx"><img src="images/ta-btn1.png" alt=""></a>
+                <a class="ta-btn cur" title="挑战" data-type="tz"><img src="images/ta-btn2.png" alt=""></a>
+                <a class="ta-btn" title="天神" data-type="ts"><img src="images/ta-btn3.png" alt=""></a>
+                <a class="ta-btn" title="英雄" data-type="yx"><img src="images/ta-btn4.png" alt=""></a>
+                <a class="ta-btn" title="公会" data-type="gh"><img src="images/ta-btn5.png" alt=""></a>
+                <a class="ta-btn" title="补给箱" data-type="bjx"><img src="images/ta-btn6.png" alt=""></a>
+            </div>
+
+        </div>
+
+        <!-- 第3屏-->
+        <div class="swiper-slide page3">
+            <img src="images/p3-title.png" alt="卡特里亚天空岛" class="p3-title">
+            <div class="slider">
+                <a href="javascript:void(0);" class="prev-btn" onclick="slider_btn.prev()"></a>
+                <a href="javascript:void(0);" class="next-btn" onclick="slider_btn.next()"></a>
+                <div class="slider__cont">
+                    <ul id="slider" class="slider__ul">
+                        <li>
+                            <a class="card-img">
+                                <img src="images/card1.png" alt="">
+                            </a>
+                            <div class="card-des">
+                                <h3 class="card-title"><b class="card-name">精英副本</b>旅团到达XX级开启</h3>
+                                <p class="card-text">完成不同的地域冒险挑战可开启其精英副本，玩家可在此获得一定量的不同的英雄碎片，是英雄收集的好去处。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="card-img">
+                                <img src="images/card2.png" alt="">
+                            </a>
+                            <div class="card-des">
+                                <h3 class="card-title"><b class="card-name">虚空试炼</b>旅团到达XX级开启</h3>
+                                <p class="card-text">这里像在金字塔迷宫当中，玩家只有不断地攀爬才能获得更大属性的加成，在这里或许你还可发现珍稀的碎片和魔晶哦。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="card-img">
+                                <img src="images/card3.png" alt="">
+                            </a>
+                            <div class="card-des">
+                                <h3 class="card-title"><b class="card-name" style="margin-right: .4rem">考 古</b>旅团到达XX级开启</h3>
+                                <p class="card-text">世界那么大要多出去走走看看，有可能获得珍贵的天神物品。玩家还可获得地图碎片，拼合地图可获得寻宝的所有奖励。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="card-img">
+                                <img src="images/card4.png" alt="">
+                            </a>
+                            <div class="card-des">
+                                <h3 class="card-title"><b class="card-name">勇者试炼</b>旅团到达XX级开启</h3>
+                                <p class="card-text">没有什么比排行榜的名次争夺更令人兴奋了，挑战成功可以获得大量的钻石奖励，是获得钻石十连抽奖的关键机会。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="card-img">
+                                <img src="images/card5.png" alt="">
+                            </a>
+                            <div class="card-des">
+                                <h3 class="card-title"><b class="card-name" style="margin-right: .4rem">秘境</b>旅团通关天神岛开启</h3>
+                                <p class="card-text">除了需要携带一名游侠类英雄以外，还有允许女士进入男士止步等的秘境。每个秘境的开放时间不一，发现地方也不相同，需要玩家把握时机。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="card-img">
+                                <img src="images/card6.png" alt="">
+                            </a>
+                            <div class="card-des">
+                                <p class="card-tips">暂未开启</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!--答题-->
+            <div class="answer-box">
+                <img class="answer-img" src="images/answer-img.png" alt="">
+                <img src="images/answer-title.png" alt="" class="answer-title">
+                <div class="answer-list">
+                    <a class="answer-btn" title="精英副本" data-answer="a">精英副本</a>
+                    <a class="answer-btn" title="考古" data-answer="b">考古</a>
+                    <a class="answer-btn" title="秘境" data-answer="c">秘境</a>
+                </div>
+            </div>
+
+            <div class="part-box" title="点击开启" data-state="hide">
+                <img class="part" src="images/part.png" alt="">
+                <a class="part-btn"><img src="images/part-slide-tips.png" alt=""></a>
+            </div>
+        </div>
+
+        <!-- 第4屏-->
+        <div class="swiper-slide page4">
+
+            <!--对话内容-->
+            <div class="dialos">
+                <img src="images/red-tips.png" alt="感叹号!" class="red-tips j-step1-msg">
+
+                <img src="images/dialo1.png" alt="省略号" class="dialo npc j-step2-msg">
+                <img src="images/dialo1.png" alt="省略号" class="dialo player j-step1-msg j-step3-msg">
+                <img src="images/dialo2.png" alt="省略号" class="dialo2 j-step1-msg">
+
+                <img src="images/dialo-p2.png" alt="有什么需要协助的吗？" class="dialo-answer j-step2-player-dialog">
+                <img class="j-step3-npc-dialog dialo-answer3" src="images/dialo-p3.png" alt="黑暗之神的信徒正在天神 岛周边搞破坏，将天神的 天命全部都打乱了。现在 急需人手过去协助分类， 我有其它要事在身，你可 以帮我">
+                <img src="images/dialo-p4.png" alt="请放心，我现在就过去 帮忙！" class="dialo-answer j-step3-player-dialog">
+
+                <!--<div class="dialogue-btns">-->
+                <img class="dialogue-btn j-step1-btn" src="images/dialogue-btn1.png" alt="开始对话" style="display:block;" title="开始对话">
+                <img class="dialogue-btn j-step2-btn" src="images/dialogue-btn2.png" alt="点击此处,继续" title="继续">
+                <img class="dialogue-btn j-step3-btn" src="images/dialogue-btn3.png" alt="点击此处,接受任务" title="接受任务">
+                <img class="dialogue-btn j-step4-btn" src="images/dialogue-btn4.png" alt="您已经接受了“天神的烦恼”任务！">
+
+            </div>
+
+
+            <div class="b4-box">
+                <img src="images/p4-title.png" alt="" class="p4-title">
+                <!--人物-->
+                <div class="rotes">
+                    <img class="rote" src="images/rote1.png" alt="火神">
+                    <img class="rote" src="images/rote2.png" alt="大地神">
+                    <img class="rote" src="images/rote3.png" alt="死神">
+                    <img src="images/no-right.png" alt="答案不正确" class="select-tips">
+                </div>
+
+                <!--选择技能-->
+                <div class="skill-box">
+                    <a class="skill skill1" data-group="d">
+                        <img src="images/skill1.png" alt="怒不可遏">
+                    </a>
+
+                    <a class="skill skill2" data-group="b">
+                        <img src="images/skill2.png" alt="艾尔伯恩军官">
+                    </a>
+
+                    <a class="skill skill3" data-group="c">
+                        <img src="images/skill3.png" alt="落雷">
+                    </a>
+
+                    <a class="skill skill4" data-group="a">
+                        <img src="images/skill4.png" alt="疾风乱流">
+                    </a>
+
+                    <a class="skill skill5" data-group="b">
+                        <img src="images/skill5.png" alt="湖新镇牧师">
+                    </a>
+
+                    <a class="skill skill6" data-group="c">
+                        <img src="images/skill6.png" alt="战斗号角">
+                    </a>
+
+                    <a class="skill skill7" data-group="c">
+                        <img src="images/skill7.png" alt="暗影吞噬">
+                    </a>
+
+                    <a class="skill skill8" data-group="a">
+                        <img src="images/skill8.png" alt="圣光普照">
+                    </a>
+
+                    <a class="skill skill9" data-group="d">
+                        <img src="images/skill9.png" alt="时不我待">
+                    </a>
+
+                    <a class="skill skill10" data-group="b">
+                        <img src="images/skill10.png" alt="温德尔元帅">
+                    </a>
+
+                    <a class="skill skill11" data-group="d">
+                        <img src="images/skill11.png" alt="幸运日">
+                    </a>
+
+                    <a class="skill skill12" data-group="a">
+                        <img src="images/skill12.png" alt="治愈">
+                    </a>
+                </div>
+
+                <!--描述-->
+                <div class="text-des" data-state="show">
+                    <a class="task-btn"></a>
+                    <h3 class="text-title">天选者来测测您在冒险旅行中所担当的角色吧，或许你就是一坑货！</h3>
+                    <p class="text">根据天神的意愿，协助他们选出相应的天命吧！<b class="highlight">完成三个任务</b>即可获得称号~</p>
+                    <p class="text">独创天神天命系统可在战斗过程中释放，多方面协助英雄作战，增加了游戏的可玩....... <a href="" class="highlight">了解更多</a></p>
+                </div>
+
+                <a class="result-btn j-result-btn" title="查看测试结果"><img src="images/result-btn.png" alt=""></a>
+
+                <!--任务进度条-->
+                <ul class="task-progress">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+            </div>
+
+        </div>
     </div>
 
 
-    <!--
-       弹窗组:
-       t1:游戏规则
-       t2:激活码
-       t3:谢谢参与
-       t4:获得了抽奖的机会
-       t5:抽中QB
-       -->
-    <div class="mask"></div>
-     <!-- @import:win1 -->
-     <!-- @import:win2 -->
+
+
 </div><!--main/-->
+
+<!--
+        各种弹窗
+    -->
+<div class="ta-win j-win auto-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p class="autoText"></p>
+    </div>
+</div>
+
+<!--冒险-->
+<div class="ta-win j-win ta-mx-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p>需求 <b class="b2-userName"></b>旅团升到下一级后开启冒险</p>
+    </div>
+</div>
+
+<!--天神-->
+<div class="ta-win j-win ta-ts-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p>天选者需要到大冒险的天神岛才可以获得神明的庇护。</p>
+        <p class="last">加油吧，少年！</p>
+    </div>
+</div>
+<!--英雄-->
+<div class="ta-win j-win ta-yx-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p>我们在冒险中的神明岛等待您，少年加快脚步，快点过来吧！</p>
+    </div>
+</div>
+
+<!--公会-->
+<div class="ta-win j-win ta-gh-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p><i>加入</i>或<i>创建公会</i>，通过捐献获得和求助获得所需物品。</p>
+    </div>
+</div>
+
+<!--补给箱-->
+<div class="ta-win j-win ta-bjx-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p>玩家可以通过<i>奖券</i>或<i>钻石</i>进行抽奖，钻石<i>十连抽</i>必得英雄。</p>
+    </div>
+</div>
+
+<!--任务-->
+<div class="ta-win ta-task-win j-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="ta-cont">
+        <p>进入冒险后会接到不同委托人的任务，完成任务可获得一份惊喜哦！</p>
+    </div>
+</div>
+
+<!--b3答题选对提示框-->
+<div class="b3-win j-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="win-cont">
+        <p>恭喜<b class="b3-userName">”XXXXXXX”</b>旅团</p>
+        <p>升级<b>“冒险”</b>副本开启。</p>
+    </div>
+    <a class="b3-win-btn"><img src="images/b3-win-btn.png"></a>
+</div>
+
+<!--最后测试结果弹窗-->
+<div class="testEnd-win j-win">
+    <a class="close-btn J_close_btn"></a>
+    <div class="win-cont">
+        <h2 class="win-title">恭喜<b class="j-userName"></b>旅团完成了<b>“天神的烦恼”</b>任务</h2>
+        <p>经过检测你在冒险旅途中职业为：</p>
+        <div class="result-job">
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-1.jpg" alt="">
+                <h3 class="result-job-name">战士</h3>
+                <p class="result-job-des">拥有较强的责任心和领导能力，勇敢地走在队伍的最前面。同时您还非常懂得照顾女性同伴，男友力MAX。</p>
+            </div>
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-2.jpg" alt="">
+                <h3 class="result-job-name">游侠</h3>
+                <p class="result-job-des">阳光帅气，一表正气。还拥有较强的输出能力，经常在战场上打得非常兴奋，被队友坑了还一脸呆萌的样子。</p>
+            </div>
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-3.jpg" alt="">
+                <h3 class="result-job-name">黑魔导</h3>
+                <p class="result-job-des">有时调皮捣蛋，喜欢捉弄身边的队友，但面对战斗你会瞬间变得成熟稳重，使用魔法帮助队友化险为夷。</p>
+            </div>
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-4.jpg" alt="">
+                <h3 class="result-job-name">骑士</h3>
+                <p class="result-job-des">队伍中的坦克，敢作敢当，做事情很有担当能力。当队伍遇到困难有你挡着，队友们只负责逃，不折不扣的背锅王。</p>
+            </div>
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-5.jpg" alt="">
+                <h3 class="result-job-name">刺客</h3>
+                <p class="result-job-des">虽然您外表冷漠寡言，其实内心确实狂热的。同时您的头脑灵敏，喜欢打自己的小算盘，没办法解决困难时，带头逃跑的就是您。</p>
+            </div>
+
+            <div class="jobs">
+                <img class="job-ico" src="images/job-6.jpg" alt="">
+                <h3 class="result-job-name">白魔导</h3>
+                <p class="result-job-des">温柔善良，做事情有条不紊，而且非常喜欢帮助别人。作为一名奶妈，经常解救临危的队友，所以在旅团中非常受欢迎。</p>
+            </div>
+
+        </div>
+
+        <div class="share-group">
+            <p>邀请你的小伙伴一起加入冒险吧~</p>
+            <a class="play-again-btn"><img src="images/play-again-btn.png" alt="再玩一次"></a>
+            <a class="share-code-btn"><img src="images/share-code-btn.png" alt="分享二维码"></a>
+        </div>
+
+    </div>
+</div>
+
+
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
@@ -76,11 +426,11 @@
         setWidth: true,//设置最大宽度
         maxWidth: 800,//最大宽度
         maxRadio: 1.625,//最大页面比例
-        minRadio: 1.48,//最小页面比例
+        minRadio: 1.55,//最小页面比例
         radio: 1.625,//页面比例：1300:800
         resize: true,//自适应
         fullpage: false,//是否适应fullpage插件
-        autoHeight: true //尽量适应全屏
+        autoHeight: !1 //尽量适应全屏
     };
     $(function(){
         var $p_num = $("#percent_num"),
@@ -99,8 +449,12 @@
     });
 </script>
 <script type="text/javascript" src="js/jquery-loading.1.8.min.js"></script>
-<script type="text/javascript" src="js/swiper.min.js"></script>
-<script type="text/javascript" src="js/swiper.animate1.0.2.min.js"></script>
+<!--<script type="text/javascript" src="js/swiper.js"></script>-->
+<script type="text/javascript" src="js/swiper.jquery.js"></script>
+<script type="text/javascript" src="js/touchslidingBase.min.js"></script>
+<script type="text/javascript" src="js/touchSliding.min.js"></script>
+
+<!--<script type="text/javascript" src="js/swiper.animate1.0.2.min.js"></script>-->
 <script type="text/javascript">
     var temp_swiper = null;
     var mySwiper = null;
@@ -110,8 +464,11 @@
         onInit: function(swiper){ //Swiper2.x的初始化是onFirstInit
            // swiperAnimateCache(swiper); //隐藏动画元素
             temp_swiper = swiper;
+            swiper.lockSwipes()
         },
         onSlideChangeEnd: function(swiper){
+            console.log('回调?');
+            swiper.lockSwipes();
             //swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
         }
     });
@@ -121,16 +478,42 @@
         toNextPage();
     });
 
+    //锁屏
+    function lock(){
+        mySwiper.lockSwipes();
+        console.log('锁定页面');
+    }
+    //解屏
+    function unlock(){
+        mySwiper.unlockSwipes();
+        console.log('解锁');
+    }
     //跳到下一屏
-    function toNextPage(){
-        if(mySwiper.activeIndex !== 2){
-            mySwiper.slideTo(mySwiper.activeIndex+1, 1000, function (swiper) {
-               // swiperAnimate(swiper);
-            });
-        }
+    function toNextPage(callback){
+//        if(mySwiper.activeIndex !== 2){
+        console.log('callback1');
+//        mySwiper.slideTo(mySwiper.activeIndex + 1, 500, function (swiper) {
+//            console.log('callback2');
+//            console.log(callback);
+//            if (callback && typeof callback === 'function') {
+//                callback(swiper);
+//            }
+//        });
+
+        mySwiper.slideNext(function(swiper){
+            console.log('callback2');
+            if (callback && typeof callback === 'function') {
+                callback(swiper);
+            }
+        },500);
+
+//        }
     }
 
+
+
 </script>
+<script type="text/javascript" src="js/index.js"></script>
 <!--<script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="http://h5.static.myappgame.com/common/WeixinApi.js"></script>
 <script type="text/javascript">
