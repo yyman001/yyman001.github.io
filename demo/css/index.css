@@ -238,7 +238,7 @@ body { background-color: #f0f0f0; }
 .block4 .skill > img { -webkit-filter: brightness(0.5); filter: brightness(0.5); }
 .block4 .skill.cur > img, .block4 .skill:hover > img { -webkit-filter: brightness(1); filter: brightness(1); }
 .block4 .skill.cur .skill-des, .block4 .skill:hover .skill-des { visibility: visible; opacity: 1; }
-.block4 .skill[data-state="1"] > img { -webkit-filter: brightness(1); filter: brightness(1); }
+.block4 .skill[data-state="1"] > img, .block4 .skill[data-complete="1"] > img { -webkit-filter: brightness(1); filter: brightness(1); }
 .block4 .skill.skill1 { top: -49px; left: 318px; }
 .block4 .skill.skill2 { top: 52px; left: 416px; }
 .block4 .skill.skill3 { top: 180px; left: 452px; }

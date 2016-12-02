@@ -555,7 +555,16 @@
 		$('.skill').attr('data-state', '0');
 	}
 
+	//正确答案设置高亮状态
+	function setHighlight(array){
+		array.forEach(function(ele,index){
+			ele.setAttribute("data-complete",1);
+		});
+		console.log('array:', array);
+		_answerDom = [];
+	}
 
+	var _answerDom = [];  //每一个任务段 存放的高亮 dom 元素
 	$('.rotes').on('click', 'a', function () {
 		var _this = this;
 		var _state;// = this.getAttribute("data-state");   //点击状态
@@ -563,7 +572,7 @@
 		var _answerType;
 		var _answerAllRight = !0; //默认 不存在错误答案
 		//console.log(this, _state);
-
+		if(!!_this.getAttribute("data-complete")){return;}
 		taskStep = getTaskProgress();
 		console.log('taskStep:', taskStep);
 
@@ -576,20 +585,20 @@
 			_answerValue = this.getAttribute("data-group");   // 任务a,b,c 的数组答案
 			//console.log(this, _state);
 
-
 			if (_state === "0" || typeof _state === 'undefined' || _state === null) {
 				//push
 				this.setAttribute("data-state", "1");
 				if (_answerValue) {
-					answerArray.push(_answerValue)
+					answerArray.push(_answerValue);
+					_answerDom.push(this);
 				}
 				console.log('点亮');
 				//点亮的时候判断答案是否正确
 				switch (taskStep){
 					case 0: //任务1
 						console.log('点亮-任务1');
-						console.log('点击技能值为:',_answerValue);
-						console.log('????:',_answerValue !== 'a');
+						//console.log('点击技能值为:',_answerValue);
+						//console.log('????:',_answerValue !== 'a');
 
 						if (_answerValue !== 'a') {
 							console.log('不是为真吗?怎么没反应');
@@ -610,8 +619,6 @@
 					default:break;
 				}
 
-
-
 			} else if (_state === '1') {
 
 				console.log('取消点亮');
@@ -622,21 +629,16 @@
 						console.log('answerArray[i]:', i, answerArray[i]);
 						if (answerArray[i] === _answerValue) {
 							answerArray.splice(i, 1);
+							_answerDom.splice(i,1);
 							break;
 						}
 					}
-					console.log('answerArray:', answerArray);
+
 				}
 				//============
-
-
-
-
-
 			}
 
 			console.log('answerArray:', answerArray.toString());
-
 
 			//删除已经去掉的高亮元素,再判断是否还存在不正确答案
 			switch (taskStep){
@@ -652,7 +654,6 @@
 				default:break;
 			}
 
-
 			for (var ii = 0, ll = answerArray.length; ii < ll; ii++) {
 				console.log('取消高亮答案结果:', ii, answerArray[ii]);
 				if (answerArray[ii] !== _answerType) {
@@ -663,13 +664,9 @@
 				}
 			}
 
-
-
-
 			switch (taskStep) {
 				case 0:
 					console.log('all:', getAnswerArray('a'));
-
 					//全部答对,任务1
 					if (answerArray.toString() === getAnswerArray('a')) {
 						$('.task-progress').children().eq(0).addClass('cur');
@@ -677,6 +674,9 @@
 						$rotes.eq(0).hide();
 						$rotes.eq(1).css({'visibility': 'visible'});
 						$('.select-tips').css({'visibility': 'hidden'});
+						console.log('_answerDom:', _answerDom);
+						setHighlight(_answerDom);
+
 					} else {
 
 						//answerArray.forEach(function(v,i){
@@ -705,6 +705,7 @@
 						$rotes.eq(1).hide();
 						$rotes.eq(2).css({'visibility': 'visible'});
 						$('.select-tips').css({'visibility': 'hidden'});
+						setHighlight(_answerDom);
 					} else {
 						if (_answerAllRight) {
 							$('.select-tips').css({'visibility': 'hidden'});
@@ -723,13 +724,13 @@
 
 					//全部答对,任务3
 					if (answerArray.toString() === getAnswerArray('c')) {
+						setHighlight(_answerDom);
 						$('.task-progress').children().eq(2).addClass('cur');
 						resetSelectIco();
 						//设置用户名
 						$('.j-userName')[0].innerHTML = '“' + userName + '”';
 						setJob();
 						showWinFrame('.testEnd-win');
-
 						//显示结果按钮
 						$('.j-result-btn').show();
 						$('.select-tips').css({'visibility': 'hidden'});
@@ -756,7 +757,7 @@
 
 		//check
 		console.log(answerArray);
-
+		console.log('<<<_answerDom:', _answerDom);
 
 		//if(answerArray.length){}
 
