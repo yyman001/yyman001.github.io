@@ -13,6 +13,15 @@
 	//	}
 	//});
 
+	//forEach 方法扩展
+	if (typeof Array.prototype.forEach != 'function') {
+		Array.prototype.forEach = function (callback) {
+			for (var i = 0; i < this.length; i++) {
+				callback.apply(this, [this[i], i, this]);
+			}
+		};
+	}
+
 	function cretaMask(callback) {
 		window.$mask = window.$mask || $('<div class="mask" style="position: absolute;top:0;left: 0;right: 0;bottom: 0;z-index:9;min-width: 100%;background-color: rgb(0, 0, 0);opacity: .8;"></div>');
 		$mask.css({"height": $(document).height()});
@@ -185,9 +194,13 @@
 	//切换页面
 	function switchPage($curPage,$nexPage){
 		$(window).scrollTop(0);
-		$curPage.hide();
 		$('.main').attr('data-state',$nexPage.attr('data-page'));
-		$nexPage.show();
+		if ($curPage.length) {
+			$curPage.fadeOut().css({"zIndex":1});
+		}
+		if($nexPage.length){
+			$nexPage.fadeIn().css({"zIndex":7});
+		}
 	}
 
 	//冒险按钮
@@ -450,10 +463,15 @@
 		var _parentNode = this.parentNode;
 		var oldCurPage = _parentNode.getAttribute('data-cur-page');
 		_parentNode.setAttribute('data-cur-page',_page);
+		$(this).addClass('cur').siblings().removeClass('cur');
 
-		
+		console.log('oldCurPage:', oldCurPage);
+		console.log('_page:', _page);
 
-	  return false;
+		switchPage($(oldCurPage),$(_page));
+
+
+		return false;
 	});
 
 
@@ -539,8 +557,11 @@
 
 
 	$('.rotes').on('click', 'a', function () {
+		var _this = this;
 		var _state;// = this.getAttribute("data-state");   //点击状态
 		var _answerValue;// = this.getAttribute("data-group");   // 任务a,b,c 的数组答案
+		var _answerType;
+		var _answerAllRight = !0; //默认 不存在错误答案
 		//console.log(this, _state);
 
 		taskStep = getTaskProgress();
@@ -562,31 +583,94 @@
 				if (_answerValue) {
 					answerArray.push(_answerValue)
 				}
+				console.log('点亮');
+				//点亮的时候判断答案是否正确
+				switch (taskStep){
+					case 0: //任务1
+						console.log('点亮-任务1');
+						console.log('点击技能值为:',_answerValue);
+						console.log('????:',_answerValue !== 'a');
+
+						if (_answerValue !== 'a') {
+							console.log('不是为真吗?怎么没反应');
+							$('.select-tips').css({'visibility': 'visible'});
+						}
+					break;
+					case 1: //任务2
+						console.log('点亮-任务2');
+						if (_this.getAttribute('data-group') !== 'b') {
+							$('.select-tips').css({'visibility': 'visible'});
+						}
+					break;
+					case 2: //任务3
+						if (_this.getAttribute('data-group') !== 'c') {
+							$('.select-tips').css({'visibility': 'visible'});
+						}
+					break;
+					default:break;
+				}
+
+
 
 			} else if (_state === '1') {
-				//pop
+
+				console.log('取消点亮');
+				//=============取消点亮,去掉对应元素
 				this.setAttribute("data-state", "0");
 				if (_answerValue) {
 					for (var i = 0, l = answerArray.length; i < l; i++) {
-						//(function (i) {
 						console.log('answerArray[i]:', i, answerArray[i]);
 						if (answerArray[i] === _answerValue) {
 							answerArray.splice(i, 1);
 							break;
 						}
-						//})(i)
 					}
 					console.log('answerArray:', answerArray);
-					//answerArray.pop(_answerValue)
 				}
+				//============
+
+
+
+
+
 			}
 
 			console.log('answerArray:', answerArray.toString());
 
 
+			//删除已经去掉的高亮元素,再判断是否还存在不正确答案
+			switch (taskStep){
+				case 0: //任务1
+					_answerType = 'a';
+					break;
+				case 1: //任务2
+					_answerType = 'b';
+					break;
+				case 2: //任务3
+					_answerType = 'c';
+					break;
+				default:break;
+			}
+
+
+			for (var ii = 0, ll = answerArray.length; ii < ll; ii++) {
+				console.log('取消高亮答案结果:', ii, answerArray[ii]);
+				if (answerArray[ii] !== _answerType) {
+					console.log('存在的错误答案为:', answerArray[ii]);
+					_answerAllRight = !1; //存在错误答案
+
+					break;
+				}
+			}
+
+
+
+
 			switch (taskStep) {
 				case 0:
 					console.log('all:', getAnswerArray('a'));
+
+					//全部答对,任务1
 					if (answerArray.toString() === getAnswerArray('a')) {
 						$('.task-progress').children().eq(0).addClass('cur');
 						resetSelectIco();
@@ -594,17 +678,27 @@
 						$rotes.eq(1).css({'visibility': 'visible'});
 						$('.select-tips').css({'visibility': 'hidden'});
 					} else {
-						if (answerArray.length >= 3) {
+
+						//answerArray.forEach(function(v,i){
+						//	console.log(i, v,_this);
+						//});
+
+						if (_answerAllRight) {
+							$('.select-tips').css({'visibility': 'hidden'});
+						}
+						/*if (answerArray.length >= 3) {
 							$('.select-tips').css({'visibility': 'visible'});
 						} else {
 							$('.select-tips').css({'visibility': 'hidden'});
-						}
+						}*/
 
 					}
 					//
 					break;
 				case 1:
 					console.log('all:', getAnswerArray('b'));
+
+					//全部答对,任务2
 					if (answerArray.toString() === getAnswerArray('b')) {
 						$('.task-progress').children().eq(1).addClass('cur');
 						resetSelectIco();
@@ -612,16 +706,22 @@
 						$rotes.eq(2).css({'visibility': 'visible'});
 						$('.select-tips').css({'visibility': 'hidden'});
 					} else {
-						if (answerArray.length >= 3) {
+						if (_answerAllRight) {
+							$('.select-tips').css({'visibility': 'hidden'});
+						}
+
+						/*if (answerArray.length >= 3) {
 							$('.select-tips').css({'visibility': 'visible'});
 						} else {
 							$('.select-tips').css({'visibility': 'hidden'});
-						}
+						}*/
 					}
 					//
 					break;
 				case 2:
 					console.log('all:', getAnswerArray('c'));
+
+					//全部答对,任务3
 					if (answerArray.toString() === getAnswerArray('c')) {
 						$('.task-progress').children().eq(2).addClass('cur');
 						resetSelectIco();
@@ -634,11 +734,14 @@
 						$('.j-result-btn').show();
 						$('.select-tips').css({'visibility': 'hidden'});
 					} else {
-						if (answerArray.length >= 3) {
+						if (_answerAllRight) {
+							$('.select-tips').css({'visibility': 'hidden'});
+						}
+						/*if (answerArray.length >= 3) {
 							$('.select-tips').css({'visibility': 'visible'});
 						} else {
 							$('.select-tips').css({'visibility': 'hidden'});
-						}
+						}*/
 					}
 					//
 					break;
