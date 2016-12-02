@@ -35,7 +35,7 @@ body { background-color: #f0f0f0; }
 .q-code .q-code-text { position: absolute; top: 250px; left: 57px; width: 154px; height: 40px; text-align: center; line-height: 40px; font-size: 12px; color: #2a509a; }
 .q-code .q-code-btn { background-color: #fa8d00; position: absolute; top: 310px; left: 69px; width: 130px; height: 33px; line-height: 33px; text-align: center; z-index: 243; border-radius: 5px; color: #ffffff; font-size: 16px; }
 
-.tab-status { position: absolute; top: 39px; left: 50%; margin-left: -570px; z-index: 8; }
+.tab-status { display: none; position: absolute; top: 39px; left: 50%; margin-left: -570px; z-index: 8; }
 .tab-status .tab { position: relative; display: inline-block; margin-right: 5px; width: 125px; height: 68px; background-position: 50% 50%; background-repeat: no-repeat; cursor: pointer; }
 .tab-status .tab:before { display: none; content: ''; position: absolute; top: -2px; left: -2px; width: 130px; height: 94px; background-repeat: no-repeat; background-position: 0 0; }
 .tab-status .tab.tab1 { background-image: url(../images/tab1.png); }

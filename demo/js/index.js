@@ -95,6 +95,9 @@
 	var userName; //用户名
 
 	var openViewTab = 1; //默认打开的是挑战 tab页
+
+	var firstPlay = !1; //已经玩过了  假
+
 	//b1======
 
 	//随机获取名字
@@ -211,6 +214,12 @@
 			$('.autoText').html('请输入完整团队名称!');
 			showWinFrame('.auto-win');
 		} else {
+			console.log('firstPlay:', firstPlay);
+			if(firstPlay){
+				$('.tab-status').children().eq(1).addClass('cur');
+				$('.tab-status').attr('data-cur-page','#nav2').fadeIn();
+			}
+
 			switchPage($('#nav1'),$('#nav2'));
 			//toScroll('#nav2');
 			//next page
@@ -310,8 +319,12 @@
 	//next to page
 	$('.b3-win-btn').on('click', function () {
 		hideWinFrame();
+
 		//toScroll('#nav4');
 		switchPage($('#nav3'),$('#nav4'));
+		$('.tab-status').children().eq(3).addClass('cur');
+		$('.tab-status').fadeIn(); //显示导航
+		firstPlay = !0;
 		return false;
 	});
 
@@ -403,20 +416,6 @@
 				this.className = 'ta-btn';
 				$('.switch-tabs').children().eq(1).addClass('prompt');
 				openWin = !1;
-				/*toScroll('#nav3', function () {
-					openViewTab = 1;
-					p3init();
-
-					if (typeof slider_btn === 'undefined') {
-						touchSlidingBox({
-							id: 'slider',
-							operate: 'slider_btn'
-						});
-						console.log('创建slider-:by--> 挑战');
-					}
-					console.log('slider_btn:', slider_btn);
-				});*/
-
 				switchPage($('#nav2'),$('#nav3'));
 				openViewTab = 1;
 				p3init();
@@ -463,12 +462,20 @@
 		var _parentNode = this.parentNode;
 		var oldCurPage = _parentNode.getAttribute('data-cur-page');
 		_parentNode.setAttribute('data-cur-page',_page);
-		$(this).addClass('cur').siblings().removeClass('cur');
+
+		if(!$(this).hasClass('cur')){
+			$(this).addClass('cur').siblings().removeClass('cur');
+			switchPage($(oldCurPage),$(_page));
+		}
+
+		if(_page === '#nav1'){
+			_parentNode.style.display = 'none';
+		}
 
 		console.log('oldCurPage:', oldCurPage);
 		console.log('_page:', _page);
 
-		switchPage($(oldCurPage),$(_page));
+
 
 
 		return false;
@@ -590,7 +597,7 @@
 				this.setAttribute("data-state", "1");
 				if (_answerValue) {
 					answerArray.push(_answerValue);
-					_answerDom.push(this);
+					//_answerDom.push(this);
 				}
 				console.log('点亮');
 				//点亮的时候判断答案是否正确
@@ -629,7 +636,7 @@
 						console.log('answerArray[i]:', i, answerArray[i]);
 						if (answerArray[i] === _answerValue) {
 							answerArray.splice(i, 1);
-							_answerDom.splice(i,1);
+							//_answerDom.splice(i,1);
 							break;
 						}
 					}
@@ -675,7 +682,7 @@
 						$rotes.eq(1).css({'visibility': 'visible'});
 						$('.select-tips').css({'visibility': 'hidden'});
 						console.log('_answerDom:', _answerDom);
-						setHighlight(_answerDom);
+						//setHighlight(_answerDom);
 
 					} else {
 
@@ -705,7 +712,7 @@
 						$rotes.eq(1).hide();
 						$rotes.eq(2).css({'visibility': 'visible'});
 						$('.select-tips').css({'visibility': 'hidden'});
-						setHighlight(_answerDom);
+						//setHighlight(_answerDom);
 					} else {
 						if (_answerAllRight) {
 							$('.select-tips').css({'visibility': 'hidden'});
@@ -724,7 +731,7 @@
 
 					//全部答对,任务3
 					if (answerArray.toString() === getAnswerArray('c')) {
-						setHighlight(_answerDom);
+						//setHighlight(_answerDom);
 						$('.task-progress').children().eq(2).addClass('cur');
 						resetSelectIco();
 						//设置用户名
