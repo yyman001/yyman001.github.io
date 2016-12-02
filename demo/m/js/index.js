@@ -226,7 +226,7 @@ var wxData = {
 		var value = this.getAttribute("data-answer");
 		if (value === 'b') {
 			$('.answer-box').hide();
-			$('.part-box').css({"visibility": "visible"}).attr('data-state', 'show');
+			$('.part-box').css({"visibility": "visible","opacity":1});//.attr('data-state', 'show');
 		}
 		return false;
 	});
@@ -859,7 +859,7 @@ var wxData = {
 			//========p3
 			$('.answer-box').show();
 			$('.answer-list').find('.cur').removeClass('cur');
-			$('.part-box').css({'visibility': 'hidden'});
+			$('.part-box').css({'visibility': 'hidden',"opacity":0});
 			$('#slider').css({"left":0});
 
 			//========p2
