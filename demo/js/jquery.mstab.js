@@ -59,7 +59,7 @@ $.fn.mstab = function (op) {
 			contBody.css({"display": "none", "visibility": "hidden"});
 			contBody.eq(index).css({"display": "block", "visibility": "visible"});
 			if (_options.callback && typeof _options.callback === 'function') {
-				_options.callback(index, contBody);
+				_options.callback(index, $this ,contBody);
 			}
 
 		});//bind

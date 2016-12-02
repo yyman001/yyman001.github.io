@@ -22,7 +22,11 @@ body { background-color: #f0f0f0; }
 
 .cover__img { position: relative; display: block; background-repeat: no-repeat; background-position: 50% 50%; background-size: cover; }
 
-.block-wrap { position: relative; min-width: 1200px; overflow: hidden; }
+.main { position: relative; min-width: 1200px; }
+.main[data-state="1"] { height: 1200px; }
+.main[data-state="2"] , .main[data-state="3"] , .main[data-state="4"] { height: 1080px; }
+
+.block-wrap { position: absolute; top: 0; left: 0; width: 100%; min-width: 1200px; overflow: hidden; }
 
 .block { position: relative; margin: 0 auto; width: 1200px; outline: 1px solid #f00; }
 
@@ -90,7 +94,7 @@ body { background-color: #f0f0f0; }
 .block1 .search .tips { font-size: 16px; line-height: 2; color: #f8caad; }
 .block1 .search__input { float: left; box-sizing: border-box; padding: 10px 15px 10px 20px; width: 316px; height: 64px; border: none; font-size: 20px; color: #c3926b; background: url(../images/search__input.png) no-repeat 0 0; }
 .block1 .search__input:focus { outline: 1px solid transparent; }
-.block1 .search__submit { float: right; margin-top: -19px; width: 153px; height: 93px; background: url(../images/search__submit.png) no-repeat 0 0; }
+.block1 .search__submit { float: right; margin-top: -19px; width: 153px; height: 93px; }
 
 @media screen and (max-width: 1680px) { .block1 .logo { left: 58px; }
   .block1 .q-code { right: 125px; } }
@@ -144,8 +148,8 @@ body { background-color: #f0f0f0; }
 .block3 .b3-box { position: relative; z-index: 1; margin: 0 auto; width: 1155px; height: 670px; background: url(../images/b3-box-bg.png) no-repeat 50% 0; }
 .block3 .switch-tabs { position: absolute; left: 77px; top: 4px; z-index: 2; }
 .block3 .switch-tab { position: relative; display: inline-block; margin-right: 5px; cursor: pointer; }
-.block3 .switch-tab:before { content: ''; position: absolute; top: -16px; right: -20px; z-index: 1; width: 57px; height: 63px; background: url(../images/red-tips.png) no-repeat 0 0; visibility: visible; }
-.block3 .switch-tab.cur:before { visibility: hidden; }
+.block3 .switch-tab:before { content: ''; position: absolute; top: -16px; right: -20px; z-index: 1; width: 57px; height: 63px; background: url(../images/red-tips.png) no-repeat 0 0; visibility: hidden; }
+.block3 .switch-tab.prompt:before { visibility: visible; }
 .block3 .switch-cont { min-height: 670px; }
 
 .in-cont { visibility: hidden; }
@@ -279,7 +283,7 @@ body .share-bar .rwt_share .qzone-ico { background-image: url(../images/qzone-ic
 body .share-bar .rwt_share .tsina-ico { background-image: url(../images/tsina-ico.png); }
 body .share-bar .rwt_share .tqq-ico { background-image: url(../images/qq-ico.png); }
 
-.footer-wrap { background-color: #000; min-width: 1000px; }
+.footer-wrap { background-color: #000; min-width: 1200px; }
 
 .footer-wrap .footer { width: 1000px; margin: 0 auto; padding: 20px 0 30px 0; background: #000; overflow: hidden; }
 

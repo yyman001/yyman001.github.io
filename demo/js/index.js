@@ -182,6 +182,14 @@
 		//return false;
 	});
 
+	//切换页面
+	function switchPage($curPage,$nexPage){
+		$(window).scrollTop(0);
+		$curPage.hide();
+		$('.main').attr('data-state',$nexPage.attr('data-page'));
+		$nexPage.show();
+	}
+
 	//冒险按钮
 	$('.search__submit').on('click', function () {
 		userName = $.trim($('.search__input').val());
@@ -190,7 +198,8 @@
 			$('.autoText').html('请输入完整团队名称!');
 			showWinFrame('.auto-win');
 		} else {
-			toScroll('#nav2');
+			switchPage($('#nav1'),$('#nav2'));
+			//toScroll('#nav2');
 			//next page
 		}
 
@@ -211,16 +220,22 @@
 	//秘境
 	$('.b2-bt2').on('click', function () {
 		$(this).removeClass('cur');
-		toScroll('#nav3', function () {
-			openViewTab = 2;
-			p3init();
-		});
+		//toScroll('#nav3', function () {
+		//	openViewTab = 2;
+		//	p3init();
+		//});
+		$('.switch-tabs').children().eq(0).addClass('prompt');
+		switchPage($('#nav2'),$('#nav3'));
+		openViewTab = 2;
+		p3init();
+
 		return false;
 	});
 
 
 	//b2========
 
+	//$('.switch-tabs').children().eq(0).addClass('prompt');
 
 	//b3======
 	function p3init() {
@@ -230,8 +245,11 @@
 			"hdElement": "a",
 			"view": openViewTab,
 			"cont": ".switch-cont .in-cont",
-			"callback": function (index) {
+			"callback": function (index,$curTab,body) {
 				console.log(index);
+				console.log($curTab);
+				console.log(body);
+				$curTab.removeClass('prompt');
 				if (index === 0 && typeof slider_btn === 'undefined') {
 					touchSlidingBox({
 						id: 'slider',
@@ -279,7 +297,8 @@
 	//next to page
 	$('.b3-win-btn').on('click', function () {
 		hideWinFrame();
-		toScroll('#nav4');
+		//toScroll('#nav4');
+		switchPage($('#nav3'),$('#nav4'));
 		return false;
 	});
 
@@ -354,6 +373,10 @@
 	}
 
 	console.log('slider_btn:', typeof slider_btn);
+
+
+
+	//p2 工具条
 	$('.ta-bar').on('click', 'a', function () {
 		var _type = this.getAttribute("data-type");
 		var _winString = '';
@@ -365,8 +388,9 @@
 				break;
 			case 'tz': //挑战
 				this.className = 'ta-btn';
+				$('.switch-tabs').children().eq(1).addClass('prompt');
 				openWin = !1;
-				toScroll('#nav3', function () {
+				/*toScroll('#nav3', function () {
 					openViewTab = 1;
 					p3init();
 
@@ -377,13 +401,22 @@
 						});
 						console.log('创建slider-:by--> 挑战');
 					}
-					//touchSlidingBox({
-					//	id: 'slider',
-					//	operate: 'slider_btn'
-					//});
-
 					console.log('slider_btn:', slider_btn);
-				});
+				});*/
+
+				switchPage($('#nav2'),$('#nav3'));
+				openViewTab = 1;
+				p3init();
+				if (typeof slider_btn === 'undefined') {
+					touchSlidingBox({
+						id: 'slider',
+						operate: 'slider_btn'
+					});
+					console.log('创建slider-:by--> 挑战');
+				}
+				console.log('slider_btn:', slider_btn);
+
+
 				break;
 			case 'ts':  //天神
 				_winString = '.ta-' + 'ts' + '-win';
@@ -410,6 +443,17 @@
 			showWinFrame(_winString);
 		}
 		return false;
+	});
+
+	$('.tab-status').on('click','a',function(){
+	  var _page = this.getAttribute('data-page');
+		var _parentNode = this.parentNode;
+		var oldCurPage = _parentNode.getAttribute('data-cur-page');
+		_parentNode.setAttribute('data-cur-page',_page);
+
+		
+
+	  return false;
 	});
 
 
