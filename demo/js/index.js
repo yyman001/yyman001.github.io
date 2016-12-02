@@ -203,12 +203,14 @@
 	//b2========
 	//任务
 	$('.b2-bt1').on('click', function () {
+		$(this).removeClass('cur');
 		showWinFrame('.ta-task-win');
 		return false;
 	});
 
 	//秘境
 	$('.b2-bt2').on('click', function () {
+		$(this).removeClass('cur');
 		toScroll('#nav3', function () {
 			openViewTab = 2;
 			p3init();
@@ -362,6 +364,7 @@
 				$('.b2-userName')[0].innerHTML = '“' + userName + '”';
 				break;
 			case 'tz': //挑战
+				this.className = 'ta-btn';
 				openWin = !1;
 				toScroll('#nav3', function () {
 					openViewTab = 1;

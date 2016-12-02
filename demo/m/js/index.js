@@ -197,6 +197,7 @@
 	//b2========
 	//任务
 	$('.b2-bt1').on('click', function () {
+		$(this).removeClass('cur');
 		hideTabWin();
 		showWinFrame('.ta-task-win');
 		return false;
@@ -204,7 +205,9 @@
 
 	//秘境
 	$('.b2-bt2').on('click', function () {
-
+		$(this).removeClass('cur');
+		unlock();
+		toNextPage();
 		return false;
 	});
 
@@ -213,16 +216,11 @@
 
 
 	//b3======
-	//
-	//$('.b3-box').mstab({
-	//	"event": "click",
-	//	"hd": ".switch-tabs",
-	//	"hdElement": "a",
-	//	"cont": ".switch-cont .in-cont"
-	//});
 
-
-	slider_btn = new touchSliding('slider', {speed: 600, timeout: 3000000, mouseWheel: !1})
+	setTimeout(function () {
+		slider_btn = new touchSliding('slider', {speed: 600, timeout: 3000000, mouseWheel: !1});
+		console.log('初始化p3');
+	}, 2000);
 
 
 	$('.b3-video-btn').on('click', function () {
@@ -365,6 +363,7 @@
 				//hideTabWin();
 				break;
 			case 'tz': //挑战
+				this.className = 'ta-btn';
 				openWin = !1;
 				hideTabWin();
 				unlock();
@@ -658,9 +657,16 @@
 
 	//分享按钮
 	$('.share-code-btn').on('click', function () {
-
+		$('.share-page').show();
 		return false;
 	});
+
+
+	$('.share-page').on('click', function () {
+		$(this).hide();
+		return false;
+	});
+
 
 });
 
