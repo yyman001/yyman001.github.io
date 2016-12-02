@@ -77,7 +77,7 @@
             <a class="b2-bt2 cur"><img src="images/img_1x1.png" data-src="images/b2-btn2.png" alt=""></a>
 
             <!--tabWin-->
-            <div class="ta-text" data-state="hide" data-bg="images/ta-text-bg.png">
+            <div class="ta-text" data-state="show" data-bg="images/ta-text-bg.png">
                 <a href="javascript:void(0);" class="prev-btn ta-prev"></a>
                 <a href="javascript:void(0);" class="next-btn ta-next"></a>
                 <a class="up-down-btn"></a>
@@ -442,6 +442,7 @@
 
 <!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
 <!--<script type="text/javascript" src="js/vconsole.min.js"></script>-->
+<!--<script type="text/javascript" src="http://h5.static.myappgame.com/common/WeixinApi.js"></script>-->
 <script type="text/javascript" src="js/LAB.min.js"></script>
 <script type="text/javascript" src="js/player.min.js" defer></script>
 <script type="text/javascript">
@@ -500,12 +501,12 @@
      var imgDomArray = document.querySelectorAll('[data-src]');
      imgDomArray = Array.prototype.slice.call(imgDomArray);
         imgDomArray.forEach(function(v,i){
-//            console.log(i, v);
             var src = v.getAttribute("data-src");
             imgSrcArray.push(src);
         });
+
     console.timeEnd && console.timeEnd('bgArray');
-//    console.log('imgSrcArray:',imgSrcArray);
+
 
     //扫描背景图
     var bgImgDomArray = document.querySelectorAll('[data-bg]');
@@ -521,7 +522,7 @@
     var temp_swiper = null;
     var mySwiper = null;
     //锁屏
-    function lock(){
+        function lock(){
         mySwiper.lockSwipes();
         console.log('锁定页面');
     }
@@ -558,6 +559,7 @@
                         },
                         onSlideChangeEnd: function(swiper){
                             swiper.lockSwipes();
+                            console.log('页面切换');
                         }
                     });
                 })

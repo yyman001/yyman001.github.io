@@ -372,15 +372,18 @@
 		var $this = $(this);
 		var _index = $this.index();
 
-		_index++;
-		index = _index;//++
-		tabSwitch(_index);
 		if (_index) {
+			_index++;
+			index = _index;//++
+			tabSwitch(_index);
 			tabSwitch2(_index - 1);
 		} else {
-			taList.removeClass('cur')
+			if(_index){
+				taList.removeClass('cur')
+			}
+
 		}
-		//console.log('点击--索引:   ',_index);
+		console.log('点击--索引:   ',_index);
 		return false;
 	});
 

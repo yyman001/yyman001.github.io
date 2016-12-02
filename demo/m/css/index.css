@@ -152,7 +152,7 @@ a, button, ul, li { -webkit-tap-highlight-color: transparent; }
 .page4 .rotes .select-tips { position: absolute; top: 1.8rem; left: 50%; width: 2.31rem; visibility: hidden; -webkit-transform: translate(-50%, 0); -ms-transform: translate(-50%, 0); transform: translate(-50%, 0); }
 .page4 .rotes .rote { position: absolute; top: 0; left: 0; visibility: hidden; }
 .page4 .rotes .rote:first-child { visibility: visible; }
-.page4 .skill-box { padding-top: .34rem; font-size: 0; text-align: center; -webkit-tap-highlight-color: transparent; }
+.page4 .skill-box { padding-top: .34rem; font-size: 0; text-align: center; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 .page4 .skill { display: inline-block; margin: 0 .08rem .1rem .08rem; width: 1.1rem; }
 .page4 .skill > img { -webkit-filter: brightness(0.5); filter: brightness(0.5); }
 .page4 .skill.cur > img { -webkit-filter: brightness(1); filter: brightness(1); }

@@ -2,6 +2,19 @@
  * Created by Administrator on 2016/6/30.
  */
 
+var wxData = {
+	appId:'' ,//appid，可不用这项
+	imgUrl:'http://hd.appgame.com/wp-content/uploads/sites/55/2016/05/', // 缩略图地址
+	link: 'http://hd.appgame.com/act/',// 链接地址
+	desc: '怒鸟大电影中没有告诉你的私密档案，胖红过去的历史竟然是这样......' ,// 详细描述
+	title: '没get到这些梗，你还好意思说看过《愤怒的小鸟》？',// 标题
+	success: function(){
+
+	},
+	cancel: function(){
+	}
+};
+
 
 ;$(function () {
 
@@ -27,9 +40,14 @@
 	}
 
 //隐藏窗口
-	function hideWinFrame() {
-		$mask.fadeOut();
+	function hideWinFrame(callback) {
 		$('.j-win').fadeOut();
+		$mask.fadeOut(function(){
+			if(callback && typeof callback === 'function'){
+				callback();
+			}
+		});
+
 	}
 
 	function showWinFrame(type) {
@@ -44,42 +62,6 @@
 		});
 		$('.j-win').fadeOut();
 	});
-
-
-	//$('.button__rotate-get').on('click',function(){
-	//    showWinFrame('.win__share');
-	//  return false;
-	//});
-	/*
-
-	 $('.button__rotate-tao,.button__rotate-get,.j_get_btn').on('click',function(){
-	 showWinFrame('.win__code');
-	 return false;
-	 });
-
-	 $('.button__rotate-end').on('click',function(){
-	 showWinFrame('.win__end');
-	 return false;
-	 });
-	 */
-
-
-	//返回顶部
-	/*$(".j_toTop").on('click', function () {
-	 $('html,body').animate({ "scrollTop": 0 }, 220);
-	 $(this).hide();
-	 });
-
-	 $(window).scroll(function () {
-	 var scrolls = $(this).scrollTop();
-	 if (scrolls > 100) {
-	 console.log(scrolls);
-	 $(".j_toTop").show();
-	 } else {
-	 $(".j_toTop").hide();
-	 }
-
-	 });*/
 
 	//随机函数
 	function getRandomIndex(_array) {
@@ -317,21 +299,25 @@
 		var $this = $(this);
 		var _index = $this.index();
 
-
-		_index++;
-		index = _index;
-		console.log(_index);
-
-		if (index !== 1) {
-			console.log('tab');
-			tabSwitch(_index);
-			showTabWin();
-		}
+		//if (index !== 1) {
+		//	console.log('tab');
+		//
+		//}
 
 		if (_index) {
+			_index++;
+			index = _index;
+			console.log(_index);
+
+			tabSwitch(_index);
+			showTabWin();
+
 			tabSwitch2(_index - 1);
 		} else {
-			taList.removeClass('cur')
+			if(_index){
+				taList.removeClass('cur')
+			}
+
 		}
 		//console.log('点击--索引:   ',_index);
 		return false;
@@ -382,7 +368,8 @@
 				openWin = !1;
 				index = 1;
 				tabSwitch(index);
-				$('.ta').find('.cur').removeClass('cur');
+				taList.filter('.cur').removeClass('cur');
+				//$('.ta').find('.cur').removeClass('cur');
 				showTabWin();
 				//_winString = '.ta-' + 'gh' + '-win';
 				break;
@@ -390,7 +377,8 @@
 				openWin = !1;
 				index = 0;
 				tabSwitch(index);
-				$('.ta').find('.cur').removeClass('cur');
+				taList.filter('.cur').removeClass('cur');
+				//$('.ta').find('.cur').removeClass('cur');
 				showTabWin();
 				//_winString = '.ta-' + 'bjx' + '-win';
 				break;
@@ -446,11 +434,12 @@
 
 		setTimeout(function () {
 			$('.dialos').hide();
-			//$('.j-step2-msg').hide();
-			//$('.j-step4-btn').hide();
+			$('.j-step3-player-dialog').hide();
+			$('.j-step4-btn').hide();
+
 			$('.b4-box-bg').show();
 			$('.b4-box').show();
-		}, 3000);
+		}, 2000);
 
 		return false;
 	});
@@ -508,7 +497,7 @@
 		return false;
 	});
 
-	$('.skill-box').on('click', 'a', function () {
+	/*$('.skill-box').on('click', 'a', function () {
 		var _state;// = this.getAttribute("data-state");   //点击状态
 		var _answerValue;// = this.getAttribute("data-group");   // 任务a,b,c 的数组答案
 		//console.log(this, _state);
@@ -629,6 +618,201 @@
 
 
 		return false;
+	});*/
+
+	$('.skill-box').on('click', 'a', function () {
+		var _this = this;
+		var _state;// = this.getAttribute("data-state");   //点击状态
+		var _answerValue;// = this.getAttribute("data-group");   // 任务a,b,c 的数组答案
+		var _answerType;
+		var _answerAllRight = !0; //默认 不存在错误答案
+		//console.log(this, _state);
+
+		taskStep = getTaskProgress();
+		console.log('taskStep:', taskStep);
+
+		$('.text-des').attr('data-state', 'hide');
+
+		if (taskStep > 2) {
+			console.log('已经完成任务');
+		} else {
+
+			_state = this.getAttribute("data-state");   //点击状态
+			_answerValue = this.getAttribute("data-group");   // 任务a,b,c 的数组答案
+			//console.log(this, _state);
+
+			if (_state === "0" || typeof _state === 'undefined' || _state === null) {
+				//push
+				this.setAttribute("data-state", "1");
+				if (_answerValue) {
+					answerArray.push(_answerValue)
+				}
+				console.log('点亮');
+				//点亮的时候判断答案是否正确
+				switch (taskStep){
+					case 0: //任务1
+						console.log('点亮-任务1');
+						console.log('点击技能值为:',_answerValue);
+						console.log('????:',_answerValue !== 'a');
+
+						if (_answerValue !== 'a') {
+							console.log('不是为真吗?怎么没反应');
+							$('.select-tips').css({'visibility': 'visible'});
+						}
+						break;
+					case 1: //任务2
+						console.log('点亮-任务2');
+						if (_this.getAttribute('data-group') !== 'b') {
+							$('.select-tips').css({'visibility': 'visible'});
+						}
+						break;
+					case 2: //任务3
+						if (_this.getAttribute('data-group') !== 'c') {
+							$('.select-tips').css({'visibility': 'visible'});
+						}
+						break;
+					default:break;
+				}
+
+			} else if (_state === '1') {
+
+				console.log('取消点亮');
+				//=============取消点亮,去掉对应元素
+				this.setAttribute("data-state", "0");
+				if (_answerValue) {
+					for (var i = 0, l = answerArray.length; i < l; i++) {
+						console.log('answerArray[i]:', i, answerArray[i]);
+						if (answerArray[i] === _answerValue) {
+							answerArray.splice(i, 1);
+							break;
+						}
+					}
+					console.log('answerArray:', answerArray);
+				}
+				//============
+			}
+
+			console.log('answerArray:', answerArray.toString());
+
+			//删除已经去掉的高亮元素,再判断是否还存在不正确答案
+			switch (taskStep){
+				case 0: //任务1
+					_answerType = 'a';
+					break;
+				case 1: //任务2
+					_answerType = 'b';
+					break;
+				case 2: //任务3
+					_answerType = 'c';
+					break;
+				default:break;
+			}
+
+			for (var ii = 0, ll = answerArray.length; ii < ll; ii++) {
+				console.log('取消高亮答案结果:', ii, answerArray[ii]);
+				if (answerArray[ii] !== _answerType) {
+					console.log('存在的错误答案为:', answerArray[ii]);
+					_answerAllRight = !1; //存在错误答案
+
+					break;
+				}
+			}
+
+			switch (taskStep) {
+				case 0:
+					console.log('all:', getAnswerArray('a'));
+					//全部答对,任务1
+					if (answerArray.toString() === getAnswerArray('a')) {
+						$('.task-progress').children().eq(0).addClass('cur');
+						resetSelectIco();
+						$rotes.eq(0).css({'visibility': 'hidden'});
+						$rotes.eq(1).css({'visibility': 'visible'});
+						$('.select-tips').css({'visibility': 'hidden'});
+					} else {
+
+						//answerArray.forEach(function(v,i){
+						//	console.log(i, v,_this);
+						//});
+
+						if (_answerAllRight) {
+							$('.select-tips').css({'visibility': 'hidden'});
+						}
+						/*if (answerArray.length >= 3) {
+						 $('.select-tips').css({'visibility': 'visible'});
+						 } else {
+						 $('.select-tips').css({'visibility': 'hidden'});
+						 }*/
+
+					}
+					//
+					break;
+				case 1:
+					console.log('all:', getAnswerArray('b'));
+
+					//全部答对,任务2
+					if (answerArray.toString() === getAnswerArray('b')) {
+						$('.task-progress').children().eq(1).addClass('cur');
+						resetSelectIco();
+						$rotes.eq(1).css({'visibility': 'hidden'});
+						$rotes.eq(2).css({'visibility': 'visible'});
+						$('.select-tips').css({'visibility': 'hidden'});
+					} else {
+						if (_answerAllRight) {
+							$('.select-tips').css({'visibility': 'hidden'});
+						}
+
+						/*if (answerArray.length >= 3) {
+						 $('.select-tips').css({'visibility': 'visible'});
+						 } else {
+						 $('.select-tips').css({'visibility': 'hidden'});
+						 }*/
+					}
+					//
+					break;
+				case 2:
+					console.log('all:', getAnswerArray('c'));
+
+					//全部答对,任务3
+					if (answerArray.toString() === getAnswerArray('c')) {
+						$('.task-progress').children().eq(2).addClass('cur');
+						resetSelectIco();
+						//设置用户名
+						$('.j-userName')[0].innerHTML = '“' + userName + '”';
+						setJob();
+						showWinFrame('.testEnd-win');
+
+						//显示结果按钮
+						$('.j-result-btn').show();
+						$('.select-tips').css({'visibility': 'hidden'});
+					} else {
+						if (_answerAllRight) {
+							$('.select-tips').css({'visibility': 'hidden'});
+						}
+						/*if (answerArray.length >= 3) {
+						 $('.select-tips').css({'visibility': 'visible'});
+						 } else {
+						 $('.select-tips').css({'visibility': 'hidden'});
+						 }*/
+					}
+					//
+					break;
+				default:
+					console.log('out');
+					break;
+			}
+
+
+		}
+
+
+		//check
+		console.log(answerArray);
+
+
+		//if(answerArray.length){}
+
+
+		return false;
 	});
 
 	//$('.j-userName')[0].innerHTML = '“' + userName + '”';
@@ -649,9 +833,60 @@
 		$('.jobs').hide().eq(_random).show();
 	}
 
+	//重置游戏
+	function resetApp(){
+		//========p4
+
+		hideWinFrame(function(){
+			randomUserName(); //重新获取名称
+			unlock();
+			mySwiper.slideTo(0, 500, function (swiper) {});
+
+			$('.dialos').css({'display': 'block'});
+			$('.b4-box').css({'display': 'none'});
+			$('.j-step1-msg').css({'display': 'block'});
+			$('.j-step1-btn').css({'display': 'block'});
+
+			$('.j-result-btn').hide(); //1.隐藏 结果按钮
+			$('.task-progress').find('.cur').removeClass();							//2. 清空 任务进度条
+
+			$('.text-des').attr('data-state','show'); //p4 说明
+
+			$rotes.eq(0).css({'visibility': 'visible'});
+			$rotes.eq(1).css({'visibility': 'hidden'});
+			$rotes.eq(2).css({'visibility': 'hidden'});
+
+			//========p3
+			$('.answer-box').show();
+			$('.answer-list').find('.cur').removeClass('cur');
+			$('.part-box').css({'visibility': 'hidden'});
+			$('#slider').css({"left":0});
+
+			//========p2
+			$('.ta-bar').children().eq(1).addClass('cur');
+			$('.b2-bt1').addClass('cur');
+			$('.b2-bt2').addClass('cur');
+			$('.ta-text').attr('data-state','show');
+			taList.filter('.cur').removeClass();
+			index = 0;
+			tabSwitch(index);
+
+		});
+
+
+
+
+
+
+	}
+
+
 	//再玩一次
 	$('.play-again-btn').on('click', function () {
 		console.log('再玩一次');
+		resetApp();
+
+
 		return false;
 	});
 
