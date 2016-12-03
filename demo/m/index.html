@@ -548,6 +548,8 @@
 
     //wait
 
+	var  isLoukPage = !0;
+	
     window.onload = function () {
         console.timeEnd && console.timeEnd('time');
         console.log('全部文件已经加载完毕');
@@ -567,7 +569,13 @@
                             console.log('初始化完成');
                         },
                         onSlideChangeEnd: function(swiper){
-                            swiper.lockSwipes();
+                            if(swiper.activeIndex === 3){ //p4
+								isLoukPage = !1;
+							}
+							if(isLoukPage){
+							    swiper.lockSwipes();
+							}
+                            console.log(swiper.activeIndex);
                             console.log('页面切换');
                         }
                     });
