@@ -4,10 +4,10 @@
 
 var wxData = {
 	appId:'' ,//appid，可不用这项
-	imgUrl:'http://hd.appgame.com/wp-content/uploads/sites/55/2016/05/', // 缩略图地址
-	link: 'http://hd.appgame.com/act/',// 链接地址
-	desc: '卡德里亚世界里，《天命传说》的玩家都充当着游戏中的拥有天命之力的主角，在小伙伴的陪伴下一起开展冒险旅程。' ,// 详细描述
-	title: '没玩到这地图都不知道 原来我是旅团中的逃兵\挡箭牌\傻冒\智圣\呆瓜',// 标题
+	imgUrl:'', // 缩略图地址
+	link: 'http://hd.appgame.com/act/tmcs2016js/m/',// 链接地址
+	desc: '来自远古销声匿迹的《天命传说》卡德里亚世界，是成为真正冒险家不得不到达地方，然而没有地图的玩家却像走进了迷宫里。' ,// 详细描述
+	title: '据说没看过地图的旅团 都在进去后出不来了',// 标题
 	success: function(){
 
 	},
@@ -201,7 +201,7 @@ var wxData = {
 
 	setTimeout(function () {
 		slider_btn = new touchSliding('slider', {speed: 600, timeout: 3000000, mouseWheel: !1});
-		console.log('初始化p3');
+		//console.log('初始化p3');
 	}, 2000);
 
 

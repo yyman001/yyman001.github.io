@@ -55,23 +55,6 @@
 	});
 
 
-	//返回顶部
-	/*$(".j_toTop").on('click', function () {
-	 $('html,body').animate({ "scrollTop": 0 }, 220);
-	 $(this).hide();
-	 });
-
-	 $(window).scroll(function () {
-	 var scrolls = $(this).scrollTop();
-	 if (scrolls > 100) {
-	 console.log(scrolls);
-	 $(".j_toTop").show();
-	 } else {
-	 $(".j_toTop").hide();
-	 }
-
-	 });*/
-
 	//随机函数
 	function getRandomIndex(_array) {
 		return _array.length ? Math.floor(Math.random() * _array.length) : -1;
@@ -148,8 +131,7 @@
 	$('.video-btn').click(function (e) {
 		$('.video-rotate').addClass('ani-paused');
 		$('body').css('overflow', 'hidden');
-		// $('.mask, .video').show();
-		//showWinFrame('.video');
+
 		cretaMask(function () {
 			$('#video').empty();
 			$('.video-rotate').removeClass('ani-paused');
@@ -182,16 +164,7 @@
 	//文本框
 	$('.search__input').on('keyup', function (e) {
 		console.log(e.key);
-		//console.log(e.keyCode);
-		//
-		//if(getStringLength(this.value,16) > 16){
-		//	this.value = this.value.substring(0,16);
-		//}
-
-		//console.log(this.value);
-		//getStringLength(this.value,16);
 		limit(this, 16);
-		//return false;
 	});
 
 	//切换页面
@@ -221,7 +194,6 @@
 			}
 
 			switchPage($('#nav1'),$('#nav2'));
-			//toScroll('#nav2');
 			//next page
 		}
 
@@ -529,7 +501,7 @@
 			//$('.j-step4-btn').hide();
 			$('.b4-box-bg').show();
 			$('.b4-box').show();
-		}, 300);
+		}, 2000);
 
 		return false;
 	});
@@ -689,18 +661,9 @@
 
 					} else {
 
-						//answerArray.forEach(function(v,i){
-						//	console.log(i, v,_this);
-						//});
-
 						if (_answerAllRight) {
 							$('.select-tips').css({'visibility': 'hidden'});
 						}
-						/*if (answerArray.length >= 3) {
-							$('.select-tips').css({'visibility': 'visible'});
-						} else {
-							$('.select-tips').css({'visibility': 'hidden'});
-						}*/
 
 					}
 					//
@@ -721,11 +684,6 @@
 							$('.select-tips').css({'visibility': 'hidden'});
 						}
 
-						/*if (answerArray.length >= 3) {
-							$('.select-tips').css({'visibility': 'visible'});
-						} else {
-							$('.select-tips').css({'visibility': 'hidden'});
-						}*/
 					}
 					//
 					break;
@@ -748,11 +706,7 @@
 						if (_answerAllRight) {
 							$('.select-tips').css({'visibility': 'hidden'});
 						}
-						/*if (answerArray.length >= 3) {
-							$('.select-tips').css({'visibility': 'visible'});
-						} else {
-							$('.select-tips').css({'visibility': 'hidden'});
-						}*/
+
 					}
 					//
 					break;
@@ -763,14 +717,6 @@
 
 
 		}
-
-
-		//check
-		console.log(answerArray);
-		console.log('<<<_answerDom:', _answerDom);
-
-		//if(answerArray.length){}
-
 
 		return false;
 	});
