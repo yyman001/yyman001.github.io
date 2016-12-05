@@ -7,24 +7,37 @@ var wxData = {
 	imgUrl:'', // 缩略图地址
 	link: 'http://hd.appgame.com/act/tmcs2016js/m/',// 链接地址
 	desc: '来自远古销声匿迹的《天命传说》卡德里亚世界，是成为真正冒险家不得不到达地方，然而没有地图的玩家却像走进了迷宫里。' ,// 详细描述
-	title: '据说没看过地图的旅团 都在进去后出不来了',// 标题
-	success: function(){
-
-	},
-	cancel: function(){
-	}
+	title: '据说没看过地图的旅团 都在进去后出不来了'
 };
-
+WeixinApi.ready(function (Api) {
+	// 分享的回调
+	var wxCallbacks = {
+		ready : function() {
+		},
+		cancel : function(resp) {
+		},
+		fail : function(resp) {
+		},
+		confirm : function(resp) {
+		},
+		all : function(resp) {
+		}
+	};
+	Api.generalShare(wxData, wxCallbacks);
+	Api.shareToFriend(wxData, wxCallbacks);
+	Api.shareToTimeline(wxData, wxCallbacks);
+	Api.shareToWeibo(wxData, wxCallbacks);
+});
 
 ;$(function () {
 
 	console.log('debug');
 
-	//document.addEventListener('touchmove', function(event) {
-	//	if($(".mask").is(":visible")){
-	//		event.preventDefault();
-	//	}
-	//});
+	document.addEventListener('touchmove', function(event) {
+		if($(".j-win").is(":visible")){
+			event.preventDefault();
+		}
+	});
 
 	function cretaMask(callback) {
 		window.$mask = window.$mask || $('<div class="mask" style="position: absolute;top:0;left: 0;right: 0;bottom: 0;z-index:9;min-width: 100%;background-color: rgb(0, 0, 0);opacity: .8;"></div>');
