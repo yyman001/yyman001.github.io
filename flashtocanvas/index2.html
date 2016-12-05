@@ -1,0 +1,135 @@
+<!--
+	NOTES:
+	1. All tokens are represented by '$' sign in the template.
+	2. You can write your code only wherever mentioned.
+	3. "DO NOT" alter the tokens in the template html as they are required during publishing.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>保卫萝卜</title>
+<!-- write your code here -->
+
+
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+
+
+<!-- write your code here -->
+<style>
+#mainView{
+display:block;
+margin:0 auto;
+}
+</style>
+</head>
+<body style="background-color:#D4D4D4;margin:0px;">
+	<canvas id="mainView" class="cont" width="800" height="1300" style="background-color:#FFFFFF"></canvas>
+	
+	
+<script src="jquery.min.js"></script>
+
+<script>
+
+
+var loadOptions = {
+        container: ".cont",
+        slow: true,//开启缓慢显示进度，默认 false
+        slowtime: 50,//缓慢显示进度的时间间隔，默认 50
+        setRem: true,//使用rem单位
+        setWidth: true,//设置最大宽度
+        maxWidth: 800,//最大宽度
+        maxRadio: 1.625,//最大页面比例
+        minRadio: 1.48,//最小页面比例
+        radio: 1.625,//页面比例：1300:800
+        resize: true,//自适应
+        fullpage: false,//是否适应fullpage插件
+        autoHeight: false //尽量适应全屏
+    };
+
+
+var canvas, stage, exportRoot;
+/*function init() {
+
+	
+	canvas = document.getElementById("canvas");
+	images = images||{};
+	ss = ss||{};
+
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);
+	loader.loadManifest(lib.properties.manifest);
+}
+*/
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+$(function(){
+     
+       
+		
+		 init();
+		 
+    });
+
+
+function progressHandler(event) {
+
+}
+
+function init() {
+
+	stage = new createjs.Stage(canvas);
+	//controlInit()
+	container = new createjs.Container();
+	stage.addChild(container);
+	createjs.Touch.enable(stage);
+	
+	images = images||{};
+	ss = ss||{};
+
+	var loader = new createjs.LoadQueue(true);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("progress", progressHandler);
+	loader.addEventListener("complete", handleComplete);
+	
+	loader.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);//new add software create
+	
+	loader.loadManifest(lib.properties.manifest);
+	isloadInit = true;
+
+	createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
+	createjs.Ticker.setFPS(30);
+	createjs.Ticker.addEventListener("tick", stageBreakHandler);
+
+}
+
+function stageBreakHandler(event){
+stage.update();
+}
+
+
+function handleComplete(evt) {
+	var queue = evt.target;
+	ss["保卫萝卜_atlas_"] = queue.getResult("保卫萝卜_atlas_");
+	exportRoot = new lib.保卫萝卜();
+
+	stage = new createjs.Stage(mainView);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+	
+}
+
+</script>
+<script src="jquery-loading.1.8.1.js"></script>
+<!-- <script src="main.js"></script> -->
+<script src="lb.js"></script>
+</body>
+</html>
