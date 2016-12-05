@@ -6,8 +6,8 @@ var wxData = {
 	appId:'' ,//appid，可不用这项
 	imgUrl:'http://hd.appgame.com/wp-content/uploads/sites/55/2016/05/', // 缩略图地址
 	link: 'http://hd.appgame.com/act/',// 链接地址
-	desc: '怒鸟大电影中没有告诉你的私密档案，胖红过去的历史竟然是这样......' ,// 详细描述
-	title: '没get到这些梗，你还好意思说看过《愤怒的小鸟》？',// 标题
+	desc: '卡德里亚世界里，《天命传说》的玩家都充当着游戏中的拥有天命之力的主角，在小伙伴的陪伴下一起开展冒险旅程。' ,// 详细描述
+	title: '没玩到这地图都不知道 原来我是旅团中的逃兵\挡箭牌\傻冒\智圣\呆瓜',// 标题
 	success: function(){
 
 	},
