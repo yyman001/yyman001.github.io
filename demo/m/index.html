@@ -448,11 +448,8 @@
 <!--分享页面-->
 <div class="share-page" data-bg="images/share-page-bg.jpg"></div>
 
-<!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
-<!--<script type="text/javascript" src="js/vconsole.min.js"></script>-->
-<!--<script type="text/javascript" src="http://h5.static.myappgame.com/common/WeixinApi.js"></script>-->
+
 <script type="text/javascript" src="js/LAB.min.js"></script>
-<!--<script type="text/javascript" src="js/player.min.js" defer></script>-->
 <script type="text/javascript">
     //forEach 方法扩展
     if (typeof Array.prototype.forEach != 'function') {
@@ -571,6 +568,7 @@
                 .script("http://res.wx.qq.com/open/js/jweixin-1.0.0.js")
                 .wait()
                 .script("js/WeixinApi.js")
+                .wait()
                 .script("js/index.js?v=1.0.7").wait(function(){
 
             var $p_num = $("#percent_num");
