@@ -448,8 +448,10 @@
 <!--分享页面-->
 <div class="share-page" data-bg="images/share-page-bg.jpg"></div>
 
-<script type="text/javascript" src="http://h5.static.myappgame.com/common/WeixinApi.js"></script>
+
 <script type="text/javascript" src="js/LAB.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="http://h5.static.myappgame.com/common/WeixinApi.js"></script>
 <script type="text/javascript">
     //forEach 方法扩展
     if (typeof Array.prototype.forEach != 'function') {
@@ -536,7 +538,8 @@
         console.log('全部文件已经加载完毕');
         document.querySelector('.g-logo').className = 'g-logo figure-sup-ani';
 
-        $LAB.script("js/jquery.min.js")
+        //$LAB.script("js/jquery.min.js")
+            $LAB
                 .script("js/jquery-loading.1.8.1.js")
                 .script("js/swiper.jquery.min.js")
                 .wait(function(){
