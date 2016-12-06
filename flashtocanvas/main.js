@@ -15,8 +15,8 @@ var isloadInit = false;
 var View = {};
 View.isTween = false;
 
-model = new createjs.EventDispatcher();
-modelData = {};
+//model = new createjs.EventDispatcher();
+//modelData = {};
 //stageWidth = document.documentElement.clientWidth;
 //stageHeight = document.documentElement.clientHeight;
 //stageScale = stageWidth / (800 / 2); // 2倍
@@ -25,12 +25,8 @@ modelData = {};
 
 //if (stageWidth / stageHeight > 0.665) {
 
-
-
-
 function Adaptation(options){
 	this.canvas = null;
-	
 	this.id = options.id;
 	this.stageWidth = document.documentElement.clientWidth;
 	this.stageHeight = document.documentElement.clientHeight;
@@ -42,12 +38,12 @@ function Adaptation(options){
 	this.radio = (this.width / this.height).toFixed(3);
 	this.scale = this.stageWidth / this._h;
 	this.eventType = 'pc'; //默认事件为pc端
+	this.X = -1; 
+	this.Y = -1;
 	//function 
 	this._fileload = function (event){}
 	this._progress = function (event){}
 	this._complete = function (event){}
-	
-	
 	
 	//wap event
 	this._touchstart = function (event){}
@@ -58,21 +54,19 @@ function Adaptation(options){
 	this._mousemove = function (event){}
 	this._mouseup = function (event){}
 	
-	
-	
-	
+	this._callbackfn = function (){}
 	
 	//return this.init();
-	console.log('this.canvas:',this.canvas);
+	//console.log('this.canvas:',this.canvas);
 	
 	this.setLayout(); //初始化页面的时候设置一次
 }
 
 Adaptation.prototype.setLayout = function(){
 	this.canvas = document.querySelector(this.id)
-	console.log('radio:',this.radio);
-	console.log('id:',this.id);
-	console.log('this.canvas:',this.canvas);
+	//console.log('radio:',this.radio);
+	//console.log('id:',this.id);
+	//console.log('this.canvas:',this.canvas);
 	this.setWH();									
 	
 }
@@ -81,11 +75,11 @@ Adaptation.prototype.setWH = function (){
 										   //0.615 = 800/1300
 										   //最小比例, 值越小,越接近原来尺寸比例,越大,比例放大
 	if (this.stageWidth / this.stageHeight > 0.615) {    //宽高比例大过设计的比例就是 宽屏,  高取最大值
-	console.log('1')
+	//console.log('1')
 	this.stageScale = this.stageHeight / this._h;
 	//canvas.style.left = (stageWidth - 800 / 2 * stageScale) / 2 + 'px'; //居中
 	} else {  //竖屏 ->  宽取最大值
-		console.log('2')
+		//console.log('2')
 		this.stageScale = this.stageWidth / this._w;
 		//canvas.style.left = '0px';
 		//canvas.style.top = (stageHeight - 1300 / 2 * stageScale) / 2 + 'px'; //居中
@@ -106,13 +100,12 @@ Adaptation.prototype.touchInit = function (event){
 	this.canvas.addEventListener('touchstart', function(event) {
 		event.preventDefault();
 		var touch = event.targetTouches[0];
-		mx = touch.pageX * 2;
-		my = touch.pageY * 2;
-		modelData.mouseX = mx;
-		modelData.mouseY = my;
-		_this._touchstart(event);
+		_this.X = touch.pageX * 2;
+		_this.Y = touch.pageY * 2;
+		//modelData.mouseX = mx;
+		//modelData.mouseY = my;
+		_this._touchstart(event, _this.X , _this.Y);
 	}, false);
-
 
 	var addX = 0;
 	var addY = 0;
@@ -124,13 +117,13 @@ Adaptation.prototype.touchInit = function (event){
 			var touch = event.targetTouches[0];
 			// 把元素放在手指所在的位置
 
-			mx = touch.pageX * 2;
-			my = touch.pageY * 2;
-			modelData.mouseX = mx;
-			modelData.mouseY = my;
+			_this.X = touch.pageX * 2;
+			_this.Y = touch.pageY * 2;
+			//modelData.mouseX = mx;
+			//modelData.mouseY = my;
 			//touchMoveHandler();
-			_this._touchmove(event);
-			console.log(modelData)
+			_this._touchmove(event,_this.X,_this.Y);
+			console.log(_this.X,_this.Y)
 		}
 	}, false);
 
@@ -158,11 +151,10 @@ Adaptation.prototype.mouseInit = function (event){
 	var my = 0;
 	_this.stage.addEventListener('stagemousedown', function(mouseEvent) {
 		isMouseDown = true;
-		mx = mouseEvent.rawX;
-		my = mouseEvent.rawY;
-		modelData.mouseX = mx;
-		modelData.mouseY = my;
-		_this._mousedown(mouseEvent,modelData)
+		_this.X = mouseEvent.rawX;
+		_this.Y = mouseEvent.rawY;
+	
+		_this._mousedown(mouseEvent,_this.X,_this.Y)
 		/*homeView.checkHit({
 			x: mx,
 			y: my
@@ -172,18 +164,16 @@ Adaptation.prototype.mouseInit = function (event){
 
 	_this.stage.addEventListener('stagemousemove', function(mouseEvent) {
 		if (isMouseDown == false) return;
-		mx = mouseEvent.rawX;
-		my = mouseEvent.rawY;
-		modelData.mouseX = mx;
-		modelData.mouseY = my;
-		_this._mousemove(mouseEvent,modelData)
+		_this.X = mouseEvent.rawX;
+		_this.Y = mouseEvent.rawY;
+		_this._mousemove(mouseEvent,_this.X,_this.Y)
 		
 		//mouseMoveHandler();
 	});
 
 	_this.stage.addEventListener('stagemouseup', function(mouseEvent) {
 		isMouseDown = false;
-		_this._mouseup(mouseEvent,modelData);
+		_this._mouseup(mouseEvent);
 		//homeView.endDrawLine();
 	});
 }
@@ -213,15 +203,15 @@ Adaptation.prototype.init = function (){
 	//=====================资源队列处理
 	images = images||{};
 	ss = ss||{};
-	var loader = new createjs.LoadQueue(true);
-	loader.addEventListener("fileload", handleFileLoad);
-	loader.addEventListener("progress", progressHandler);
-	loader.addEventListener("complete", handleComplete);
+	//var loader = new createjs.LoadQueue(true);
+	//loader.addEventListener("fileload", handleFileLoad);
+	//loader.addEventListener("progress", progressHandler);
+	//loader.addEventListener("complete", handleComplete);
 	
-	loader.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);//new add software create
+	//loader.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);//new add software create
 	
-	loader.loadManifest(lib.properties.manifest);
-	console.log(lib.properties.manifest)
+	//loader.loadManifest(lib.properties.manifest);
+	//console.log(lib.properties.manifest)
 	isloadInit = true;
 	//======================
 	createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
@@ -241,14 +231,13 @@ Adaptation.prototype.stageBreakHandler = function (event){
 		this.stageWidth = document.documentElement.clientWidth;
 		this.stageHeight = document.documentElement.clientHeight;
 		this.setWH();
-		
 	}
 	this.stage.update();
 }
 
 Adaptation.prototype.callback = function (callbackfn){
 	if(callbackfn && typeof callbackfn === 'function'){
-		callbackfn();
+		this._callbackfn = callbackfn;
 	}
 	return this;
 }
@@ -309,40 +298,11 @@ Adaptation.prototype.checkEventType = function (){
 			break;
 		}
 	}
-	console.log('type:',this.eventType);
+	//console.log('type:',this.eventType);
 }
 
 
-var xxx  = new Adaptation(def); //实例化
-//xxx.setLayout();
 
-window.onload = function (){
-	
-	xxx.init()
-	.touchstart(function(e){
-		console.log('touchstart',e);
-	})
-	.touchmove(function(e){
-		//console.log('touchmove',e);
-	})
-	.touchend(function(e){
-		console.log('touchend',e);
-	})
-	.mousedown(function(e){
-		console.log('mousedown');
-	})
-	.mousemove(function(e){
-		console.log('mousemove');
-	})
-	.mouseup(function(e){
-		console.log('mouseup');
-	})
-	
-	.callback(function(){
-		console.log('callback...');
-	});
-	console.log(xxx);
-}
 
 
 
@@ -380,7 +340,7 @@ function handleFileLoad(evt) {
 }
 
 function progressHandler(event) {
-
+	//console.log(event)
 }
 
 /*function completeHandler(event) {
