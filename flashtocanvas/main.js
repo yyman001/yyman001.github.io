@@ -231,6 +231,7 @@ Adaptation.prototype.init = function (){
 		//console.log(event)
 	});
 	
+	//this.stage.update();
 	return this;
 }
 
@@ -255,7 +256,7 @@ Adaptation.prototype.callback = function (callbackfn){
 Adaptation.prototype.touchstart = function (callbackfn){
 	if(callbackfn && typeof callbackfn === 'function'){
 		this._touchstart = callbackfn;
-		console.log('touchstart-init',this._touchstart);
+		//console.log('touchstart-init',this._touchstart);
 	}
 	return this;
 }
@@ -263,7 +264,7 @@ Adaptation.prototype.touchstart = function (callbackfn){
 Adaptation.prototype.touchmove = function (callbackfn){
 	if(callbackfn && typeof callbackfn === 'function'){
 		this._touchmove = callbackfn;
-		console.log('touchmove-init',this._touchmove);
+		//console.log('touchmove-init',this._touchmove);
 	}
 	return this;
 }
@@ -271,7 +272,7 @@ Adaptation.prototype.touchmove = function (callbackfn){
 Adaptation.prototype.touchend = function (callbackfn){
 	if(callbackfn && typeof callbackfn === 'function'){
 		this._touchend = callbackfn;
-		console.log('touchend-init',this._touchend);
+		//console.log('touchend-init',this._touchend);
 	}
 	return this;
 }
