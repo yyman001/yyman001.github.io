@@ -1,7 +1,6 @@
 (function (lib, img, cjs, ss) {
 
 var p; // shortcut to reference prototypes
-lib.webFontTxtFilters = {}; 
 
 // library properties:
 lib.properties = {
@@ -9,19 +8,11 @@ lib.properties = {
 	height: 1300,
 	fps: 24,
 	color: "#FFFFFF",
-	webfonts: {},
 	manifest: []
 };
 
 
 
-lib.webfontAvailable = function(family) { 
-	lib.properties.webfonts[family] = true;
-	var txtFilters = lib.webFontTxtFilters && lib.webFontTxtFilters[family] || [];
-	for(var f = 0; f < txtFilters.length; ++f) {
-		txtFilters[f].updateCache();
-	}
-};
 // symbols:
 
 
@@ -182,51 +173,55 @@ p.nominalBounds = new cjs.Rectangle(0,0,482,156);
 	this.instance.alpha = 0;
 	this.instance._off = true;
 
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(11).to({_off:false},0).to({alpha:1},17).wait(2));
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(50).to({_off:false},0).to({alpha:1},17).wait(13));
 
 	// 文字
 	this.instance_1 = new lib.文字("synched",0);
 	this.instance_1.setTransform(400,554.1,1,1,0,0,0,-41.5,2);
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({startPosition:0},4).to({y:565.9},2).to({y:544.4},4).wait(20));
+	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({startPosition:0},4).to({y:565.9},2).to({y:554.1},4).to({startPosition:0},4).to({y:565.9},2).to({y:554.1},4).to({startPosition:0},4).to({y:565.9},2).to({y:554.1},4).to({startPosition:0},4).to({y:565.9},2).to({y:554.1},4).to({startPosition:0},4).to({y:565.9},2).to({y:544.4},4).wait(30));
 
 	// f5
 	this.instance_2 = new lib.f5("synched",0);
 	this.instance_2.setTransform(633.5,-96.5,1,1,0,0,0,-10,-7.5);
+	this.instance_2._off = true;
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_2).to({y:317.3},4).wait(26));
+	this.timeline.addTween(cjs.Tween.get(this.instance_2).wait(40).to({_off:false},0).to({y:317.9},4).to({y:348.5},2).to({y:317.9},4).wait(30));
 
 	// f4
 	this.instance_3 = new lib.f4("synched",0);
 	this.instance_3.setTransform(535.6,-71.5,1,1,0,0,0,-1.5,-0.5);
+	this.instance_3._off = true;
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_3).to({y:333.2},4).wait(26));
+	this.timeline.addTween(cjs.Tween.get(this.instance_3).wait(30).to({_off:false},0).to({y:327.2},4).to({y:360.4},2).to({y:327.2},4).wait(40));
 
 	// f3
 	this.instance_4 = new lib.f3("synched",0);
 	this.instance_4.setTransform(408.4,-102.7,1,1,0,0,0,12.5,-18.4);
+	this.instance_4._off = true;
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_4).to({y:302.3},4).wait(26));
+	this.timeline.addTween(cjs.Tween.get(this.instance_4).wait(20).to({_off:false},0).to({y:296.5},4).to({y:331},2).to({y:296.5},4).wait(50));
 
 	// f2
 	this.instance_5 = new lib.f2("synched",0);
 	this.instance_5.setTransform(266.6,-74.5,1,1,0,0,0,0.5,4.5);
+	this.instance_5._off = true;
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_5).to({y:352.2},4).wait(26));
+	this.timeline.addTween(cjs.Tween.get(this.instance_5).wait(10).to({_off:false},0).to({y:330.2},4).to({y:358.8},2).to({y:330.2},4).wait(60));
 
 	// f1
 	this.instance_6 = new lib.f1("synched",0);
 	this.instance_6.setTransform(149,-64,1,1,0,0,0,-2.5,-3);
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_6).to({y:340.7},4).to({y:381.8},2).to({y:332.9},4).wait(20));
+	this.timeline.addTween(cjs.Tween.get(this.instance_6).to({y:353.5},4).to({y:381.8},2).to({y:338.1},4).wait(70));
 
 	// 背景
 	this.instance_7 = new lib.page1bg();
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_7).wait(30));
+	this.timeline.addTween(cjs.Tween.get(this.instance_7).wait(80));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(400,444.8,800,1505.3);
+p.nominalBounds = new cjs.Rectangle(400,522,800,1428);
 
 })(lib = lib||{}, images = images||{}, createjs = createjs||{}, ss = ss||{});
 var lib, images, createjs, ss;
