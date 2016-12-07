@@ -164,11 +164,36 @@ function loader (option){
 	
 	console.log('_arguments:',this._arguments);
 	
-	//return this.init();
+	return this._init();
 }
 
 loader.prototype = new createjs.LoadQueue(true);
 
+loader.prototype._init2 = function (o){
+	var _load = new loader();
+	
+		_load.addEventListener("fileload", function(evt){
+			_this._fileload(evt)
+		});
+		
+		_load.addEventListener("progress", function(evt){
+			 _this._progress(evt)
+		});
+		
+		_load.addEventListener("fileprogress", function(evt){
+			 _this._fileprogress(evt)
+		});
+		
+		_load.addEventListener("complete", function(evt){
+		    console.log('init2-complete:',evt);
+			_this._complete(evt,_this.loader)
+		} );
+		
+		_load.addEventListener("error",  function(evt){
+			_this._error(evt)
+	});
+	return _load;
+}
 loader.prototype._init = function (o){
 	var _this = this;
 	//console.log('arguments:',arguments)
@@ -250,6 +275,7 @@ loader.prototype.error = loader.prototype.catch = function (fn){
 	if(fn && typeof fn === 'function'){
 		this._error = fn;
 	}
+	return this;
 }
 
 
@@ -257,7 +283,7 @@ loader.prototype.error = loader.prototype.catch = function (fn){
 //var lll = new loader({id:"image", src:"filePath/file.jpg"});
 //var lll = new loader([]);
 var load = new loader({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);
-load._init();
+//load._init();
 console.log(load);
 
 	//load.loadFile("images/hear.png")
@@ -266,7 +292,7 @@ console.log(load);
 
 	
 	
-	/*load
+	load
 	.fileload(function(evt){
 		console.log(evt)
 	})
@@ -283,8 +309,9 @@ console.log(load);
 	.error(function(evt){
 		console.log(evt)
 	})
+	//._init();
 	//.catch(function(){})
-	*/
+	
 	//load.load();
 
 </script>
