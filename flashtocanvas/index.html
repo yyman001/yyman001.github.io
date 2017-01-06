@@ -76,6 +76,9 @@ xxx.init()
 		});
 console.log(xxx);
 console.log(xxx.stage);
+
+var bitmap = new createjs.Bitmap("images/hear.png");
+
 function handleComplete(evt) {
 	var queue = evt.target;
 	ss["保卫萝卜_atlas_"] = queue.getResult("保卫萝卜_atlas_");
@@ -88,11 +91,14 @@ function handleComplete(evt) {
 
 	xxx.setFPS(lib.properties.fps);
 //	createjs.Ticker.addEventListener("tick", stage);
+
+
+
 }
 
 
 
-var bitmap = new createjs.Bitmap("images/hear.png");
+
 
 window.onload = function (){
 	
