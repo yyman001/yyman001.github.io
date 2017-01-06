@@ -52,96 +52,67 @@ function handleFileLoad(evt) {
 	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
 }*/
 
+var xxx  = new Adaptation(def); //实例化
+xxx.init()
+		.touchstart(function(e){
+			console.log('touchstart',e);
+		})
+		.touchmove(function(e){
+
+		})
+		.touchend(function(e){
+			console.log('touchend',e);
+		})
+		.mousedown(function(e){
+			console.log('mousedown');
+		})
+		.mousemove(function(e){
+			console.log('mousemove');
+		})
+		.mouseup(function(e){
+			console.log('mouseup');
+		})
+		.callback(function(){
+		});
+console.log(xxx);
+console.log(xxx.stage);
 function handleComplete(evt) {
 	var queue = evt.target;
 	ss["保卫萝卜_atlas_"] = queue.getResult("保卫萝卜_atlas_");
 	console.log(ss["保卫萝卜_atlas_"])
 	exportRoot = new lib.保卫萝卜();
 
-	stage = new createjs.Stage(mainView);
-	stage.addChild(exportRoot);
-	stage.update();
+//	stage = new createjs.Stage(mainView);
+	xxx.append(exportRoot);
+//	stage.update();
 
-	createjs.Ticker.setFPS(lib.properties.fps);
-	createjs.Ticker.addEventListener("tick", stage);
+	xxx.setFPS(lib.properties.fps);
+//	createjs.Ticker.addEventListener("tick", stage);
 }
 
 
-var xxx  = new Adaptation(def); //实例化
+
+var bitmap = new createjs.Bitmap("images/hear.png");
 
 window.onload = function (){
 	
-	xxx.init()
-	.touchstart(function(e){
-		console.log('touchstart',e);
-	})
-	.touchmove(function(e){
-		
-	})
-	.touchend(function(e){
-		console.log('touchend',e);
-	})
-	.mousedown(function(e){
-		console.log('mousedown');
-	})
-	.mousemove(function(e){
-		console.log('mousemove');
-	})
-	.mouseup(function(e){
-		console.log('mouseup');
-	})
-	
-	.callback(function(){
-		//console.log('callback...');
-	});
-	console.log(xxx);
+
+
+	bitmap.x = 600;
+	bitmap.y = 920;
+//	console.log(bitmap.getBounds());
+//	bitmap.setBounds(0,0,67,58);
+//	console.log(bitmap.getBounds());
+	xxx.append(bitmap)
+
+
+
 }
 
 
 
-function A (){
-	this.name = 'MY NAME IS A.'
-}
 
-A.prototype = new createjs.LoadQueue(true);
-//A.prototype.constructor = A;
-
-function Create(){
-	
-	//var load = new createjs.LoadQueue(true);
-	//console.log(load)
-	
-	/*
-	直接在方法上进行扩展
-	缺点:不灵活
-	createjs.LoadQueue.prototype.getName = function (){
-		return this.name;
-	}*/
-	//a.getName.bind(load);
-	//load.prototype = A.prototype;
-	//load.getName();
-	//console.log('a.prototype:',a.prototype)
-	//console.log('load.prototype:',load.prototype);
-	
-	//a.prototype = load.prototype;
-	//a.prototype = new createjs.LoadQueue(true);
-	
-	//a.prototype.constructor = a;
-	//-------
-	//console.log('a:',a)
-	
-	//a.load()
-	
-	//return a;
-}
-
-
-/*var a = new A();
-a.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);
-a.load()
-console.log('a:',a)
-*/
-function loader (option){
+function Loader (option){
 	this.loader = null;
 	this.loadFileDate = null;
 	//this.loadFile = function (e){};
@@ -167,10 +138,10 @@ function loader (option){
 	return this._init();
 }
 
-loader.prototype = new createjs.LoadQueue(true);
-
-loader.prototype._init2 = function (o){
-	var _load = new loader();
+Loader.prototype = new createjs.LoadQueue(true);
+Loader.prototype.constructor = Loader;
+Loader.prototype._init2 = function (o){
+	var _load = new Loader();
 	
 		_load.addEventListener("fileload", function(evt){
 			_this._fileload(evt)
@@ -194,15 +165,13 @@ loader.prototype._init2 = function (o){
 	});
 	return _load;
 }
-loader.prototype._init = function (o){
+Loader.prototype._init = function (o){
 	var _this = this;
 	//console.log('arguments:',arguments)
 	
 	try{
 		this.loader = new createjs.LoadQueue(true);
 		console.log('队列初始化-绑定事件');
-		
-		
 		this.loader.addEventListener("fileload", function(evt){
 			_this._fileload(evt)
 		});
@@ -216,7 +185,7 @@ loader.prototype._init = function (o){
 		});
 		
 		this.loader.addEventListener("complete", function(evt){
-		    console.log('complete:',evt);
+//		    console.log('complete:',evt);
 			_this._complete(evt,_this.loader)
 		} );
 		
@@ -241,37 +210,33 @@ loader.prototype._init = function (o){
 	}
 	
 	return this;
-}
-//loader.prototype.loadFile = 
-loader.prototype.AAAAAAA = function (){
-	
-} 
+};
 
-loader.prototype.fileload = function (fn){
+Loader.prototype.fileload = function (fn){
 	if(fn && typeof fn === 'function'){
 		this._fileload = fn;
 	}
 	return this;
 }
-loader.prototype.fileprogress = function (fn){
+Loader.prototype.fileprogress = function (fn){
 	if(fn && typeof fn === 'function'){
 		this._fileprogress = fn;
 	}
 	return this;
 }
-loader.prototype.progress = function (fn){
+Loader.prototype.progress = function (fn){
 	if(fn && typeof fn === 'function'){
 		this._progress = fn;
 	}	
 	return this;
 }
-loader.prototype.complete = function (fn){
+Loader.prototype.complete = function (fn){
 	if(fn && typeof fn === 'function'){
 		this._complete = fn;
 	}
 	return this;
 }
-loader.prototype.error = loader.prototype.catch = function (fn){
+Loader.prototype.error = Loader.prototype.catch = function (fn){
 	if(fn && typeof fn === 'function'){
 		this._error = fn;
 	}
@@ -279,10 +244,7 @@ loader.prototype.error = loader.prototype.catch = function (fn){
 }
 
 
-
-//var lll = new loader({id:"image", src:"filePath/file.jpg"});
-//var lll = new loader([]);
-var load = new loader({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);
+var load = new Loader({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);
 //load._init();
 console.log(load);
 
@@ -294,17 +256,19 @@ console.log(load);
 	
 	load
 	.fileload(function(evt){
-		console.log(evt)
+//		console.log(evt)
 	})
 	.fileprogress(function(evt){
-		console.log(evt)
+//		console.log(evt)
 	})
 	.progress(function(evt){
-		console.log(evt)
+//		console.log(evt)
 	})
 	.complete(function(evt,queue){
-		console.log('complete:',evt)
-		console.log(evt.target === queue)
+//		console.log('complete:',evt)
+//		console.log(evt.target === queue)
+		//xxx.Ticker();
+		handleComplete(evt)
 	})
 	.error(function(evt){
 		console.log(evt)

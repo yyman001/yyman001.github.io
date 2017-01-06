@@ -1,13 +1,12 @@
 //main.js
 
 
-
 var def = {
-	id:'#mainView',
-	width:800,
-	height:1300,
-	minRaio:0.615
-}
+	id: '#mainView',
+	width: 800,
+	height: 1300,
+	minRaio: 0.615
+};
 
 
 var canvas, stage, model, modelData, container, loadingView, currentView, homeView, stageWidth, stageHeight, stageScale, video, shape, controlType, isComplete = false;
@@ -40,6 +39,7 @@ function Adaptation(options){
 	this.eventType = 'pc'; //默认事件为pc端
 	this.X = -1; 
 	this.Y = -1;
+	this.resetWin = false; //记录分辨率是否缩放过
 	//function 
 	this._fileload = function (event){}
 	this._progress = function (event){}
@@ -123,7 +123,7 @@ Adaptation.prototype.touchInit = function (event){
 			//modelData.mouseY = my;
 			//touchMoveHandler();
 			_this._touchmove(event,_this.X,_this.Y);
-			console.log(_this.X,_this.Y)
+			//console.log(_this.X,_this.Y)
 		}
 	}, false);
 
@@ -201,8 +201,8 @@ Adaptation.prototype.init = function (){
 	
 	
 	//=====================资源队列处理
-	images = images||{};
-	ss = ss||{};
+	//images = images||{};
+	//ss = ss||{};
 	//var loader = new createjs.LoadQueue(true);
 	//loader.addEventListener("fileload", handleFileLoad);
 	//loader.addEventListener("progress", progressHandler);
@@ -212,28 +212,54 @@ Adaptation.prototype.init = function (){
 	
 	//loader.loadManifest(lib.properties.manifest);
 	//console.log(lib.properties.manifest)
-	isloadInit = true;
+	//isloadInit = true;
 	//======================
-	createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
-	createjs.Ticker.setFPS(30);
-	createjs.Ticker.addEventListener("tick", function(event){
-		_this.stageBreakHandler(event);
-		//console.log(event)
-	});
+
+	this.Ticker();
 	
 	//this.stage.update();
+	window.onresize = function (){
+		_this.resetWin = true;
+		_this.stageBreakHandler();
+	};
 	return this;
-}
+};
 
+Adaptation.prototype.Ticker = function (FPS_Number){
+	var _this = this;
+	createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
+	//reatejs.Ticker.setFPS(FPS_Number || 30);
+	this.setFPS();
+	createjs.Ticker.addEventListener("tick", function(event){
+		_this.stageBreakHandler(event);
+		_this.stage.update();
+	});
+
+};
+
+Adaptation.prototype.setFPS = function (Number){
+	createjs.Ticker.setFPS(Number || 30);
+};
+
+Adaptation.prototype.append = function (obj){
+	//obj.appendTo(this.stage);
+	this.stage.addChild(obj)
+};
 Adaptation.prototype.stageBreakHandler = function (event){
 	//console.log(this)
-	if (this.stageWidth !== document.documentElement.clientWidth || this.stageHeight !== document.documentElement.clientHeight) {
+	if(this.resetWin){
 		this.stageWidth = document.documentElement.clientWidth;
 		this.stageHeight = document.documentElement.clientHeight;
 		this.setWH();
+		this.resetWin = false;
 	}
-	this.stage.update();
-}
+	//if (this.stageWidth !== document.documentElement.clientWidth || this.stageHeight !== document.documentElement.clientHeight) {
+	//	this.stageWidth = document.documentElement.clientWidth;
+	//	this.stageHeight = document.documentElement.clientHeight;
+	//	this.setWH();
+	//}
+	//this.stage.update();
+};
 
 Adaptation.prototype.callback = function (callbackfn){
 	if(callbackfn && typeof callbackfn === 'function'){
@@ -307,31 +333,32 @@ Adaptation.prototype.checkEventType = function (){
 
 
 
-function init() {
-	stage = new createjs.Stage(canvas);
-	controlInit()
-	container = new createjs.Container();
-	stage.addChild(container);
-	createjs.Touch.enable(stage);
-	
-	images = images||{};
-	ss = ss||{};
-
-	var loader = new createjs.LoadQueue(true);
-	loader.addEventListener("fileload", handleFileLoad);
-	loader.addEventListener("progress", progressHandler);
-	loader.addEventListener("complete", handleComplete);
-	
-	loader.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);//new add software create
-	
-	loader.loadManifest(lib.properties.manifest);
-	isloadInit = true;
-
-	createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
-	createjs.Ticker.setFPS(30);
-	createjs.Ticker.addEventListener("tick", stageBreakHandler);
-
-}
+//function init() {
+//	stage = new createjs.Stage(canvas);
+//	controlInit()
+//	container = new createjs.Container();
+//	stage.addChild(container);
+//	createjs.Touch.enable(stage);
+//
+//	images = images||{};
+//	ss = ss||{};
+//
+//	var loader = new createjs.LoadQueue(true);
+//	loader.addEventListener("fileload", handleFileLoad);
+//	loader.addEventListener("progress", progressHandler);
+//	loader.addEventListener("complete", handleComplete);
+//
+//	loader.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);
+//	//new add software create
+//
+//	loader.loadManifest(lib.properties.manifest);
+//	isloadInit = true;
+//
+//	createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
+//	createjs.Ticker.setFPS(30);
+//	createjs.Ticker.addEventListener("tick", stageBreakHandler);
+//
+//}
 
 function handleFileLoad(evt) {
 	if (evt.item.type == "image") {
@@ -364,136 +391,3 @@ function progressHandler(event) {
 	currentView = homeView;
 }*/
 
-//
-function stageBreakHandler(event) {
-	if (stageWidth != document.documentElement.clientWidth || stageHeight != document.documentElement.clientHeight) {
-		stageWidth = document.documentElement.clientWidth;
-		stageHeight = document.documentElement.clientHeight;
-		
-		if (stageWidth / stageHeight > 0.665) { //最小比例, 值越小,越接近原来尺寸比例,越大,比例放大
-			stageScale = stageHeight / (1300 / 2);
-			//canvas.style.left = (stageWidth - 800 / 2 * stageScale) / 2 + 'px';
-		} else {
-			stageScale = stageWidth / (800 / 2);
-			//canvas.style.left = '0px';
-		}
-
-		canvas.style.width = 800 / 2 * stageScale + 'px';
-		canvas.style.height = 1300 / 2 * stageScale + 'px';
-		//canvas的width height 改变会导致touch的坐标不稳 所以鼠标位置也需要算上stageScale
-	}
-	stage.update();
-}
-
-//control
-function controlInit() {
-	if (IsPC() == true) {
-		mouseInit()
-	} else {
-		touchInit();
-	}
-}
-
-function mouseInit() {
-	controlType = "mouse";
-	var isMouseDown = false;
-	var mx = 0;
-	var my = 0;
-	stage.addEventListener('stagemousedown', function(mouseEvent) {
-		isMouseDown = true;
-		mx = mouseEvent.rawX;
-		my = mouseEvent.rawY;
-		modelData.mouseX = mx;
-		modelData.mouseY = my;
-		homeView.checkHit({
-			x: mx,
-			y: my
-		})
-		homeView.startDrwaLine();
-	});
-
-	stage.addEventListener('stagemousemove', function(mouseEvent) {
-		if (isMouseDown == false) return;
-		mx = mouseEvent.rawX;
-		my = mouseEvent.rawY;
-		modelData.mouseX = mx;
-		modelData.mouseY = my;
-		mouseMoveHandler();
-	});
-
-	stage.addEventListener('stagemouseup', function(mouseEvent) {
-		isMouseDown = false;
-		homeView.endDrawLine();
-	});
-
-	function mouseMoveHandler() {
-		homeView.checkHit({
-			x: mx,
-			y: my
-		})
-	}
-}
-
-function touchInit() {
-	controlType = "touch";
-	var mx = 0;
-	var my = 0;
-	canvas.addEventListener('touchstart', function(event) {
-		event.preventDefault();
-		var touch = event.targetTouches[0];
-		mx = touch.pageX * 2;
-		my = touch.pageY * 2;
-		modelData.mouseX = mx;
-		modelData.mouseY = my;
-		homeView.checkHit({
-			x: mx / stageScale,
-			y: my / stageScale
-		})
-		homeView.startDrwaLine();
-	}, false);
-
-
-	var addX = 0;
-	var addY = 0;
-
-	canvas.addEventListener('touchmove', function(event) {
-		// 如果这个元素的位置内只有一个手指的话
-		if (event.targetTouches.length == 1) {
-			event.preventDefault(); // 阻止浏览器默认事件，重要
-			var touch = event.targetTouches[0];
-			// 把元素放在手指所在的位置
-
-			mx = touch.pageX * 2;
-			my = touch.pageY * 2;
-			modelData.mouseX = mx;
-			modelData.mouseY = my;
-			touchMoveHandler();
-		}
-	}, false);
-
-	canvas.addEventListener('touchend', function(event) {
-		homeView.endDrawLine();
-	}, false);
-
-
-
-	function touchMoveHandler() {
-		homeView.checkHit({
-			x: mx / stageScale,
-			y: my / stageScale
-		})
-	}
-}
-
-function IsPC() {
-	var userAgentInfo = navigator.userAgent;
-	var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
-	var flag = true;
-	for (var v = 0; v < Agents.length; v++) {
-		if (userAgentInfo.indexOf(Agents[v]) > 0) {
-			flag = false;
-			break;
-		}
-	}
-	return flag;
-}
