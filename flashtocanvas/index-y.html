@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>保卫萝卜</title>
+<script src="createjs-2015.11.26.min.js"></script>
+<style>
+#mainView{
+display:block;
+margin:0 auto;
+}
+</style>
+</head>
+<body style="background-color:#D4D4D4;margin:0px;">
+	<canvas id="mainView" width="800" height="1300" style="background-color:#18D3C1"></canvas>
+<script src="main.js"></script>
+<!--<script src="lb.js"></script>-->
+<script>
+var canvas, stage, exportRoot;
+        var xxx  = new Adaptation(def); //实例化
+        xxx.init()
+		.touchstart(function(e){
+			console.log('touchstart',e);
+		})
+		.touchmove(function(e){
+
+		})
+		.touchend(function(e){
+			console.log('touchend',e);
+		})
+		.mousedown(function(e){
+			console.log('mousedown');
+		})
+		.mousemove(function(e){
+			console.log('mousemove');
+		})
+		.mouseup(function(e){
+			console.log('mouseup');
+		})
+		.callback(function(){
+		});
+
+console.log(xxx);
+console.log(xxx.stage);
+window.onload = function (){
+	//bitmap.x = 600;
+	//bitmap.y = 920;
+//	console.log(bitmap.getBounds());
+//	bitmap.setBounds(0,0,67,58);
+//	console.log(bitmap.getBounds());
+	//xxx.append(bitmap)
+
+
+    // 或者将其更改为一个位图填充：
+    //fillCommand.bitmap(myImage);
+
+//    var shape=new createjs.Shape();
+//
+//    var graphics = shape.graphics;
+//    graphics.beginStroke("blue");
+//    graphics.setStrokeStyle(1);
+////    graphics.beginStroke("red");
+////    graphics.setStrokeStyle(1);
+////    graphics.moveTo(5,5);
+////    graphics.lineTo(180,180);
+//
+//
+//    graphics.moveTo(100,5);
+//    graphics.lineTo(100,100);
+//    graphics.x = 0;
+//    graphics.y = 100;
+//    //xxx.addChild(shape);
+//    var v = 0;
+//    setInterval(function(){
+//        v+=10;
+//      //  graphics.clear();
+//       // graphics.moveTo(100,5+v);
+//      //  graphics.lineTo(100,180+v);
+////        xxx.append(shape);
+////        graphics.setTransform(100,180+v);
+//
+//    },500);
+//    createjs.Tween.get(graphics,{loop:true}).to({x:1000},2000);
+
+//    xxx.append(shape)
+    var i = 10;
+    while (i--){
+        createLine();
+    }
+    function createLine(){
+        var circle = new createjs.Shape();
+        circle.graphics.beginStroke("#fff").setStrokeStyle(1).moveTo(0,0).lineTo(0,100);
+        circle.x = Math.random() * 1000 + 100;
+        circle.y = Math.random() * 100 + 20 * Math.random();
+        console.log('circle.x:',circle.x);
+        console.log('ttt',1000 +  Math.random() * 2000);
+        xxx.stage.addChild(circle);
+        createjs.Tween.get(circle,{loop:true}).to({y:1000},1000 +  Math.random() * 2000);
+    }
+};
+
+/*$(function() {
+    var W = 480,
+            H = 800,
+            ctx, angle = 0,
+            len = 20,
+            count = 250;
+    var canvas = $("#myCanvas")[0];
+    ctx = canvas.getContext('2d');
+    console.log(W, H);
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+    var run = setInterval(draw, 200);
+
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+        xiayus();
+    }
+
+    function xiayu(x, y, r) {
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + angle, y + len);
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+
+    function xiayus() {
+        for (var i = 1; i <= count; i++) {
+            xiayu(Math.random() * W, Math.random() * H, angle);
+        }
+    }
+});*/
+</script>
+</body>
+</html>
