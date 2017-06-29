@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>作品列表</title>
+    <style>
+        body{margin: 0;background-color: #f8f8f8;}
+        .title{
+            position: relative;
+            font-size: 32px;
+            height: 36px;
+            line-height: 36px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        .title::before{
+            content: '';
+            position: absolute;
+            left: 0;
+            z-index: -1;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: #eee;
+        }
+        .title strong{
+            position: relative;
+            display: inline-block;
+            background-color: #f8f8f8;
+            padding: 0 20px;
+        }
+        .main{
+            display: flex;
+            margin: 0 auto;
+            /*width: 1200px;*/
+            max-width: 1200px;
+            flex-wrap: wrap;
+            height: auto;
+            justify-content: space-between;
+        }
+        .card{
+           margin:0 1% 20px;
+           width: 23%;
+                
+        }
+        [v-cloak]{
+            display: none;
+        }
+        .crad__link{
+            position: relative;
+            display: block;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: .2em;
+            overflow: hidden;
+        }
+        .crad__link::before{
+            content: '';
+            display: block;
+            padding-top: 60%;
+        }
+        .crad__id{
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding:10px;
+            font-size: 12px;
+            color: #fff;
+            font-style: normal;
+            text-align: center;
+            background-color:rgba(0,0,0,.5);
+        }
+        .crad__title{
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
+            font-size: 12px;
+            /*text-align: center;*/
+            color: #fff;
+            font-style: normal;
+            background-color:rgba(0,0,0,.5);
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title"><strong>我的作品</strong></h1>
+    <div id="app" class="main" v-cloak="">
+        <div v-for="card in data" class="card">
+            <a :href="card.url" :title="card.title" target="_blank" class="crad__link" :style="{backgroundImage: 'url(' +  card.image +' )' }">
+                <i class="crad__id">{{card.id}}</i>
+                <em class="crad__title">{{card.title}}</em>
+            </a>
+        </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                data:[]
+            },
+            mounted:function(){
+                console.log('init')
+                this.getDate();
+            },
+            methods:{
+                getDate:function(){
+                    var me = this;
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://app.appgame.com/mongofly/index.php?c=icommon&a=data&n=zthd&t=date2015',
+                        dataType: 'jsonp',
+                        jsonp: "callback",
+                        jsonCallback: 'jsonCallback',
+                        beforeSend: function () {
+                        },
+                        success: function (data) {
+                            if(data.data.length){
+                                me.data = data.data;
+                            }
+                            
+                        },
+                        error: function (error) {
+                            console.log('错误处理' + error);
+                        }
+                        });
+                }
+            }
+        })
+    </script>
+</body>
+</html>

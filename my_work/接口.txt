@@ -1,0 +1,15 @@
+    $.ajax({
+      type: 'GET',
+      url: 'http://app.appgame.com/mongofly/index.php?c=icommon&a=data&n=zthd&t=date2015',
+      dataType: 'jsonp',
+      jsonp: "callback",
+      jsonCallback: 'jsonCallback',
+      beforeSend: function () {
+      },
+      success: function (data) {
+        json2015 = data.data;
+      },
+      error: function (error) {
+        console.log('¥ÌŒÛ¥¶¿Ì' + error);
+      }
+    });
