@@ -6,7 +6,7 @@ var p; // shortcut to reference prototypes
 lib.properties = {
 	width: 800,
 	height: 1300,
-	fps: 24,
+	fps: 30,
 	color: "#FFFFFF",
 	manifest: []
 };
@@ -218,10 +218,9 @@ p.nominalBounds = new cjs.Rectangle(0,0,482,156);
 	// 背景
 	this.instance_7 = new lib.page1bg();
 
-	this.timeline.addTween(cjs.Tween.get(this.instance_7).wait(80));
+	this.timeline.addTween(cjs.Tween.get(this.instance_7).wait(80)).call(angleChange);
 
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(400,522,800,1428);
-
 })(lib = lib||{}, images = images||{}, createjs = createjs||{}, ss = ss||{});
 var lib, images, createjs, ss;

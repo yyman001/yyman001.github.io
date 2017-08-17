@@ -8,282 +8,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>保卫萝卜</title>
-<!-- write your code here -->
-
-
-<!-- <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script> -->
-<script src="createjs-2015.11.26.min.js"></script>
-
-
-<!-- write your code here -->
-<style>
-#mainView{
-display:block;
-margin:0 auto;
-}
-</style>
+	<meta charset="UTF-8">
+	<title>保卫萝卜</title>
+	<script src="createjs-2015.11.26.min.js"></script>
+	<!-- write your code here -->
+	<style>
+		#mainView {
+			display: block;
+			margin: 0 auto;
+		}
+	</style>
 </head>
+
 <body style="background-color:#D4D4D4;margin:0px;">
 	<!-- <canvas id="mainView" width="800" height="1300" style="background-color:#FFFFFF"></canvas> -->
 	<canvas id="mainView" width="800" height="1300" style="background-color:#FFFFFF"></canvas>
-	
-	
-<script src="main.js"></script>
-<script src="lb.js"></script>
-<script>
-var canvas, stage, exportRoot;
-/*function init() {
-
-	
-	canvas = document.getElementById("canvas");
-	images = images||{};
-	ss = ss||{};
-
-	var loader = new createjs.LoadQueue(false);
-	loader.addEventListener("fileload", handleFileLoad);
-	loader.addEventListener("complete", handleComplete);
-	loader.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);
-	loader.loadManifest(lib.properties.manifest);
-}
-
-function handleFileLoad(evt) {
-	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
-}*/
-
-var xxx  = new Adaptation(def); //实例化
-xxx.init()
-		.touchstart(function(e){
-			console.log('touchstart',e);
+	<script src="main.js"></script>
+	<script src="lb.js"></script>
+	<script src="Loader.js"></script>
+	<script>
+		var canvas, exportRoot;
+		
+		var manifest = [{ src: "images/保卫萝卜_atlas_.json", type: "spritesheet", id: "保卫萝卜_atlas_" }]
+		var loader = new Loader(manifest);
+		
+  loader.loadManifest(manifest)
+		.fileload(function (evt) {
+			console.log('fileload',evt.item.type)
+			if (evt.item.type == "image") {
+				images[evt.item.id] = evt.result;
+				console.log(evt.result)
+			}
 		})
-		.touchmove(function(e){
+			.complete(function (evt) {
+				var queue = evt.target;
+				ss["保卫萝卜_atlas_"] = queue.getResult("保卫萝卜_atlas_");
+				exportRoot = new lib.保卫萝卜();
+				console.log('exportRoot:', exportRoot)
+				canvas.append(exportRoot);
+				canvas.setFPS(lib.properties.fps);
+			})
 
-		})
-		.touchend(function(e){
-			console.log('touchend',e);
-		})
-		.mousedown(function(e){
-			console.log('mousedown');
-		})
-		.mousemove(function(e){
-			console.log('mousemove');
-		})
-		.mouseup(function(e){
-			console.log('mouseup');
-		})
-		.callback(function(){
-		});
-console.log(xxx);
-console.log(xxx.stage);
+		//画布对象
+		canvas = new Adaptation(def);
+		canvas.init()
+			.callback(function () {
+				console.log('初始化完成')
+			});
 
-var bitmap = new createjs.Bitmap("images/hear.png");
+		function angleChange() {
+			console.log('angleChange');
+		}
 
-function handleComplete(evt) {
-	var queue = evt.target;
-	ss["保卫萝卜_atlas_"] = queue.getResult("保卫萝卜_atlas_");
-	console.log(ss["保卫萝卜_atlas_"])
-	exportRoot = new lib.保卫萝卜();
-
-//	stage = new createjs.Stage(mainView);
-	xxx.append(exportRoot);
-//	stage.update();
-
-	xxx.setFPS(lib.properties.fps);
-//	createjs.Ticker.addEventListener("tick", stage);
-
-
-
-}
-
-
-
-
-
-window.onload = function (){
-	
-
-
-	bitmap.x = 600;
-	bitmap.y = 920;
-//	console.log(bitmap.getBounds());
-//	bitmap.setBounds(0,0,67,58);
-//	console.log(bitmap.getBounds());
-	xxx.append(bitmap)
-
-
-
-}
-
-
-
-
-function Loader (option){
-	this.loader = null;
-	this.loadFileDate = null;
-	//this.loadFile = function (e){};
-	//
-	this._loadFile = function (e){}      //加载文件清单
-	this._fileload = function (e){}      //单个文件已完成加载。
-	this._fileprogress = function (e){}  //单个文件进度变化。注意,只有文件装载XHR(或可能通过插件)将 file 事件进展除了0或100%。
-	this._progress = function (e){}      //对于整个队列进展已经改变。
-	this._error = function (e){}         //当队列与任何文件遇到错误时。
-	this._complete = function (e){}      //当队列完成加载所有文件时。
-	
-	this._arguments = [];
-	
-	//
-	/* for (var i in arguments) {
-        console.log('arguments:',arguments[i]);
-    }*/
-	
-	this._arguments = Array.prototype.slice.call(arguments);
-	
-	console.log('_arguments:',this._arguments);
-	
-	return this._init();
-}
-
-Loader.prototype = new createjs.LoadQueue(true);
-Loader.prototype.constructor = Loader;
-Loader.prototype._init2 = function (o){
-	var _load = new Loader();
-	
-		_load.addEventListener("fileload", function(evt){
-			_this._fileload(evt)
-		});
-		
-		_load.addEventListener("progress", function(evt){
-			 _this._progress(evt)
-		});
-		
-		_load.addEventListener("fileprogress", function(evt){
-			 _this._fileprogress(evt)
-		});
-		
-		_load.addEventListener("complete", function(evt){
-		    console.log('init2-complete:',evt);
-			_this._complete(evt,_this.loader)
-		} );
-		
-		_load.addEventListener("error",  function(evt){
-			_this._error(evt)
-	});
-	return _load;
-}
-Loader.prototype._init = function (o){
-	var _this = this;
-	//console.log('arguments:',arguments)
-	
-	try{
-		this.loader = new createjs.LoadQueue(true);
-		console.log('队列初始化-绑定事件');
-		this.loader.addEventListener("fileload", function(evt){
-			_this._fileload(evt)
-		});
-		
-		this.loader.addEventListener("progress", function(evt){
-			 _this._progress(evt)
-		});
-		
-		this.loader.addEventListener("fileprogress", function(evt){
-			 _this._fileprogress(evt)
-		});
-		
-		this.loader.addEventListener("complete", function(evt){
-//		    console.log('complete:',evt);
-			_this._complete(evt,_this.loader)
-		} );
-		
-		this.loader.addEventListener("error",  function(evt){
-			_this._error(evt)
-		});
-		
-		
-		//console.log('this:',this.loader)
-		
-		this.loader.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);//new add software create
-	
-		//this.loader.loadFile.call(this._arguments)
-		
-		this.loader.load() ;//执行加载
-		//this._loadFile = this.loader.loadFile;
-		//console.log('this.loadFile:',this.loadFile)
-		//console.log('_this.loadFile:',this._loadFile)
-		//this.prototype =  new createjs.LoadQueue(true);
-	}catch(e){
-		console.warn('Preload.js 未加载')
-	}
-	
-	return this;
-};
-
-Loader.prototype.fileload = function (fn){
-	if(fn && typeof fn === 'function'){
-		this._fileload = fn;
-	}
-	return this;
-}
-Loader.prototype.fileprogress = function (fn){
-	if(fn && typeof fn === 'function'){
-		this._fileprogress = fn;
-	}
-	return this;
-}
-Loader.prototype.progress = function (fn){
-	if(fn && typeof fn === 'function'){
-		this._progress = fn;
-	}	
-	return this;
-}
-Loader.prototype.complete = function (fn){
-	if(fn && typeof fn === 'function'){
-		this._complete = fn;
-	}
-	return this;
-}
-Loader.prototype.error = Loader.prototype.catch = function (fn){
-	if(fn && typeof fn === 'function'){
-		this._error = fn;
-	}
-	return this;
-}
-
-
-var load = new Loader({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);
-//load._init();
-console.log(load);
-
-	//load.loadFile("images/hear.png")
-	//load.loader.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);//new add software create
-	//load.loadFile({src:"images/保卫萝卜_atlas_.json", type:"spritesheet", id:"保卫萝卜_atlas_"}, true);//new add software create
-
-	
-	
-	load
-	.fileload(function(evt){
-//		console.log(evt)
-	})
-	.fileprogress(function(evt){
-//		console.log(evt)
-	})
-	.progress(function(evt){
-//		console.log(evt)
-	})
-	.complete(function(evt,queue){
-//		console.log('complete:',evt)
-//		console.log(evt.target === queue)
-		//xxx.Ticker();
-		handleComplete(evt)
-	})
-	.error(function(evt){
-		console.log(evt)
-	})
-	//._init();
-	//.catch(function(){})
-	
-	//load.load();
-
-</script>
+		function handleComplete(evt) {
+			var queue = evt.target;
+			ss["保卫萝卜_atlas_"] = queue.getResult("保卫萝卜_atlas_");
+			//console.log(ss["保卫萝卜_atlas_"])
+			exportRoot = new lib.保卫萝卜();
+			//createjs.Ticker.timingMode = createjs.Ticker.RAF;
+			//exportRoot.loop = false;
+			//exportRoot.paused = true;
+			//exportRoot.gotoAndPlay(0);
+			// console.log('exportRoot:', exportRoot)
+			canvas.append(exportRoot);
+			canvas.setFPS(lib.properties.fps);
+		}
+	</script>
 </body>
+
 </html>
