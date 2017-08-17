@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>作品列表</title>
+        <script type="text/javascript">
+        var win_width = window.innerWidth || document.documentElement.clientWidth;
+        var win_height = window.innerHeight || document.documentElement.clientHeight;
+        var radio = win_height / win_width;
+        //1.425
+//        radio = radio < 1.48 ? 1.625 : radio > 1.625 ? 1.625 : radio;
+        radio = radio < 1.6 ? 1.625 : radio > 1.625 ? 1.625 : radio;
+        var maxwidth = win_height / radio;
+        if (win_height / win_width <= radio) {
+            win_width = maxwidth;
+        }
+        document.documentElement.style.fontSize = (win_width / 800 > 1 ? 1 : win_width / 800) * 100 + 'px';
+    </script>
     <style>
         body{margin: 0;background-color: #f8f8f8;}
         .title{
@@ -35,7 +49,6 @@
         .main{
             display: flex;
             margin: 0 auto;
-            /*width: 1200px;*/
             max-width: 1200px;
             flex-wrap: wrap;
             height: auto;
@@ -44,7 +57,6 @@
         .card{
            margin:0 1% 20px;
            width: 23%;
-                
         }
         [v-cloak]{
             display: none;
@@ -90,6 +102,35 @@
             background-color:rgba(0,0,0,.5);
             overflow: hidden;
         }
+        canvas{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        };
+        @media screen and (min-width: 320px){
+           
+        }
+        @media screen and (max-width: 320px){
+            .main{
+                max-width: 100%;
+                /*background-color: #333;*/
+                justify-content: center;
+            }
+            .card{
+                margin:0 0 20px;
+                width: 92%;
+            }
+            .crad__link{
+                border-radius: .05em;
+            }
+            .crad__title{
+                /*height: 30px;*/
+                /*line-height: 30px;*/
+                /*font-size: 10px;*/
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -97,24 +138,32 @@
     <div id="app" class="main" v-cloak="">
         <div v-for="card in data" class="card">
             <a :href="card.url" :title="card.title" target="_blank" class="crad__link" :style="{backgroundImage: 'url(' +  card.image +' )' }">
+                <!--<b v-if="qcode(this,card.url)" class="card__qcode"></b>-->
                 <i class="crad__id">{{card.id}}</i>
                 <em class="crad__title">{{card.title}}</em>
             </a>
         </div>
     </div>
     <script src="js/jquery.js"></script>
+    <script src="js/jquery.qrcode.min.js"></script>
     <script src="js/vue.js"></script>
     <script>
         var vm = new Vue({
             el:'#app',
             data:{
-                data:[]
+                data:[],
+                wap:[],
+                pc:[]
             },
             mounted:function(){
                 console.log('init')
                 this.getDate();
             },
             methods:{
+                qcode:function(ele,url){
+                    jQuery(ele).qrcode({width: 100,height: 100,text:url});
+                    return true;
+                },
                 getDate:function(){
                     var me = this;
                     $.ajax({
