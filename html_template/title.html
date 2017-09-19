@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>标题排版</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="box" style="background-color:#272a31;">
+        <style>
+		.title-h3 { position: relative; margin: 0 0 25px; padding-top: 35px; font-size: 24px; font-weight: 400; text-align: center; }
+		.title-h3:before, .title-h3:after { content: ''; position: absolute; bottom: 4px; width: 431px; border-top: 1px solid #747474; opacity: .5; filter: alpha(opacity=50); }
+		.title-h3:before { left: 0; }
+		.title-h3:after { right: 0; }
+		.title-h3 > em { display: block; padding-top: 2px; font-style: normal; font-size: 12px; vertical-align: bottom; }
+		.title-h3.style1 { color: #bba067; }
+		.title-h3.style1 > em { color: #5e5238; }
+		.title-h3.style2 { color: #bba067; }
+		.title-h3.style2 > em { color: #bba067; }
+		.title-h3.style3 { color: #31acff; }
+		.title-h3.style3 > em { color: #284e67; }
+		.title-h3.style4 { color: #31acff; }
+		.title-h3.style4 > em { color: #1c78b6; }
+		.title-h3.style3:before, .title-h3.style3:after, .title-h3.style4:before, .title-h3.style4:after { border-top: 1px solid #185882; }
+
+        </style>    
+		<h3 class="title-h3 style1" title="赛事规则 COMPETITION RULES">赛事规则<em>COMPETITION RULES</em></h3>
+    </div>
+
+
+	
+</body>
+</html>
