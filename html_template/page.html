@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>分页</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="box">
+        <style>
+        .page-bar { margin-left: auto; margin-right: auto; width: 360px;height: auto;overflow: hidden; }
+        .page-bar:before{content: '';display: table;clear: both;}
+        .page-bar a { float: left; margin: 0 5px; width: 30px; height: 30px; line-height: 30px; color: #888; text-align: center; font-size: 14px; background-color: #F4F4F4; transition: all .3s linear; }
+        .page-bar a.cur, .page-bar a:hover { color: #ffffff; background-color: #E04565; }
+        .page-bar .prev, .page-bar .next { background-repeat: no-repeat; background-position: 50% 50%; }
+        .page-bar .prev.cur, .page-bar .next.cur { color: #888; background-color: #F4F4F4; }
+        .page-bar .prev { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAQCAMAAADzlqVxAAAAP1BMVEX///9mZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmYTjEajAAAAFXRSTlMABggKCx1EUmpsbXR2f4Kdn6Goq69/TpIVAAAAPklEQVQI12NggABuNihDgI8VyuCF0Iz8PBAGiyAXhMEszAlhMIlwQHUJsTNgsBCyCB1IpiCZjGQbsgtArgIAjkwBxUkax8QAAAAASUVORK5CYII=); }
+        .page-bar .prev:hover { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAQCAMAAADzlqVxAAAAP1BMVEX///////////////////////////////////////////////////////////////////////////////////81m6ZbAAAAFXRSTlMABggKCx1EUmpsbXR2f4Kdn6Goq69/TpIVAAAAPklEQVQI12NggABuNihDgI8VyuCF0Iz8PBAGiyAXhMEszAlhMIlwQHUJsTNgsBCyCB1IpiCZjGQbsgtArgIAjkwBxUkax8QAAAAASUVORK5CYII=); }
+        .page-bar .next { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAQCAMAAADzlqVxAAAAPFBMVEX///9mZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmabbpTXAAAAFHRSTlMABggKCz1SamxtdHZ/gp2foairrxoH0ZwAAAA5SURBVAjXY+BigAFefjiTB8Hk5mOEMTkFWGBMDiFmGJNdmAnGZBNkRWfBZeE64KbATYbbhnAB3FUAgWwBm/rv5yYAAAAASUVORK5CYII=); }
+        .page-bar .next:hover { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAQCAMAAADzlqVxAAAAPFBMVEX///////////////////////////////////////////////////////////////////////////////8gsV51AAAAFHRSTlMABggKCz1SamxtdHZ/gp2foairrxoH0ZwAAAA5SURBVAjXY+BigAFefjiTB8Hk5mOEMTkFWGBMDiFmGJNdmAnGZBNkRWfBZeE64KbATYbbhnAB3FUAgWwBm/rv5yYAAAAASUVORK5CYII=); }
+
+        </style>    
+        <div class="page-bar">
+            <a href="" class="prev"></a>
+            <a href="" class="cur">1</a>
+            <a href="">2</a>
+            <a href="">3</a>
+            <a href="">4</a>
+            <a href="">5</a>
+            <a>...</a>
+            <a href="">20</a>
+            <a href="" class="next"></a>
+        </div>
+    </div>
+
+</body>
+</html>
