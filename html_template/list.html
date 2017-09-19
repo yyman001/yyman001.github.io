@@ -192,6 +192,46 @@
 <!-- 3 -->
 <div class="box">
     <style>
+        /*推荐游戏*/
+.recommend-game { position: relative; padding-top: 25px; padding-left: 60px; height: 130px; }
+.recommend-game:before { content: ''; position: absolute; top: 30px; left: 0; height: 128px; border-left: 1px solid #ccc; }
+.recommend-game__title { font-size: 15px; color: #000000; font-weight: 400; }
+.recommend-game__items { margin-top: 10px; }
+.recommend-game__items:after { content: ''; display: table; clear: both; }
+.recommend-game__item { box-sizing: border-box; float: left; padding-left: 88px; width: 33.3%; }
+.recommend-game__item:after { content: ''; display: table; clear: both; }
+.recommend-game__cover { float: left; margin-left: -88px; width: 74px; height: 74px; border-radius: 10px; background-color: #b4b4b4; background-repeat: no-repeat; background-position: 50% 50%; background-size: cover; overflow: hidden; }
+.recommend-game__title2 { color: #666; font-size: 14px; line-height: 1.5; }
+.recommend-game__type { margin-bottom: 5px; font-size: 12px; color: #999; }
+.recommend-game__down { display: block; width: 76px; height: 22px; line-height: 22px; font-size: 12px; color: #cccccc; text-align: center; border: 1px solid #ccc; border-radius: 15px; }
+
+    </style>
+    <ul class="recommend-game__items">
+        <li class="recommend-game__item">
+            <a href="" class="recommend-game__cover"></a>
+            <h4 class="recommend-game__title2">《天命传说》</h4>
+            <p class="recommend-game__type">类型：策略卡牌</p>
+            <a href="" class="recommend-game__down" title="立即下载">立即下载</a>
+        </li>
+        <li class="recommend-game__item">
+            <a href="" class="recommend-game__cover"></a>
+            <h4 class="recommend-game__title2">《天命传说》</h4>
+            <p class="recommend-game__type">类型：策略卡牌</p>
+            <a href="" class="recommend-game__down" title="立即下载">立即下载</a>
+        </li>
+        <li class="recommend-game__item">
+            <a href="" class="recommend-game__cover"></a>
+            <h4 class="recommend-game__title2">《天命传说》</h4>
+            <p class="recommend-game__type">类型：策略卡牌</p>
+            <a href="" class="recommend-game__down" title="立即下载">立即下载</a>
+        </li>
+    </ul>
+
+</div>
+
+<!-- 3.1 -->
+<div class="box">
+    <style>
     .result-mode ul { overflow: hidden;}
     .result-mode li { box-sizing: border-box;float: left; margin-bottom: 30px;width: 25%; text-align: center; overflow: hidden; }
     .result-mode li a:hover b { color: #e04565; }
