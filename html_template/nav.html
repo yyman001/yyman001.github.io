@@ -39,7 +39,7 @@
     <!-- 2 -->
     <div class="box">
         <style>
-        .nav { position: relative; margin: 0 auto; height: 80px; line-height: 80px; overflow: hidden; background-color: #ccc;}
+        .nav.box2 { position: relative; margin: 0 auto; height: 80px; line-height: 80px; overflow: hidden; background-color: #ccc;}
         .nav__ul { height: 100%; }
         .nav__ul:after { content: ''; display: table; clear: both; }
         .nav__li { float: left; margin-left: 45px; width: 65px; height: 100%; }
@@ -51,7 +51,7 @@
         .nav__link:hover:before, .nav__link:hover:after, .nav__link.cur:before, .nav__link.cur:after { background-color: #0da1ff; }
 
         </style>
-        <div class="nav">
+        <div class="box2 nav">
             <ul class="nav__ul">
                 <li class="nav__li">
                     <a href="index.html" class="nav__link" target="_blank" title="首页">首页</a>
@@ -71,5 +71,47 @@
             </ul>
         </div>
     </div>
+
+    <!-- 3 -->
+    <div class="box">
+        <style>
+        .nav-mode { position: relative;min-width: 1000px; height: 69px; background-color: #0e295c; background-color: rgba(12, 59, 143, 0.5); }
+        .nav-mode .nav { max-width: 1000px; margin: 0 auto; height: 100%; overflow: hidden; }
+        .nav-mode .nav:after { content: ''; display: table; clear: both; }
+        .nav-mode .nav > li { position: relative; float: left; height: 100%; width: 16.66666666666667%; }
+        .nav-mode .nav > li:before, .nav-mode .nav > li:after { content: ''; position: absolute; top: 18px; height: 32px; width: 0; border-right: 1px solid; }
+        .nav-mode .nav > li:before { border-color: #305197; left: 0; }
+        .nav-mode .nav > li:after { border-color: #000; left: 1px; }
+        .nav-mode .nav > li:first-child:before, .nav-mode .nav > li:first-child:after { display: none; }
+        .nav-mode .nav > li:hover .link { color: #3b97ff; }
+        .nav-mode .nav > li:hover .link > i { color: #204f93; }
+        .nav-mode .link { box-sizing: border-box; padding-top: 15px; display: block; height: 100%; font-size: 16px; color: #fff; line-height: 1.45; letter-spacing: 2px; text-align: center; }
+        .nav-mode .link > i { display: block; font-size: 12px; color: #626B8A; letter-spacing: 1px; font-style: normal; }
+
+        </style>
+        <div class="nav-mode">
+            <ul class="nav">
+                <li>
+                    <a class="link" href="" title="电竞站首页">电竞站首页<i>HOME</i></a>
+                </li>
+                <li>
+                    <a class="link" href="" title="比赛直播">比赛直播<i>LIVE</i></a>
+                </li>
+                <li>
+                    <a class="link" href="" title="热点新闻">热点新闻<i>NEWS</i></a>
+                </li>
+                <li>
+                    <a class="link" href="" title="视频中心">视频中心<i>VIDEO</i></a>
+                </li>
+                <li>
+                    <a class="link" href="" title="战队介绍">战队介绍<i>TEAM</i></a>
+                </li>
+                <li>
+                    <a class="link" href="" title="官方专题">官方专题<i>TOPICS</i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 </body>
 </html>
