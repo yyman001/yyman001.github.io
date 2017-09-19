@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>导航</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <!-- 1 -->
+    <div class="box">
+        <style>
+        .top-wrap { border-bottom: 1px solid #d2d2d2; background: #fbfbfb url(../images/top-bar-bg.jpg) repeat-x 0 0; }
+        .top-bar { margin: 0 auto; /* width: 1000px; */ height: 39px; line-height: 3.2; font-size: 12px; color: #666666; }
+        .top-bar__left { float: left; }
+        .top-bar__left span { padding-right: 20px; }
+        .top-bar__right { float: right; margin-right: -10px; }
+        .top-bar__right .link:first-child:before { content: normal; }
+        .top-bar .link { position: relative; display: inline-block; padding: 0 10px; color: #666666; }
+        .top-bar .link:before { content: ''; position: absolute; top: 50%; margin-top: -6px; left: 0; width: 1px; height: 12px; background-color: #666; }
+        .top-bar .link.noLine:before { content: normal; }
+        </style>
+            <div class="top-wrap">
+                    <div class="top-bar">
+                        <div class="top-bar__left">
+                            <span>本公司游戏仅适合18岁以上玩家！</span>
+                            <a class="link noLine" title="设为首页">设为首页</a>
+                            <a class="link" title="收藏本站">收藏本站</a>
+                        </div>
+                        <div class="top-bar__right">
+                            <a href="register.html" class="link" title="登录">登录</a>
+                            <a href="register.html" class="link" title="注册">注册</a>
+                            <a href="about.html" class="link" title="关于我们">关于我们</a>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <!-- 2 -->
+    <div class="box">
+        <style>
+        .nav { position: relative; margin: 0 auto; height: 80px; line-height: 80px; overflow: hidden; background-color: #ccc;}
+        .nav__ul { height: 100%; }
+        .nav__ul:after { content: ''; display: table; clear: both; }
+        .nav__li { float: left; margin-left: 45px; width: 65px; height: 100%; }
+        .nav__link { position: relative; display: block; height: 100%; text-align: center; color: #383838; font-size: 16px; }
+        .nav__link:before, .nav__link:after { content: ''; position: absolute; left: 0; height: 2px; width: 100%; background-color: transparent; }
+        .nav__link:before { top: 22px; }
+        .nav__link:after { bottom: 24px; }
+        .nav__link:hover, .nav__link.cur { color: #0da1ff; }
+        .nav__link:hover:before, .nav__link:hover:after, .nav__link.cur:before, .nav__link.cur:after { background-color: #0da1ff; }
+
+        </style>
+        <div class="nav">
+            <ul class="nav__ul">
+                <li class="nav__li">
+                    <a href="index.html" class="nav__link" target="_blank" title="首页">首页</a>
+                </li>
+                <li class="nav__li">
+                    <a href="about.html" class="nav__link cur" target="_blank" title="关于我们">关于我们</a>
+                </li>
+                <li class="nav__li">
+                    <a href="register.html" class="nav__link" target="_blank" title="充值中心">充值中心</a>
+                </li>
+                <li class="nav__li">
+                    <a href="contact.html" class="nav__link" target="_blank" title="联系我们">联系我们</a>
+                </li>
+                <li class="nav__li">
+                    <a href="intro.html" class="nav__link" target="_blank" title="家长监护">家长监护</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

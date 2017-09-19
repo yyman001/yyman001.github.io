@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>幻灯片</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="box">
+        <style>
+        .slide-box { position: relative; }
+        .slide-box .slide-cont { height: 100%; overflow: hidden; }
+        .slide-box .slide-cont ul, .slide-box .slide-cont li { height: 100%; }
+        .slide-box .slide-cont li { float: left; width: 100%; }
+        .slide-box .slide-cont a { position: relative; display: block; height: 100%; }
+        .slide-box .slide-cont p { box-sizing: border-box; position: absolute; left: 0; bottom: 0; z-index: 8; padding-left: 15px; padding-right: 15px; height: 50px; line-height: 50px; color: #ffffff; width: 100%; background-color: #000; filter: alpha(opacity=80); background-color: rgba(0, 0, 0, 0.8); }
+        .slide-box .slide-bar { position: absolute; right: 10px; bottom: 21px; z-index: 9; height: 8px; }
+        .slide-box .slide-bar a { float: left; margin-right: 5px; width: 10px; height: 8px; background-color: #BABABA; }
+        .slide-box .slide-bar a.cur, .slide-box .slide-bar a:hover { cursor: pointer; background-color: #D32E4C; }
+
+        .index-slider-mode .slide-bar a { width: 32px; background-color: #000; }
+            .cover-img{
+                display: block;
+                height: 380px;
+                background-color: #ccc;
+            }
+        </style>
+            <div class="slide-box index-slider-mode" id="indexSM">
+            <div class="slide-bar" id="indexSliderBar">
+                <a title="" class="cur"></a>
+                <a title=""></a>
+                <a title=""></a>
+            </div>
+            <div class="slide-cont">
+                <ul id="indexSliderUl">
+                    <li>
+                        <a class="cover-box" href="" title="实时团战手游《曙光之战》公测 PVP战斗大不同">
+                            <!--790x380-->
+                            <i class="cover-img" ></i>
+                            <p>实时团战手游《曙光之战》公测 PVP战斗大不同</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>  
+</body>
+</html>
