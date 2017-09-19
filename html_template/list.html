@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>列表</title>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+    .title--h2 { position: relative; padding-left: 13px; padding-bottom: 10px; height: 20px; line-height: 20px; border-bottom: 1px solid #E04565; font-size: 20px; color: #333333; }
+    .title--h2:before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 6px; background-color: #E04565; }
+    .title--h2 .more-link { margin-top: 2px; }
+    </style>    
+</head>
+<body>
+    <div class="box">
+        <style>
+        .libao-mode {  width: 360px; }
+        .libao-mode li { height: 44px; line-height: 44px; font-size: 14px; border-bottom: 1px solid #DADADA; }
+        .libao-mode li .lb-item { display: none; }
+        .libao-mode li:hover, .libao-mode li.cur { padding: 12px 12px 12px 10px; height: 68px; line-height: initial; background-color: #F7F7F7; }
+        .libao-mode li:hover .lb-item, .libao-mode li.cur .lb-item { display: block; }
+        .libao-mode li:hover .lb-def, .libao-mode li.cur .lb-def { display: none; }
+        .libao-mode .lb-def b { display: inline-block; width: 158px; white-space: nowrap; color: #333333; }
+        .libao-mode .lb-def span { display: inline-block; width: 160px; white-space: nowrap; color: #888888; }
+        .libao-mode .lb-btn-1 { display: inline-block; font-size: 12px; color: #e04565; }
+        .libao-mode .lb-btn-2 { float: right; margin-top: 20px; width: 60px; height: 28px; line-height: 28px; text-align: center; border-radius: 3px; font-size: 14px; color: #ffffff; background-color: #E04565; }
+        .libao-mode .lb-item img { display: inline-block; width: 68px; height: 68px; }
+        .libao-mode .lb-item .item { display: inline-block; margin-left: 12px; }
+        .libao-mode .lb-item .item h3 { padding-bottom: 15px; font-size: 14px; height: 19px; line-height: 19px; font-weight: 400; color: #333333; }
+        .libao-mode .lb-item .item p { font-size: 12px; color: #666666; line-height: 18px; }
+        .libao-mode .lb-item .item i { padding-left: 10px; font-style: normal; }
+        .libao-mode .tj-mod { margin-top: 5px; }
+        .cover{    display: inline-block;
+    width: 68px;
+    height: 68px;
+    border-radius: 5px;
+    background-color: #ccc;
+}
+        </style>
+            <div class="libao-mode">
+                <h2 class="title--h2">
+                    福利礼包
+                    <a href="" class="more-link" title="更多"></a>
+                </h2>
+                <ul>
+                    <li class="cur">
+                        <div class="lb-def">
+                            <b>刀塔传奇</b>
+                            <span>天下无敌大礼包</span>
+                            <a href="" class="lb-btn-1">领取&gt;</a>
+                        </div>
+                        <div class="lb-item">
+                            <i class="cover"></i>
+                            <div class="item">
+                                <h3 title="安卓测试独家礼包">安卓测试独家礼包</h3>
+                                <p>剩余数量<i>32</i></p>
+                                <p>有效期至<i>2016-06-13</i></p>
+                            </div>
+                            <a href="" class="lb-btn-2">领取</a>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="lb-def">
+                            <b>刀塔传奇</b>
+                            <span>天下无敌大礼包</span>
+                            <a href="" class="lb-btn-1">领取&gt;</a>
+                        </div>
+                        <div class="lb-item">
+                            <i class="cover"></i>
+                            <div class="item">
+                                <h3 title="安卓测试独家礼包">安卓测试独家礼包</h3>
+                                <p>剩余数量<i>32</i></p>
+                                <p>有效期至<i>2016-06-13</i></p>
+                            </div>
+                            <a href="" class="lb-btn-2">领取</a>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="lb-def">
+                            <b>刀塔传奇</b>
+                            <span>天下无敌大礼包</span>
+                            <a href="" class="lb-btn-1">领取&gt;</a>
+                        </div>
+                        <div class="lb-item">
+                            <i class="cover"></i>
+                            <div class="item">
+                                <h3 title="安卓测试独家礼包">安卓测试独家礼包</h3>
+                                <p>剩余数量<i>32</i></p>
+                                <p>有效期至<i>2016-06-13</i></p>
+                            </div>
+                            <a href="" class="lb-btn-2">领取</a>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="lb-def">
+                            <b>刀塔传奇</b>
+                            <span>天下无敌大礼包</span>
+                            <a href="" class="lb-btn-1">领取&gt;</a>
+                        </div>
+                        <div class="lb-item">
+                            <i class="cover"></i>
+                            <div class="item">
+                                <h3 title="安卓测试独家礼包">安卓测试独家礼包</h3>
+                                <p>剩余数量<i>32</i></p>
+                                <p>有效期至<i>2016-06-13</i></p>
+                            </div>
+                            <a href="" class="lb-btn-2">领取</a>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="lb-def">
+                            <b>刀塔传奇</b>
+                            <span>天下无敌大礼包</span>
+                            <a href="" class="lb-btn-1">领取&gt;</a>
+                        </div>
+                        <div class="lb-item">
+                            <i class="cover"></i>
+                            <div class="item">
+                                <h3 title="安卓测试独家礼包">安卓测试独家礼包</h3>
+                                <p>剩余数量<i>32</i></p>
+                                <p>有效期至<i>2016-06-13</i></p>
+                            </div>
+                            <a href="" class="lb-btn-2">领取</a>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="lb-def">
+                            <b>刀塔传奇</b>
+                            <span>天下无敌大礼包</span>
+                            <a href="" class="lb-btn-1">领取&gt;</a>
+                        </div>
+                        <div class="lb-item">
+                            <i class="cover"></i>
+                            <div class="item">
+                                <h3 title="安卓测试独家礼包">安卓测试独家礼包</h3>
+                                <p>剩余数量<i>32</i></p>
+                                <p>有效期至<i>2016-06-13</i></p>
+                            </div>
+                            <a href="" class="lb-btn-2">领取</a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            </div>
+<!-- 2 -->
+<div class="box">
+    <style>
+    .game-evaluation-mode { width: 330px; }
+    .game-evaluation-mode li { box-sizing: border-box; padding: 10px 10px 11px; border-bottom: 1px solid #D9D9D9; }
+    .game-evaluation-mode li:after { content: ''; display: table; clear: both; }
+    .game-evaluation-mode li .ico { float: left; margin-right: 15px; width: 56px; height: 56px; }
+    .game-evaluation-mode li .ico > img{height: 100%;border-radius:5px;background-color: #ccc;}
+    .game-evaluation-mode li .text { float: left; width: 118px; }
+    .game-evaluation-mode li .text h3 { height: 19px; font-size: 14px; color: #333333; overflow: hidden; }
+    .game-evaluation-mode li .text p { padding-top: 5px; max-height: 32px; font-size: 12px; color: #666666; overflow: hidden; }
+    .game-evaluation-mode li .rank { float: right; margin-top: 4px; width: 48px; height: 48px;background-color: #ccc;border-radius: 50%;}
+    .game-evaluation-mode li.odd { background-color: #F7F7F7; }
+    </style>
+    <div class="game-evaluation-mode">
+        <h2 class="title--h2"> 游戏评测 <a href="" class="more-link" title="更多"></a> </h2>
+        <ul> 
+            <li> <a href="" class="ico" title="游戏名称"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /> </a> 
+                <div class="text"> 
+                <h3>大话西游手游</h3> 
+                <p>找回了当年通宵下副本的感觉</p> 
+                </div> <i class="rank">1</i></li> 
+            <li class="odd"> <a href="" class="ico"> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /> </a> 
+                <div class="text"> 
+                <h3>大话西游手游</h3> 
+                <p>找回了当年通宵下副本的感觉</p> 
+                </div> <i class="rank">2</i> </li> 
+            <li> <a href="" class="ico"> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /> </a> 
+                <div class="text"> 
+                <h3>大话西游手游</h3> 
+                <p>找回了当年通宵下副本的感觉</p> 
+                </div> <i class="rank">3</i> </li> 
+            <li class="odd"> <a href="" class="ico"> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /> </a> 
+                <div class="text"> 
+                <h3>大话西游手游</h3> 
+                <p>找回了当年通宵下副本的感觉</p> 
+                </div><i class="rank">4</i> </li> 
+            <li> <a href="" class="ico"> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /> </a> 
+                <div class="text"> 
+                <h3>大话西游手游</h3> 
+                <p>找回了当年通宵下副本的感觉</p> 
+                </div><i class="rank">5</i></li> 
+            </ul>
+    </div>
+</div>
+<!-- 3 -->
+<div class="box">
+    <style>
+    .result-mode ul { overflow: hidden;}
+    .result-mode li { box-sizing: border-box;float: left; margin-bottom: 30px;width: 25%; text-align: center; overflow: hidden; }
+    .result-mode li a:hover b { color: #e04565; }
+    .result-mode li .cover {display: block; margin: 0 auto 10px; border-radius: 16px; width: 100px; height: 100px; }
+    .result-mode li b { font-weight: 400; font-size: 14px; color: #333333; white-space: nowrap; transition: all .3s linear; }
+    .result-mode li p { padding-top: 5px; height: 19px; overflow: hidden; font-size: 12px; color: #888888; }
+    .result-mode .page-bar { margin: 18px auto 0; width: 360px; }
+    </style>
+    <div class="result-mode">
+            
+        <ul class="gameListUl" id="searchContentUl">
+            <li><a href="http://app.appgame.com/game/72531585915.html" title="杀手：狙击之神"><i class="cover"></i><b>杀手：狙击之神</b><p>射击游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/53545706260.html" title="战地霸主"><i class="cover"></i><b>战地霸主</b><p>射击游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/63374142791.html" title="现代战争5：眩晕风暴"><i class="cover"></i><b>现代战争5：眩晕风暴</b><p>射击游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/62174269707.html" title="万智牌2015"><i class="cover"></i><b>万智牌2015</b><p>卡牌游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/51014507508.html" title="我叫MT Online"><i class="cover"></i><b>我叫MT Online</b><p>卡牌游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/45915892.html" title="死亡扳机2"><i class="cover"></i><b>死亡扳机2</b><p>射击游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/53621671135.html" title="刀塔传奇"><i class="cover"></i><b>刀塔传奇</b><p>卡牌游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/51027724541.html" title="混沌与秩序对决：交换卡牌游戏"><i class="cover"></i><b>混沌与秩序对决：交换卡牌游戏</b><p>卡牌游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/45849452.html" title="杀手2-影子阴谋"><i class="cover"></i><b>杀手2-影子阴谋</b><p>射击游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/54128322102.html" title="炉石传说：魔兽英雄传"><i class="cover"></i><b>炉石传说：魔兽英雄传</b><p>卡牌游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/51033367161.html" title="天天酷跑"><i class="cover"></i><b>天天酷跑</b><p>赛车游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/50088915487.html" title="植物大战僵尸2"><i class="cover"></i><b>植物大战僵尸2</b><p>策略游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/65642639250.html" title="燃烧的蔬菜3恐龙来了"><i class="cover"></i><b>燃烧的蔬菜3恐龙来了</b><p>策略游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/45832669.html" title="迷失之风2"><i class="cover"></i><b>迷失之风2</b><p>解谜游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/51461586827.html" title="艾诺迪亚4"><i class="cover"></i><b>艾诺迪亚4</b><p>角色扮演</p></a></li>
+            <li><a href="http://app.appgame.com/game/51017018094.html" title="异形2"><i class="cover"></i><b>异形2</b><p>策略游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/68221326594.html" title="植物大战僵尸全明星(萧敬腾代言)"><i class="cover"></i><b>植物大战僵尸全明星(萧敬腾代言)</b><p>策略游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/50068633762.html" title="保卫萝卜2：极地冒险"><i class="cover"></i><b>保卫萝卜2：极地冒险</b><p>策略游戏</p></a></li>
+            <li><a href="http://app.appgame.com/game/54647913009.html" title="龙腾世纪：英雄"><i class="cover"></i><b>龙腾世纪：英雄</b><p>角色扮演</p></a></li>
+            <li><a href="http://app.appgame.com/game/53626649819.html" title="愤怒的小鸟英雄传"><i class="cover"></i><b>愤怒的小鸟英雄传</b><p>角色扮演</p></a></li>
+            </ul> 
+    </div>
+
+    
+</div>
+
+
+<!-- 4 -->
+<div class="box">
+        <style>
+        .abroad-mode ul { margin-left: -20px;overflow: hidden; }
+        .abroad-mode ul li { float: left; margin-top: 20px; margin-left: 20px; width: 280px; }
+
+        .g-item { box-sizing: border-box; position: relative; padding-top: 24px; height: 120px; overflow: hidden; border: 1px solid #EBEBEB; background-color: #F7F7F7; }
+        .g-item .g-ico { padding-left: 29px; padding-right: 16px; float: left; }
+        .g-item img { width: 68px; height: 68px;border-radius: 5px; background-color: #ccc;}
+        .g-item.tj:before { content: '推荐'; box-sizing: border-box; position: absolute; top: 0; left: 0; padding-top: 3px; width: 50px; height: 50px; padding-left: 4px; color: #ffffff; font-size: 12px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAgMAAABjUWAiAAAACVBMVEXgRWXgRWXgRWWSPfJdAAAAAnRSTlMAgJsrThgAAABaSURBVCjPVcuhAcAgEMDAG40RGaKmTAnyExdxzmibt+b95n25nVvzHhMmTJgwYcKECRMmTJgwYcKECRMmTJgwYcKECRMmTJgwYcKECRMmTJgwYcKECRMmTNgFyKXZbZa1iOwAAAAASUVORK5CYII=) no-repeat 0 0; }
+        .g-item .text-view h3 { height: 21px; overflow: hidden; font-size: 16px; color: #333333; }
+        .g-item .text-view h3 a { color: #333333; transition: color .3s linear; }
+        .g-item .text-view h3 a:hover { color: #e04565; }
+        .g-item .text-view p { height: 32px; line-height: 32px; overflow: hidden; font-size: 14px; color: #666666; }
+        /* 按钮组  */
+        .ios-down-btn, .andr-down-btn { display: inline-block; box-sizing: border-box; padding-left: 20px; height: 24px; line-height: 22px; width: 56px; font-size: 12px; color: #666666; border-radius: 3px; border: 1px solid #B9B9B9; transition: all .3s linear; background-position: 6px 50%; background-repeat: no-repeat; }
+        .ios-down-btn:hover, .andr-down-btn:hover { color: #ffffff; }
+
+        .ios-down-btn { margin-right: 5px; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAAvUlEQVQY02P4z4AMK3gqZlQcq5CD8FClWCsmV/yvWATjo0pyVxyoWFkhjiJZIViRUzGloqjCuSIZSHZX9FV4VrCBJStUgOr/g+HTigsVv8CsfxWxQMkKtorZUClkeK5CGySpVvEAQ+pvRTDYzgrLivcYkp8r9CGS+hXPsBgbA5EUrDiCRfIy0EQWkGtrsUiCnCQGklTE4qT/FdMqOCGBEF3xA03qOCicYAFXDnTzXWAoVVdsrvhYcbLCGCQKAOWg4/Q0lVV/AAAAAElFTkSuQmCC); }
+        .ios-down-btn:hover { border: 1px solid #484848; background-color: #484848; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAAsUlEQVQYGQXBIS8EAACA0S9gM8oVms1minBBkiVZRFIlRTC/wKa4mU3TZH9AMKbcbLLtCtVMMRvPe0mSJPMuPViSlCRJpp3jWpKSJMmcOzcWJSnJwIGRQ5v2HTp1ZsuMkhV3gDfPfsCfPWXGFQAAxtaUVRMAAL+2pWz4AADwZShl6B0AALtSBu4BAPBiw1RyAgAAxhaSZRMAAFyYTbLjGwDwaFFJcuTDq5Fjtz49WZf+AfopL/PLx7XDAAAAAElFTkSuQmCC); }
+
+        .andr-down-btn { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAOCAMAAAAsYw3eAAAAeFBMVEX///94eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHjh9otuAAAAJ3RSTlMAEhkcIkJQYGRma252d3qGipCUlZiZpqepr7CxvNDS09TV1tfz+f6JUxx8AAAAcElEQVQIHSXBBQKDMBAEwMWtFGsJlkCw/f8PgWMGtzjx/STGKzrII4LwNrPvZvPw+NOSlj888m5o26H7Aig+9aJvS5MXoO0pekvQKAplCK6KQq3EqUeKUZ8Ig4qiCkIA7sQs4+RClARY4pXOjjOnAC6rcQ2FwcHX6AAAAABJRU5ErkJggg==); }
+        .andr-down-btn:hover { border: 1px solid #689F38; background-color: #689F38; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAOCAMAAAAsYw3eAAAAeFBMVEX///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9lMhLIAAAAJ3RSTlMAEhkcIkJQYGRma252d3qGipCUlZiZpqepr7CxvNDS09TV1tfz+f6JUxx8AAAAcElEQVQIHSXBBQKDMBAEwMWtFGsJlkCw/f8PgWMGtzjx/STGKzrII4LwNrPvZvPw+NOSlj888m5o26H7Aig+9aJvS5MXoO0pekvQKAplCK6KQq3EqUeKUZ8Ig4qiCkIA7sQs4+RClARY4pXOjjOnAC6rcQ2FwcHX6AAAAABJRU5ErkJggg==); }
+
+        </style>    
+
+        <div class="block abroad-mode">
+                <h2 class="title--h2">
+                    国外新游
+                    <a href="" class="more-link"></a>
+                </h2>
+                <ul>
+                    <li>
+                        <div class="g-item tj">
+                            <a class="g-ico" href="http://app.appgame.com/game/77557911639.html" title="漂移Girls">
+                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                            </a>
+                            <div class="text-view">
+                                <h3 title="漂移Girls">漂移Girls</h3>
+                                <p>冒险解谜</p>
+                                <a href="" class="ios-down-btn">下载</a>
+                                <a href="" class="andr-down-btn">下载</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="g-item tj">
+                            <a class="g-ico" href="http://app.appgame.com/game/77557911639.html" title="漂移Girls">
+                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                            </a>
+                            <div class="text-view">
+                                <h3 title="漂移Girls">漂移Girls</h3>
+                                <p>冒险解谜</p>
+                                <a href="" class="ios-down-btn">下载</a>
+                                <a href="" class="andr-down-btn">下载</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="g-item tj">
+                            <a class="g-ico" href="http://app.appgame.com/game/77557911639.html" title="漂移Girls">
+                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                            </a>
+                            <div class="text-view">
+                                <h3 title="漂移Girls">漂移Girls</h3>
+                                <p>冒险解谜</p>
+                                <a href="" class="ios-down-btn">下载</a>
+                                <a href="" class="andr-down-btn">下载</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="g-item tj">
+                            <a class="g-ico" href="http://app.appgame.com/game/77557911639.html" title="漂移Girls">
+                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                            </a>
+                            <div class="text-view">
+                                <h3 title="漂移Girls">漂移Girls</h3>
+                                <p>冒险解谜</p>
+                                <a href="" class="ios-down-btn">下载</a>
+                                <a href="" class="andr-down-btn">下载</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="g-item tj">
+                            <a class="g-ico" href="http://app.appgame.com/game/77557911639.html" title="漂移Girls">
+                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                            </a>
+                            <div class="text-view">
+                                <h3 title="漂移Girls">漂移Girls</h3>
+                                <p>冒险解谜</p>
+                                <a href="" class="ios-down-btn">下载</a>
+                                <a href="" class="andr-down-btn">下载</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="g-item tj">
+                            <a class="g-ico" href="http://app.appgame.com/game/77557911639.html" title="漂移Girls">
+                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                            </a>
+                            <div class="text-view">
+                                <h3 title="漂移Girls">漂移Girls</h3>
+                                <p>冒险解谜</p>
+                                <a href="" class="ios-down-btn">下载</a>
+                                <a href="" class="andr-down-btn">下载</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="g-item tj">
+                            <a class="g-ico" href="http://app.appgame.com/game/77557911639.html" title="漂移Girls">
+                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                            </a>
+                            <div class="text-view">
+                                <h3 title="漂移Girls">漂移Girls</h3>
+                                <p>冒险解谜</p>
+                                <a href="" class="ios-down-btn">下载</a>
+                                <a href="" class="andr-down-btn">下载</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="g-item tj">
+                            <a class="g-ico" href="http://app.appgame.com/game/77557911639.html" title="漂移Girls">
+                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                            </a>
+                            <div class="text-view">
+                                <h3 title="漂移Girls">漂移Girls</h3>
+                                <p>冒险解谜</p>
+                                <a href="" class="ios-down-btn">下载</a>
+                                <a href="" class="andr-down-btn">下载</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+</div>
+
+<!-- 5 -->
+<div class="box">
+        <style>
+            .kaifu-mode {width: 360px; }
+            .kaifu-mode table { margin-top: 5px; width: 100%; border-collapse: collapse; border-bottom: 1px solid #DADADA; }
+            .kaifu-mode table tr { height: 39px; }
+            .kaifu-mode table tr:hover td, .kaifu-mode table tr:hover a { color: #d0143b !important; }
+            .kaifu-mode table td { padding-left: 10px; font-size: 14px; }
+            .kaifu-mode .k-today td, .kaifu-mode .k-today a { color: #d0143b !important; transition: color .3s linear; }
+            .kaifu-mode .k-today td:hover, .kaifu-mode .k-today a:hover { color: #e04565 !important; }
+            .kaifu-mode .k-time { width: 55px; color: #888888; }
+            .kaifu-mode .k-name { width: 140px; font-weight: 700; white-space: nowrap; }
+            .kaifu-mode .k-name a { color: #333333; transition: color .3s linear; }
+            .kaifu-mode .k-type { width: 90px; color: #888888; }
+            .kaifu-mode .k-ico { padding: 0 10px 0 0; width: 60px; text-align: right; }
+            .kaifu-mode .k-ico img { display: inline-block; }
+            .kaifu-mode .odd { background-color: #F7F7F7; }
+            .ico1,.ico2{display: inline-block;width: 16px;height: 20px;}
+            .ico1{background-color: #333333;}
+            .ico2{background-color: #E04565;}
+        </style>
+        <div class="kaifu-mode">
+                <h2 class="title--h2">
+                    网游测试表
+                    <a href="" class="more-link" title="更多"></a>
+                </h2>
+                <table>
+                    <tbody><tr class="k-today">
+                        <td class="k-time">今天</td>
+                        <td class="k-name"><a href="" title="游龙英雄">游龙英雄</a></td>
+                        <td class="k-type">公测</td>
+                        <td class="k-ico">
+                            <i class="ico1"></i>
+                            <i class="ico2"></i>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td class="k-time">10-11</td>
+                        <td class="k-name"><a href="" title="">啊实打实大</a></td>
+                        <td class="k-type">公测</td>
+                        <td class="k-ico"><i class="ico2"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="k-time">10-11</td>
+                        <td class="k-name"><a href="" title="">现代战争5：眩晕风暴</a></td>
+                        <td class="k-type">公测</td>
+                        <td class="k-ico"><i class="ico2"></i></td>
+                    </tr>
+                    <tr class="odd">
+                        <td class="k-time">10-11</td>
+                        <td class="k-name"><a href="" title="">游龙英雄</a></td>
+                        <td class="k-type">内测</td>
+                        <td class="k-ico">
+                            <i class="ico1"></i>
+                            <i class="ico2"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="k-time">10-11</td>
+                        <td class="k-name"><a href="" title="">啊实打实大</a></td>
+                        <td class="k-type">删档封测</td>
+                        <td class="k-ico"><i class="ico1"></i></td>
+                    </tr>
+                    <tr class="odd">
+                        <td class="k-time">10-11</td>
+                        <td class="k-name"><a href="" title="">啊实打实大</a></td>
+                        <td class="k-type">爱上</td>
+                        <td class="k-ico"><i class="ico1"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="k-time">10-11</td>
+                        <td class="k-name"><a href="" title="">啊实打实大</a></td>
+                        <td class="k-type">爱上</td>
+                        <td class="k-ico">
+                            <i class="ico1"></i>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td class="k-time">10-11</td>
+                        <td class="k-name"><a href="" title="">啊实打实大</a></td>
+                        <td class="k-type">爱上</td>
+                        <td class="k-ico"><i class="ico2"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+</div>
+</body>
+</html>
