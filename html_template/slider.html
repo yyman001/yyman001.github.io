@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
+    <!-- 1 -->
     <div class="box">
         <style>
         .slide-box { position: relative; }
@@ -45,6 +46,43 @@
                 </ul>
             </div>
         </div>
-    </div>  
+    </div>
+    <!-- 2 -->
+    <div class="box">
+    <style>
+            /*首页幻灯片*/
+    .slider-wrap { position: relative; }
+    .slider { height: 380px; }
+    .sliderslider__banner, .slider .cover-img { height: 380px; width: 100%; }
+    .slider__cont { position: relative; height: 100%; overflow: hidden; }
+    .slider__ul:after { content: ''; display: table; clear: both; }
+    .slider__ul > li { float: left; width: 100%; }
+    /* .slider__bar { position: absolute; left: 50%; margin-left: -500px; width: 1000px; bottom: 0; z-index: 9; height: 8px; } */
+    .slider__bar { position: absolute; left:0; width: 100%; bottom: 0; z-index: 9; height: 8px; }
+    .slider__bar a { float: left; width: 50%; height: 8px; background-color: #fff; }
+    .slider__bar a.cur, .slider__bar a:hover { cursor: pointer; background-color: #faad04; }
+
+    </style>
+    <div class="slider-wrap">
+            <!--# 幻灯片-->
+            <div class="slider">
+                <div class="slider__cont">
+                    <ul id="slider" class="slider__ul">
+                        <li>
+                            <a  class="cover-img"  title=""></a>
+                        </li>
+                        <li>
+                            <a  class="cover-img" title=""></a>
+                        </li>
+                        <li>
+                            <a  class="cover-img" title=""></a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="slider__bar" class="slider__bar"><a class="" style="width:33%"></a><a class="" style="width:33%"></a><a class="cur" style="width:33%"></a></div>
+            </div>
+        </div>
+        
+    </div>
 </body>
 </html>

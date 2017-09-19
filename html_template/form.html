@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>幻灯片</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <!-- 1 -->
+    <div class="box">
+        <style>
+		.form__box { position: relative; }
+.form__tips { position: absolute; top: 0; left: 306px; height: 38px; line-height: 38px; font-size: 12px; color: #888888; }
+.form__tips:before { content: ''; position: absolute; top: 0; left: -20px; width: 14px; height: 100%; background-position: 50% 50%; background-repeat: no-repeat; }
+.form__text, .form__code { display: block; margin-bottom: 10px; box-sizing: border-box; padding-left: 10px; height: 40px; line-height: 40px; border: 1px solid #d1d1d1; background-color: #fff; font-size: 14px; color: #b0b0b0; -webkit-transition: border .3s ease; transition: border .3s ease; }
+.form__text::-webkit-input-placeholder, .form__code::-webkit-input-placeholder { color: #b0b0b0; }
+.form__text::-moz-placeholder, .form__code::-moz-placeholder { color: #b0b0b0; }
+.form__text:-ms-input-placeholder, .form__code:-ms-input-placeholder { color: #b0b0b0; }
+.form__text::placeholder, .form__code::placeholder { color: #b0b0b0; }
+.form__text:focus, .form__code:focus { outline: 1px solid transparent; border: 1px solid #379ddf; }
+.form__text--error { border: 1px solid #de151f; background-color: #ffe2e4; }
+.form__text--error + .form__tips { color: #de151f; }
+.form__text--error + .form__tips:before { background-image: url(../images/error.png); }
+.form__text--ok { border: 1px solid #24a80a; background-color: #dfffd8; }
+.form__text { width: 280px; }
+.form__code { width: 128px; }
+.form__checkboxs { padding-top: 8px; font-size: 12px; color: #666666; }
+.form__label { cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+.form__checkbox { vertical-align: top; width: 12px; height: 12px; border: 1px solid #b2b2b2; background-color: #eaeaea; font-size: 12px; color: #666666; }
+.form__link { font-size: 12px; color: #019cff; }
+.form__login { margin: 30px auto; display: block; border: none; height: 40px; background-repeat: no-repeat; background-position: 0 0; }
+.form__login:focus { outline: 1px solid transparent; }
+.form__login:hover { cursor: pointer; }
+.form__submit { margin: 30px auto 0; border: none; width: 285px; height: 40px; background-repeat: no-repeat; background-position: 0 0; background-image: url(../images/reg-btn.png); }
+.form__submit:hover { cursor: pointer; background-image: url(../images/reg-btn-hover.png); outline: 1px solid transparent; }
+.form__regLink, .form__forget { display: inline-block; font-size: 12px; color: #666666; }
+.form__regLink { padding-right: 10px; }
+.form__forget { position: relative; padding-left: 10px; }
+.form__forget:before { content: ''; position: absolute; top: 50%; margin-top: -6px; left: 0; width: 1px; height: 13px; background-color: #666; }
+.form__code-img { position: absolute; top: 8px; left: 154px; }
+.form__code-img > img{width:55px;height:22px;background-color:#ccc;}
+.form__refresh { position: absolute; top: 8px; left: 225px; width: 48px; height: 18px; line-height: 18px; text-align: center; font-size: 12px; color: #888888; background-color: #f3f3f3; border: 1px solid #D1D1D1; }
+
+
+        .login-mode { box-sizing: border-box; margin-left: 220px; padding: 37px 23px; width: 280px; height: 320px; background-color: #fff; }
+.login-mode .form__text { margin-left: auto; margin-right: auto; width: 233px; }
+.login-mode .form__text:first-child { margin-bottom: 10px; }
+.login-mode .form__login { margin: 30px auto; width: 235px; }
+.login-mode .form__login:hover {  }
+.login-mode .form__box { padding-top: 2px; text-align: right; color: #666666; }
+
+/*
+第三方登陆
+*/
+.other-login-mod { font-size: 12px; color: #666666; height: 28px; line-height: 2.5; overflow: hidden; }
+.other-login-mod span { float: left; padding-right: 3px; }
+.other-login-mod .login-btn { display: inline-block; margin: 0 4px; width: 28px; height: 28px; background-repeat: no-repeat; background-position: 0 0; }
+.other-login-mod .login-btn.ico-qq { background-image: url(../images/ico-qq.png); }
+.other-login-mod .login-btn.ico-wx { background-image: url(../images/ico-wx.png); }
+.other-login-mod .login-btn.ico-wb { background-image: url(../images/ico-wb.png); }
+
+        </style>
+	<div class="login-mode form">
+        <input type="text" class="form__text" placeholder="账号">
+        <input type="text" class="form__text" placeholder="密码">
+        <div class="form__box"><a href="register.html" class="form__regLink" target="_blank">注册帐号</a><a href="contact.html" class="form__forget">忘记密码？</a></div>
+        <input type="button" class="form__login">
+        <div class="other-login-mod">
+            <span>其他帐号登录：</span>
+            <a class="login-btn ico-qq" title="QQ登录"></a>
+            <a class="login-btn ico-wx" title="微信登录"></a>
+            <a class="login-btn ico-wb" title="微博登录"></a>
+        </div>
+    </div>
+    </div>
+    <!-- 2 -->
+    <div class="box">
+    <style>
+	.login-mod { width: 280px; }
+	.login-mod .title-h2 { padding-bottom: 15px; margin-bottom: 20px; border-bottom: 1px solid #E1E1E1; }
+	.login-mod .form__login { margin-top: 30px; width: 280px; background-image: url(../images/login2.png); }
+	.login-mod .form__login:hover { background-image: url(../images/login2-hover.png); }
+	.login-mod .form__checkboxs { padding-top: 2px; }
+	.login-mod .form__forget { float: right; }
+	.login-mod .form__forget:before { content: normal; }
+    </style>
+
+        <div class="login-mod">
+        <h2 class="title-h2">已有帐号，登录</h2>
+        <div class="form">
+            <input type="text" class="form__text" placeholder="账号">
+            <input type="password" class="form__text" placeholder="密码">
+            <div class="form__checkboxs">
+                <label class="form__label" for="autoLogin"><input checked="" id="autoLogin" class="form__checkbox" name="" type="checkbox" value="1">下次自动登录</label>
+                <a href="" class="form__forget" title="忘记密码？">忘记密码？</a>
+            </div>
+            <input type="button" class="form__login">
+            <div class="other-login-mod">
+                <span>其他帐号登录：</span>
+                <a class="login-btn ico-qq" title="QQ登录"></a>
+                <a class="login-btn ico-wx" title="微信登录"></a>
+                <a class="login-btn ico-wb" title="微博登录"></a>
+            </div>
+        </div>
+    </div>
+    </div>
+	
+	<div class="box">
+	<style>
+	.reg-mod {
+    width: 566px;
+	}
+	</style>
+	<div class="reg-mod">
+        <h2 class="title-h2">注册新帐号</h2>
+        <form action="" class="form" method="GET">
+
+        </form>
+        <div class="form__box">
+            <input type="text" class="form__text form__text--error" placeholder="账号">
+            <span class="form__tips">帐号由6~32位字母、数字组成</span>
+        </div>
+
+        <div class="form__box">
+            <input type="password" class="form__text form__text--ok" placeholder="密码">
+            <span class="form__tips">6个或以上字符，推荐使用复杂密码</span>
+        </div>
+        <div class="form__box">
+            <input type="password" class="form__text" placeholder="确认密码">
+            <span class="form__tips">确保与上面密码一致</span>
+        </div>
+        <div class="form__box">
+            <input type="text" class="form__text" placeholder="手机">
+            <span class="form__tips">请输入手机号码</span>
+        </div>
+        <div class="form__box">
+            <input type="text" class="form__code" placeholder="验证码">
+            <a href="" class="form__code-img"><img src="images/code-img.png" alt=""></a>
+            <a href="" class="form__refresh">换一张</a>
+            <span class="form__tips">请正确输入验证码</span>
+        </div>
+        <div class="form__box">
+            <input type="text" class="form__text" placeholder="邮箱">
+            <span class="form__tips">用于找回帐号等安全操作，请填写常用真实邮箱</span>
+        </div>
+        <div class="form__box">
+            <input type="text" class="form__text" placeholder="真实姓名">
+            <span class="form__tips">请输入您的真实姓名</span>
+        </div>
+        <div class="form__box">
+            <input type="text" class="form__text" placeholder="身份证号">
+            <span class="form__tips">请输入身份证号</span>
+        </div>
+
+        <div class="form__checkboxs">
+            <label class="form__label" for="userAgreement"><input checked="" id="userAgreement" class="form__checkbox" name="userAgreement" type="checkbox" value="1">我已经阅读并同意</label>
+            <a href="agreement.html" class="form__link" target="_blank">《泰坦互娱游戏平台通行证用户服务协议》</a>
+        </div>
+
+
+        <input type="button" class="form__submit">
+
+    </div>
+	</div>
+</body>
+</html>
