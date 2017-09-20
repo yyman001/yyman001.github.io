@@ -113,5 +113,31 @@
         </div>
     </div>
 
+    <!-- 4 -->
+    <div class="box" style="background:#333;">
+        <style>
+.nav-result { box-sizing: border-box; /* position: fixed; */ top: 0; right: 50px; z-index: 8; /* padding-top: 150px; */ width: 118px; height: 100%; border-right: 1px solid #45372E; }
+.nav-result .nav-result-ul:hover .link, .nav-result .nav-result-ul:hover > li.last .share-bar { opacity: 1; }
+.nav-result .nav-result-ul > li { position: relative; margin-top: 24px; padding-right: 20px; height: 24px; line-height: 24px; text-align: right; }
+.nav-result .nav-result-ul > li:first-child { margin-top: 0; }
+.nav-result .nav-result-ul > li:before { content: ''; position: absolute; top: 50%; margin-top: -4px; right: -4px; width: 8px; height: 8px; background-color: #74684B; border-radius: 50%; -webkit-transition: background-color .3s linear; transition: background-color .3s linear; }
+.nav-result .nav-result-ul > li.last:before { margin-top: -11px; right: -9px; width: 18px; height: 22px; border-radius: 0; background: url(../images_start_games_result/share-ico.png) no-repeat 0 0; }
+.nav-result .nav-result-ul > li.last .share-bar { opacity: 0; }
+.nav-result .nav-result-ul > li:hover:before, .nav-result .nav-result-ul > li.cur:before { background-color: #fff; }
+.nav-result .nav-result-ul > li:hover.last:before, .nav-result .nav-result-ul > li.cur.last:before { background-color: transparent; }
+.nav-result .nav-result-ul > li:hover .link, .nav-result .nav-result-ul > li.cur .link { margin-right: -10px; color: #ffffff; opacity: 1; font-size: 16px; }
+.nav-result .link { /* opacity: 0; */ display: block; font-size: 14px; color: #b5a47a; white-space: nowrap; -webkit-transition: all .3s linear; transition: all .3s linear; }
+
+        </style>
+        <div id="navSidebarResult" class="nav-result">
+                <ul id="myMenu" class="nav-result-ul">
+                    <li><a href="#section1" class="link">首页</a></li>
+                    <li><a href="#section2" class="link">十大经典手游</a></li>
+                    <li><a href="#section3" class="link">十大卓越手游</a></li>
+                    <li><a href="#section4" class="link">十大期待手游</a></li>
+                    <li><a href="#section5" class="link">年度益智手游</a></li>
+                </ul>
+            </div>
+    </div>
 </body>
 </html>
