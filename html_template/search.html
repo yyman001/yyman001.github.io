@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
+    <!-- 1 -->
     <div class="box">
         <style>
         .searchForm {  position: relative;  }
@@ -24,20 +25,35 @@
         </div>
 
     </div>
-	
-	<div class="box" style="background-color:#ccc;">
+	<!-- 2 -->
+	<div class="box box2" style="background-color:#ccc;">
 	<style>
-.search-box { box-sizing: border-box;padding: 0 10%; width: 100%; }
-.search-box:after { content: ''; display: table; clear: both; }
-.search-box .search-text { box-sizing: border-box; float: left; padding-right: 50px; padding-left: 25px; width: 100%; height: 44px; line-height: 2.2; border: none; font-size: 14px; color: #666; border-radius: 45px; background-color: #fff; overflow: hidden; }
-.search-box .search-text:focus { outline: 1px solid transparent; }
-.search-box .submit-btn { float: right; margin-left: -100%; margin-top: -3px; padding: 0; width: 50px; height: 50px; line-height: 50px; color: #ffffff; border: none; border-radius: 50%; font-size: 18px; cursor: pointer; text-indent: -9999px; background-color: #a161f1; background-image: url(../images/search-ico.png); background-repeat: no-repeat; background-position: 50%; background-size: 50%; }
-
+        .box2 .search-box { box-sizing: border-box;padding: 0 10%; width: 100%; }
+        .box2 .search-box:after { content: ''; display: table; clear: both; }
+        .box2 .search-box .search-text { box-sizing: border-box; float: left; padding-right: 50px; padding-left: 25px; width: 100%; height: 44px; line-height: 2.2; border: none; font-size: 14px; color: #666; border-radius: 45px; background-color: #fff; overflow: hidden; }
+        .box2 .search-box .search-text:focus { outline: 1px solid transparent; }
+        .box2 .search-box .submit-btn { float: right; margin-left: -100%; margin-top: -3px; padding: 0; width: 50px; height: 50px; line-height: 50px; color: #ffffff; border: none; border-radius: 50%; font-size: 18px; cursor: pointer; text-indent: -9999px; background-color: #a161f1; background-image: url(../images/search-ico.png); background-repeat: no-repeat; background-position: 50%; background-size: 50%; }
 	</style>
 		<div class="search-box">
             <input type="text" class="search-text" placeholder="输入游戏名，直接搜索礼包">
             <button class="submit-btn">搜索</button>
         </div>
-	</div>
+    </div>
+    
+    <!-- 3 -->
+    <div class="box box3">
+        <style>
+        .box3 .search-box { position: relative; width: 245px; height: 40px; }
+        .box3 .search-box .text { box-sizing: border-box; float: left; padding-left: 12px; width: 191px; height: 38px; line-height: 38px; border: 1px solid #D4D4D4; border-radius: 2px 0 0 2px; font-size: 14px; color: #7E7E7E; background-color: #F8F8F8; }
+        .box3 .search-box .s-btn { float: right; width: 54px; height: 38px; line-height: 38px; cursor: pointer; border-radius: 0 3px 3px 0; border-color: #D4D4D4; border-width: 1px; border-style: solid; border-left: none; background-color: #F8F8F8; background: url(../images/ico-search.png) no-repeat 50% 50%; }
+        </style>
+        <div class="search-box">
+            <form action="">
+                <input class="text" type="text" placeholder="请输入搜索关键字">
+                <input class="s-btn" type="submit" value="">
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>

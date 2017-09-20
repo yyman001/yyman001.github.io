@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>布局</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="box">
+        <style>
+        .list-mode { margin: 0 auto; max-width: 1200px; }
+        .list-mode:after { content: ''; display: table; clear: both; }
+        .list-mode li { position: relative; float: left; box-sizing: border-box; width: 25%; padding-left: 10px; margin-bottom: 10px; }
+        .list-mode li img { display: block; width: 100%; -webkit-transition: all .4s linear; transition: all .4s linear; }
+        .list-mode li a { position: relative; display: block; overflow: hidden; }
+        .list-mode li a:hover img { -webkit-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1); }
+        .list-mode li a:hover p { color: #eb1438; }
+        .list-mode li a p { box-sizing: border-box; position: absolute; left: 0; bottom: 0; color: #cccccc; padding: 0 10px; height: 60px; width: 100%; background-color: #404040; }
+        .list-mode li a p:before { content: ''; display: inline-block; width: 0; height: 100%; vertical-align: middle; }
+        .list-mode li a p em { display: inline-block; vertical-align: middle; font-style: normal; line-height: 18px; font-size: 13px; }
+        .list-mode li:first-child { padding-left: 0; margin-bottom: 0; width: 50%; }
+        .list-mode li:first-child p em { font-size: 16px; }
+        </style>
+        <ul class="list-mode">
+                <li class="v_big"><a href="http://www.appgame.com/archives/504945.html" title=""><img style="background-image:url(c_images/p2.jpg);" src="c_images/p2.png" alt="《权力的游戏》第六季4月24日开播 布兰站起来雪诺将复活"><p><em>《权力的游戏》第六季4月24日开播 布兰站起来雪诺将复活</em></p></a></li>
+                <li><a href="" title=""><img class="cover-img" style="background-image:url(c_images/p3.jpg);" src="c_images/p3.png" alt=""><p><em>七龙珠正版手游 《龙珠激斗》与你再次回味经典</em></p></a></li>
+                <li><a href="" title=""><img class="cover-img" style="background-image:url(c_images/p3.jpg);" src="c_images/p3.png" alt=""><p><em>《蝙蝠侠大战超人》首曝删减片段 揭秘最终反派真面目？</em></p></a></li>
+                <li><a href="" title=""><img class="cover-img" style="background-image:url(c_images/p3.jpg);" src="c_images/p3.png" alt=""><p><em>《乐高大电影：蝙蝠侠》曝光超萌预告 小小老爷脱衣也有肉</em></p></a></li>
+                <li><a href="" title=""><img class="cover-img" style="background-image:url(c_images/p3.jpg);" src="c_images/p3.png" alt=""><p><em>《炉石传说》砰砰博士有多强 进口炸弹机器人告诉你</em></p></a></li>
+            </ul>
+    </div>
+</body>
+</html>
