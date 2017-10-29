@@ -2,23 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <meta name="format-detection" content="telephone=no, email=no"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>作品列表</title>
-        <script type="text/javascript">
-        var win_width = window.innerWidth || document.documentElement.clientWidth;
-        var win_height = window.innerHeight || document.documentElement.clientHeight;
-        var radio = win_height / win_width;
-        //1.425
-//        radio = radio < 1.48 ? 1.625 : radio > 1.625 ? 1.625 : radio;
-        radio = radio < 1.6 ? 1.625 : radio > 1.625 ? 1.625 : radio;
-        var maxwidth = win_height / radio;
-        if (win_height / win_width <= radio) {
-            win_width = maxwidth;
-        }
-        document.documentElement.style.fontSize = (win_width / 800 > 1 ? 1 : win_width / 800) * 100 + 'px';
-    </script>
     <style>
         body{margin: 0;background-color: #f8f8f8;}
         .title{
@@ -75,16 +60,22 @@
             display: block;
             padding-top: 60%;
         }
-        .crad__id{
+        .crad__id
+        ,.crad__type{
             position: absolute;
             top: 0;
-            left: 0;
             padding:10px;
             font-size: 12px;
             color: #fff;
             font-style: normal;
             text-align: center;
             background-color:rgba(0,0,0,.5);
+        }
+        .crad__id{
+            left: 0;
+        }
+        .crad__type{
+            right: 0;
         }
         .crad__title{
             box-sizing: border-box;
@@ -107,31 +98,26 @@
             top:50%;
             left: 50%;
             transform: translate(-50%,-50%);
-        };
-        @media screen and (min-width: 320px){
-           
         }
-        @media screen and (max-width: 320px){
+
+        @media screen and (max-width: 639px){
             .main{
                 max-width: 100%;
-                /*background-color: #333;*/
                 justify-content: center;
             }
             .card{
                 margin:0 0 20px;
-                width: 92%;
+                width: 92%!important;
             }
             .crad__link{
                 border-radius: .05em;
             }
             .crad__title{
-                /*height: 30px;*/
-                /*line-height: 30px;*/
-                /*font-size: 10px;*/
             }
         }
 
-    </style>
+</style>
+
 </head>
 <body>
     <h1 class="title"><strong>我的作品</strong></h1>
@@ -140,6 +126,7 @@
             <a :href="card.url" :title="card.title" target="_blank" class="crad__link" :style="{backgroundImage: 'url(' +  card.image +' )' }">
                 <!--<b v-if="qcode(this,card.url)" class="card__qcode"></b>-->
                 <i class="crad__id">{{card.id}}</i>
+                <i class="crad__type">{{card.type}}</i>
                 <em class="crad__title">{{card.title}}</em>
             </a>
         </div>
@@ -148,6 +135,180 @@
     <script src="js/jquery.qrcode.min.js"></script>
     <script src="js/vue.js"></script>
     <script>
+        var page = {
+        	other:{
+        	    title:'《天命传说》手游官网_踏上命定冒险之旅',
+                src:'http://tmcs.4gvv.com/?src=guanfang'
+            },
+        	2017:{
+		        1:{
+			        type:''
+		        }
+		        ,1:{
+			        type:''
+		        }
+		        ,1:{
+			        type:''
+		        }
+            },
+            2016:{
+                990:{
+                	type:'wap/pc'
+                }
+	            ,994:{
+                	type:'wap'
+                }
+	            ,996:{
+                	type:'wap/pc'
+                }
+	            ,998:{
+                	type:'wap/pc'
+                }
+	            ,999:{
+                	type:'wap/pc'
+                }
+	            ,1000:{
+                	type:'wap'
+                }
+	            ,1002:{
+                	type:'wap/pc'
+                }
+	            ,1006:{
+                	type:'wap/pc'
+                }
+	            ,1010:{
+                	type:'pc'
+                }
+	            ,1012:{
+                	type:'wap/pc'
+                }
+	            ,1013:{
+                	type:'wap'
+                }
+	            ,1015:{
+                	type:'pc'
+                }
+	            ,1017:{
+                	type:'pc'
+                }
+	            ,1021:{
+                	type:'wap'
+                }
+	            ,1023:{
+                	type:'wap'
+                }
+	            ,1025:{
+                	type:'wap'
+                }
+	            ,1027:{
+                	type:'pc'
+                }
+	            ,1031:{
+                	type:'pc'
+                }
+	            ,1033:{
+                	type:'wap'
+                }
+
+            },
+            myListData:{
+                1000:{
+                    type:'wap'
+                },
+                1001:{
+                    type:'all'
+                },
+                1016:{
+                    type:'wap/pc'
+                }
+                ,1017:{
+                	type:'wap/pc'
+                }
+                ,1020:{
+                	type:'wap'
+                }
+                ,1021:{
+                	type:'wap'
+                }
+                ,1036:{
+                	type:'wap/pc'
+                }
+                ,1039:{
+                	type:'pc'
+                }
+                ,1042:{
+                	type:'wap'
+                }
+                ,1044:{
+                	type:'pc'
+                }
+                ,1045:{
+                	type:'wap/pc'
+                }
+                ,1053:{
+                	type:'wap/pc'
+                }
+                ,1060:{
+                	type:'pc'
+                }
+            },
+            localData:null,
+            getLocalData:function(){
+                this.localData =  !!localStorage.getItem('localData') ? JSON.parse(localStorage.getItem('localData')) : null;
+            },
+            setLocalData:function(data){
+                if(!data){return}
+                localStorage.setItem('localData',JSON.stringify(data));
+            },
+            filter:function(data){
+                if(!$.isArray(data)){
+                    return data;
+                }
+                var page = this;
+                return data.filter(function(o,i){
+                    o.type = page.getDateType(o.id);
+                    return o.type !== 'null';
+                });
+            },
+            getDateType:function(id_string){
+                return this.myListData[id_string] ? this.myListData[id_string]['type'] : 'null';
+            },
+            init:function(){
+                var page = this;
+                var temp_data = [];
+                //this.getLocalData();
+                if(!this.localData){
+                    this.getDate()
+                    .then(function(data){
+                        if(data.data.length){
+                            temp_data = data.data;
+                            console.log(typeof temp_data);
+                            //temp_data = page.filter(data.data);
+                            console.log('temp_data:',temp_data);
+                            //page.setLocalData(data);
+                            vm.$set(vm,'data',temp_data)
+                        }
+                        
+                    })
+                    .fail(function(data){
+                        console.log('fail:',data);
+                    })
+                }
+            },
+            getDate:function(year){
+                return $.ajax({
+                        type: 'GET',
+                        url: 'http://app.appgame.com/mongofly/index.php?c=icommon&a=data&n=zthd&t=date2016',
+//                        url: 'http://app.appgame.com/mongofly/index.php?c=icommon&a=data&n=zthd&t=date2015',
+                        dataType: 'jsonp',
+                        jsonp: "callback",
+                        jsonCallback: 'jsonCallback'
+                    });
+            }
+        };
+
+        //page.init();
+
         var vm = new Vue({
             el:'#app',
             data:{
@@ -156,8 +317,10 @@
                 pc:[]
             },
             mounted:function(){
-                console.log('init')
-                this.getDate();
+                console.log('init',page.localData)
+                //this.getDate();
+                page.init();
+                //this.data = page.localData.data;
             },
             methods:{
                 qcode:function(ele,url){
@@ -172,13 +335,10 @@
                         dataType: 'jsonp',
                         jsonp: "callback",
                         jsonCallback: 'jsonCallback',
-                        beforeSend: function () {
-                        },
                         success: function (data) {
                             if(data.data.length){
                                 me.data = data.data;
                             }
-                            
                         },
                         error: function (error) {
                             console.log('错误处理' + error);
