@@ -142,214 +142,217 @@
 
 </head>
 <body>
-    <h1 class="title"><strong>我的作品</strong></h1>
-    <p class="text">以往做过的作品，但并非全部，大部分作为未找到链接</p>
-    <div id="app" class="main" v-cloak="">
-        <div v-for="card_row in allData" class="card__content">
-            <h2 class="title-h2">{{card_row.year}}</h2>
-            <div class="card__box">
-                <div v-for="card in card_row.data" class="card">
-                    <a :href="card.url" :title="card.title" target="_blank" class="crad__link" :style="{backgroundImage: 'url(' +  card.image +' )' }">
-                        <!--<b v-if="qcode(this,card.url)" class="card__qcode"></b>-->
-                        <i class="crad__id">{{card.id}}</i>
-                        <i class="crad__type">{{card.type}}</i>
-                        <em class="crad__title">{{card.title}}</em>
-                    </a>
-                </div>
+<h1 class="title"><strong>我的作品</strong></h1>
+<p class="text">以往做过的作品，但并非全部，大部分作为未找到链接</p>
+<div id="app" class="main" v-cloak="">
+    <div v-for="card_row in allData" class="card__content">
+        <h2 class="title-h2">{{card_row.year}}</h2>
+        <div class="card__box">
+            <div v-for="card in card_row.data" class="card">
+                <a :href="card.url" :title="card.title" target="_blank" class="crad__link" :style="{backgroundImage: 'url(' +  card.image +' )' }">
+                    <!--<b v-if="qcode(this,card.url)" class="card__qcode"></b>-->
+                    <i class="crad__id">{{card.id}}</i>
+                    <i class="crad__type">{{card.type}}</i>
+                    <em class="crad__title">{{card.title}}</em>
+                </a>
             </div>
         </div>
-
     </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.qrcode.min.js"></script>
-    <script src="js/vue.js"></script>
-    <script>
-        var page = {
-        	other:{
-        	    title:'《天命传说》手游官网_踏上命定冒险之旅',
-                src:'http://tmcs.4gvv.com/?src=guanfang'
-            },
-	        myListData_2016:{
-                990:{
-                	type:'wap/pc'
-                }
-	            ,994:{
-                	type:'wap'
-                }
-	            ,996:{
-                	type:'wap/pc'
-                }
-	            ,998:{
-                	type:'wap/pc'
-                }
-	            ,999:{
-                	type:'wap/pc'
-                }
-	            ,1000:{
-                	type:'wap'
-                }
-	            ,1002:{
-                	type:'wap/pc'
-                }
-	            ,1006:{
-                	type:'wap/pc'
-                }
-	            ,1010:{
-                	type:'pc'
-                }
-	            ,1012:{
-                	type:'wap/pc'
-                }
-	            ,1013:{
-                	type:'wap'
-                }
-	            ,1015:{
-                	type:'pc'
-                }
-	            ,1017:{
-                	type:'pc'
-                }
-	            ,1021:{
-                	type:'wap'
-                }
-	            ,1023:{
-                	type:'wap'
-                }
-	            ,1025:{
-                	type:'wap'
-                }
-	            ,1027:{
-                	type:'pc'
-                }
-	            ,1031:{
-                	type:'pc'
-                }
-	            ,1033:{
-                	type:'wap'
-                }
 
-            },
-            myListData:{
-                1009:{
-                    type:'wap'
-                },
-                1016:{
-                    type:'wap/pc'
-                }
-                ,1017:{
-                	type:'wap/pc'
-                }
-                ,1020:{
-                	type:'wap'
-                }
-                ,1021:{
-                	type:'wap'
-                }
-                ,1036:{
-                	type:'wap/pc'
-                }
-                ,1039:{
-                	type:'pc'
-                }
-                ,1042:{
-                	type:'wap'
-                }
-                ,1044:{
-                	type:'pc'
-                }
-                ,1045:{
-                	type:'wap/pc'
-                }
-                ,1053:{
-                	type:'wap/pc'
-                }
-                ,1060:{
-                	type:'pc'
-                }
-            },
-            localData:null,
-            getLocalData:function(){
-                this.localData =  !!localStorage.getItem('localData') ? JSON.parse(localStorage.getItem('localData')) : null;
-            },
-            setLocalData:function(data){
-                if(!data){return}
-                localStorage.setItem('localData',JSON.stringify(data));
-            },
-            filter:function(data){
-                if(!$.isArray(data)){
-                    return data;
-                }
-                var page = this;
-                return data.filter(function(o,i){
-                    o.type = page.getDateType(o.id);
-                    return o.type !== 'null';
-                });
-            },
-            getDateType:function(id_string){
-                return this.myListData_2016[id_string] ? this.myListData_2016[id_string]['type'] : 'null';
-            },
-            init:function(){
-                var page = this;
-                var temp_data = [];
-                //this.getLocalData();
-                if(!this.localData){
-                    this.getDate()
-                    .then(function(data){
-                        if(data.data.length){
+</div>
+<!--<script src="js/jquery.js"></script>-->
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<!--<script src="js/jquery.qrcode.min.js"></script>-->
+<script src="//cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+<!--<script src="js/vue.js"></script>-->
+<script src="//cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script>
+	var page = {
+		other:{
+			title:'《天命传说》手游官网_踏上命定冒险之旅',
+			src:'http://tmcs.4gvv.com/?src=guanfang'
+		},
+		myListData_2016:{
+			990:{
+				type:'wap/pc'
+			}
+			,994:{
+				type:'wap'
+			}
+			,996:{
+				type:'wap/pc'
+			}
+			,998:{
+				type:'wap/pc'
+			}
+			,999:{
+				type:'wap/pc'
+			}
+			,1000:{
+				type:'wap'
+			}
+			,1002:{
+				type:'wap/pc'
+			}
+			,1006:{
+				type:'wap/pc'
+			}
+			,1010:{
+				type:'pc'
+			}
+			,1012:{
+				type:'wap/pc'
+			}
+			,1013:{
+				type:'wap'
+			}
+			,1015:{
+				type:'pc'
+			}
+			,1017:{
+				type:'pc'
+			}
+			,1021:{
+				type:'wap'
+			}
+			,1023:{
+				type:'wap'
+			}
+			,1025:{
+				type:'wap'
+			}
+			,1027:{
+				type:'pc'
+			}
+			,1031:{
+				type:'pc'
+			}
+			,1033:{
+				type:'wap'
+			}
+
+		},
+		myListData:{
+			1009:{
+				type:'wap'
+			},
+			1016:{
+				type:'wap/pc'
+			}
+			,1017:{
+				type:'wap/pc'
+			}
+			,1020:{
+				type:'wap'
+			}
+			,1021:{
+				type:'wap'
+			}
+			,1036:{
+				type:'wap/pc'
+			}
+			,1039:{
+				type:'pc'
+			}
+			,1042:{
+				type:'wap'
+			}
+			,1044:{
+				type:'pc'
+			}
+			,1045:{
+				type:'wap/pc'
+			}
+			,1053:{
+				type:'wap/pc'
+			}
+			,1060:{
+				type:'pc'
+			}
+		},
+		localData:null,
+		getLocalData:function(){
+			this.localData =  !!localStorage.getItem('localData') ? JSON.parse(localStorage.getItem('localData')) : null;
+		},
+		setLocalData:function(data){
+			if(!data){return}
+			localStorage.setItem('localData',JSON.stringify(data));
+		},
+		filter:function(data){
+			if(!$.isArray(data)){
+				return data;
+			}
+			var page = this;
+			return data.filter(function(o,i){
+				o.type = page.getDateType(o.id);
+				return o.type !== 'null';
+			});
+		},
+		getDateType:function(id_string){
+			return this.myListData_2016[id_string] ? this.myListData_2016[id_string]['type'] : 'null';
+		},
+		init:function(){
+			var page = this;
+			var temp_data = [];
+			//this.getLocalData();
+			if(!this.localData){
+				this.getDate()
+					.then(function(data){
+						if(data.data.length){
 //                            temp_data = data.data;
 //                            console.log(typeof temp_data);
-                            temp_data = page.filter(data.data);
-	                        all["2016"].push(temp_data);
-	                        console.log(all["2016"]);
-	                        console.log(JSON.stringify(all["2016"]));
-	                        console.log('temp_data:',temp_data);
-                            //page.setLocalData(data);
-                            vm.$set(vm,'data',temp_data)
-                        }
-                        
-                    })
-                    .fail(function(data){
-                        console.log('fail:',data);
-                    })
-                }
-            },
-            getDate:function(){
-                return $.ajax({
-                        type: 'GET',
-                        url: 'http://app.appgame.com/mongofly/index.php?c=icommon&a=data&n=zthd&t=date2016',
+							temp_data = page.filter(data.data);
+							all["2016"].push(temp_data);
+							console.log(all["2016"]);
+							console.log(JSON.stringify(all["2016"]));
+							console.log('temp_data:',temp_data);
+							//page.setLocalData(data);
+							vm.$set(vm,'data',temp_data)
+						}
+
+					})
+					.fail(function(data){
+						console.log('fail:',data);
+					})
+			}
+		},
+		getDate:function(){
+			return $.ajax({
+				type: 'GET',
+				url: 'http://app.appgame.com/mongofly/index.php?c=icommon&a=data&n=zthd&t=date2016',
 //                        url: 'http://app.appgame.com/mongofly/index.php?c=icommon&a=data&n=zthd&t=date2015',
-                        dataType: 'jsonp',
-                        jsonp: "callback",
-                        jsonCallback: 'jsonCallback'
-                    });
-            }
-        };
+				dataType: 'jsonp',
+				jsonp: "callback",
+				jsonCallback: 'jsonCallback'
+			});
+		}
+	};
 
-        //page.init();
+	//page.init();
 
-        var vm = new Vue({
-            el:'#app',
-            data:{
-            	allData:[
-                    {
-                        year:2016,
-                        data:[{"id":990,"title":"天命传说异世界地图 任玩冒险向导专题","image":"http://app.appgame.com/mongofly/image_store/zthd/tmcs2016.jpg","url":"http://hd.appgame.com/act/tmcs2016js/","type":"wap/pc"},{"id":994,"title":"国足喊你当教练","image":"http://app.appgame.com/mongofly/image_store/zthd/gz2016.jpg","url":"http://hd.appgame.com/act/gz2016/","type":"wap"},{"id":996,"title":"WGC微信游戏精英赛","image":"http://app.appgame.com/mongofly/image_store/zthd/wgc2016.jpg","url":"http://vs.appgame.com/wgc2016","type":"wap/pc"},{"id":998,"title":"《御龙在天手游》公测有奖活动专题","image":"http://app.appgame.com/mongofly/image_store/zthd/ylzt201610.jpg","url":"http://hd.appgame.com/act/ylzt201610/","type":"wap/pc"},{"id":999,"title":"《王者荣耀》职业联赛KPL","image":"http://app.appgame.com/mongofly/image_store/zthd/kpl.jpg","url":"http://vs.appgame.com/kpl","type":"wap/pc"},{"id":1000,"title":"中秋吃月饼大赛","image":"http://app.appgame.com/mongofly/image_store/zthd/zhongqiu2016.jpg","url":"http://hd.appgame.com/act/zhongqiu2016/","type":"wap"},{"id":1002,"title":"球球大作战职业联赛BPL","image":"http://app.appgame.com/mongofly/image_store/zthd/qqdzz.jpg","url":"http://vs.appgame.com/qqdzz","type":"wap/pc"},{"id":1006,"title":"王者荣耀暑期盛典","image":"http://app.appgame.com/mongofly/image_store/zthd/wzrysqsd2016.jpg","url":"http://3v3.appgame.com/wzry-sqsd","type":"wap/pc"},{"id":1010,"title":"保卫萝卜3专题与阿卜城市冒险寻奖励","image":"http://app.appgame.com/mongofly/image_store/zthd/bwlb32016.jpg","url":"http://hd.appgame.com/act/bwlb2016/","type":"pc"},{"id":1012,"title":"游戏高考真题曝光拿满分的人才配叫高玩！","image":"http://app.appgame.com/mongofly/image_store/zthd/gkdt2016.jpg","url":"http://hd.appgame.com/act/gkdt2016/","type":"wap/pc"},{"id":1013,"title":"愤怒的小鸟电影送周边","image":"http://app.appgame.com/mongofly/image_store/zthd/fnxn2016.jpg","url":"http://hd.appgame.com/act/angrybirds2016/index.html","type":"wap"},{"id":1015,"title":"合金弹头合集玩法介绍20周年纪念专题","image":"http://app.appgame.com/mongofly/image_store/zthd/hjdt2016.jpg","url":"http://hd.appgame.com/act/hjdt2016/","type":"pc"},{"id":1017,"title":"《问道》手游全平台公测送大礼","image":"http://app.appgame.com/mongofly/image_store/zthd/wdsy2016.jpg","url":"http://hd.appgame.com/activity/wdsy2016/","type":"pc"},{"id":1021,"title":"玩了这个，恋爱小白也能捕获男人的心","image":"http://app.appgame.com/mongofly/image_store/zthd/fnj2016.jpg","url":"http://hd.appgame.com/act/iwd2016/","type":"wap"},{"id":1023,"title":"皇室战争新手卡组搭配教你如何快速冲杯","image":"http://app.appgame.com/mongofly/image_store/zthd/hszzxscbjx2016.jpg","url":"http://hszz.appgame.com/newercup","type":"wap"},{"id":1025,"title":"今天你脸盲了吗史上最看脸动漫达人大挑战","image":"http://app.appgame.com/mongofly/image_store/zthd/lm2016.jpg","url":"http://hd.appgame.com/act/lm2016/","type":"wap"},{"id":1027,"title":"晒图赢QQ猴年公仔，还有海量QB等你来拿","image":"http://app.appgame.com/mongofly/image_store/zthd/up2016.jpg","url":"http://hd.appgame.com/act/up2016/","type":"pc"},{"id":1031,"title":"《战斗吧剑灵》不限号删掉开测送QB","image":"http://app.appgame.com/mongofly/image_store/zthd/zdbjl2016.jpg","url":"http://hd.appgame.com/activity/zdbjl2016/","type":"pc"},{"id":1033,"title":"元宵情人节没人约？来游戏灯谜会赢大奖","image":"http://app.appgame.com/mongofly/image_store/zthd/yxj2016.jpg","url":"http://hd.appgame.com/act/yxj2016/","type":"wap"}]
-                    },
-                    {
-                        year:2015,
-	                    data:[{"id":1001,"title":"打破二次元和三次元的次元壁","image":"http://app.appgame.com/mongofly/image_store/zthd/ecyscy2015.jpg","url":"http://hd.appgame.com/act/ecyvsscy2015/","type":"all"},{"id":1009,"title":"《少年四大名捕》带你到帝都，三包噢！","image":"http://app.appgame.com/mongofly/image_store/zthd/sdmb2015.jpg","url":"http://hd.appgame.com/act/sdmp2015/","type":"wap"},{"id":1016,"title":"《偶像梦幻祭》梦之咲学院知多少国服限号内测激活码、京东卡大放送","image":"http://app.appgame.com/mongofly/image_store/zthd/oxmhj2015.jpg","url":"http://hd.appgame.com/activity/oxmhj/","type":"wap/pc"},{"id":1017,"title":"技术流PK装备党，谁能打造最强战机","image":"http://app.appgame.com/mongofly/image_store/zthd/xhzs2015.jpg","url":"http://hd.appgame.com/activity/xhzszt2015/","type":"wap/pc"},{"id":1020,"title":"天天喂宠物，码上到手！","image":"http://app.appgame.com/mongofly/image_store/zthd/ttzl2015.jpg","url":"http://hd.appgame.com/activity/ttzl2015/","type":"wap"},{"id":1021,"title":"勇士“保卫萝卜3”需要你，拿激活码带萝卜回家！","image":"http://app.appgame.com/mongofly/image_store/zthd/bwlb2015.jpg","url":"http://hd.appgame.com/activity/bwlb2015/","type":"wap"},{"id":1036,"title":"《九龙战》华容道超神大赛","image":"http://app.appgame.com/mongofly/image_store/zthd/jlzzjs2015.jpg","url":"http://jlz.appgame.com/hrdcs-match","type":"wap/pc"},{"id":1039,"title":"任玩堂6周年有奖活动，玩游戏，赢大奖！","image":"http://app.appgame.com/mongofly/image_store/zthd/rwtlzn2015.jpg","url":"http://hd.appgame.com/activity/rwt_pc2015/","type":"pc"},{"id":1042,"title":"无双西游活动专题","image":"http://app.appgame.com/mongofly/image_store/zthd/wsxy2015.jpg","url":"http://hd.appgame.com/activity/wsxy2015/index.html","type":"wap"},{"id":1044,"title":"《战斗吧剑灵》不限号删掉开测送QB","image":"http://app.appgame.com/mongofly/image_store/zthd/zdbjl.png","url":"http://hd.appgame.com/activity/zdbjl2016/","type":"pc"},{"id":1045,"title":"王者荣耀S1外卡赛资格挑战赛","image":"http://app.appgame.com/mongofly/image_store/zthd/wzry.png","url":"http://activity.appgame.com/activity/wzry2016/","type":"wap/pc"},{"id":1053,"title":"2015腾讯游戏嘉年华","image":"http://app.appgame.com/mongofly/image_store/zthd/tgc2015.png","url":"http://activity.appgame.com/activity/tgc2015/","type":"wap/pc"},{"id":1060,"title":"拼尽热血就是传奇，新版大揭秘还能获得大礼","image":"http://app.appgame.com/mongofly/image_store/zthd/rxcq.png","url":"http://activity.appgame.com/activity/rxcq/","type":"pc"},{"id":1009,"title":"《少年四大名捕》带你到帝都，三包噢！","image":"http://app.appgame.com/mongofly/image_store/zthd/sdmb2015.jpg","url":"http://hd.appgame.com/act/sdmp2015/","type":"wap"},{"id":1016,"title":"《偶像梦幻祭》梦之咲学院知多少国服限号内测激活码、京东卡大放送","image":"http://app.appgame.com/mongofly/image_store/zthd/oxmhj2015.jpg","url":"http://hd.appgame.com/activity/oxmhj/","type":"wap/pc"},{"id":1017,"title":"技术流PK装备党，谁能打造最强战机","image":"http://app.appgame.com/mongofly/image_store/zthd/xhzs2015.jpg","url":"http://hd.appgame.com/activity/xhzszt2015/","type":"wap/pc"},{"id":1020,"title":"天天喂宠物，码上到手！","image":"http://app.appgame.com/mongofly/image_store/zthd/ttzl2015.jpg","url":"http://hd.appgame.com/activity/ttzl2015/","type":"wap"},{"id":1021,"title":"勇士“保卫萝卜3”需要你，拿激活码带萝卜回家！","image":"http://app.appgame.com/mongofly/image_store/zthd/bwlb2015.jpg","url":"http://hd.appgame.com/activity/bwlb2015/","type":"wap"},{"id":1036,"title":"《九龙战》华容道超神大赛","image":"http://app.appgame.com/mongofly/image_store/zthd/jlzzjs2015.jpg","url":"http://jlz.appgame.com/hrdcs-match","type":"wap/pc"},{"id":1039,"title":"任玩堂6周年有奖活动，玩游戏，赢大奖！","image":"http://app.appgame.com/mongofly/image_store/zthd/rwtlzn2015.jpg","url":"http://hd.appgame.com/activity/rwt_pc2015/","type":"pc"},{"id":1042,"title":"无双西游活动专题","image":"http://app.appgame.com/mongofly/image_store/zthd/wsxy2015.jpg","url":"http://hd.appgame.com/activity/wsxy2015/index.html","type":"wap"},{"id":1044,"title":"《战斗吧剑灵》不限号删掉开测送QB","image":"http://app.appgame.com/mongofly/image_store/zthd/zdbjl.png","url":"http://hd.appgame.com/activity/zdbjl2016/","type":"pc"},{"id":1045,"title":"王者荣耀S1外卡赛资格挑战赛","image":"http://app.appgame.com/mongofly/image_store/zthd/wzry.png","url":"http://activity.appgame.com/activity/wzry2016/","type":"wap/pc"},{"id":1053,"title":"2015腾讯游戏嘉年华","image":"http://app.appgame.com/mongofly/image_store/zthd/tgc2015.png","url":"http://activity.appgame.com/activity/tgc2015/","type":"wap/pc"},{"id":1060,"title":"拼尽热血就是传奇，新版大揭秘还能获得大礼","image":"http://app.appgame.com/mongofly/image_store/zthd/rxcq.png","url":"http://activity.appgame.com/activity/rxcq/","type":"pc"}]
-                    }
-                ]
-            },
-            mounted:function(){
-            },
-            methods:{
-                qcode:function(ele,url){
-                    jQuery(ele).qrcode({width: 100,height: 100,text:url});
-                    return true;
-                }
-            }
-        })
-    </script>
+	var vm = new Vue({
+		el:'#app',
+		data:{
+			allData:[
+				{
+					year:2016,
+					data:[{"id":990,"title":"天命传说异世界地图 任玩冒险向导专题","image":"http://app.appgame.com/mongofly/image_store/zthd/tmcs2016.jpg","url":"http://hd.appgame.com/act/tmcs2016js/","type":"wap/pc"},{"id":994,"title":"国足喊你当教练","image":"http://app.appgame.com/mongofly/image_store/zthd/gz2016.jpg","url":"http://hd.appgame.com/act/gz2016/","type":"wap"},{"id":996,"title":"WGC微信游戏精英赛","image":"http://app.appgame.com/mongofly/image_store/zthd/wgc2016.jpg","url":"http://vs.appgame.com/wgc2016","type":"wap/pc"},{"id":998,"title":"《御龙在天手游》公测有奖活动专题","image":"http://app.appgame.com/mongofly/image_store/zthd/ylzt201610.jpg","url":"http://hd.appgame.com/act/ylzt201610/","type":"wap/pc"},{"id":999,"title":"《王者荣耀》职业联赛KPL","image":"http://app.appgame.com/mongofly/image_store/zthd/kpl.jpg","url":"http://vs.appgame.com/kpl","type":"wap/pc"},{"id":1000,"title":"中秋吃月饼大赛","image":"http://app.appgame.com/mongofly/image_store/zthd/zhongqiu2016.jpg","url":"http://hd.appgame.com/act/zhongqiu2016/","type":"wap"},{"id":1002,"title":"球球大作战职业联赛BPL","image":"http://app.appgame.com/mongofly/image_store/zthd/qqdzz.jpg","url":"http://vs.appgame.com/qqdzz","type":"wap/pc"},{"id":1006,"title":"王者荣耀暑期盛典","image":"http://app.appgame.com/mongofly/image_store/zthd/wzrysqsd2016.jpg","url":"http://3v3.appgame.com/wzry-sqsd","type":"wap/pc"},{"id":1010,"title":"保卫萝卜3专题与阿卜城市冒险寻奖励","image":"http://app.appgame.com/mongofly/image_store/zthd/bwlb32016.jpg","url":"http://hd.appgame.com/act/bwlb2016/","type":"pc"},{"id":1012,"title":"游戏高考真题曝光拿满分的人才配叫高玩！","image":"http://app.appgame.com/mongofly/image_store/zthd/gkdt2016.jpg","url":"http://hd.appgame.com/act/gkdt2016/","type":"wap/pc"},{"id":1013,"title":"愤怒的小鸟电影送周边","image":"http://app.appgame.com/mongofly/image_store/zthd/fnxn2016.jpg","url":"http://hd.appgame.com/act/angrybirds2016/index.html","type":"wap"},{"id":1015,"title":"合金弹头合集玩法介绍20周年纪念专题","image":"http://app.appgame.com/mongofly/image_store/zthd/hjdt2016.jpg","url":"http://hd.appgame.com/act/hjdt2016/","type":"pc"},{"id":1017,"title":"《问道》手游全平台公测送大礼","image":"http://app.appgame.com/mongofly/image_store/zthd/wdsy2016.jpg","url":"http://hd.appgame.com/activity/wdsy2016/","type":"pc"},{"id":1021,"title":"玩了这个，恋爱小白也能捕获男人的心","image":"http://app.appgame.com/mongofly/image_store/zthd/fnj2016.jpg","url":"http://hd.appgame.com/act/iwd2016/","type":"wap"},{"id":1023,"title":"皇室战争新手卡组搭配教你如何快速冲杯","image":"http://app.appgame.com/mongofly/image_store/zthd/hszzxscbjx2016.jpg","url":"http://hszz.appgame.com/newercup","type":"wap"},{"id":1025,"title":"今天你脸盲了吗史上最看脸动漫达人大挑战","image":"http://app.appgame.com/mongofly/image_store/zthd/lm2016.jpg","url":"http://hd.appgame.com/act/lm2016/","type":"wap"},{"id":1027,"title":"晒图赢QQ猴年公仔，还有海量QB等你来拿","image":"http://app.appgame.com/mongofly/image_store/zthd/up2016.jpg","url":"http://hd.appgame.com/act/up2016/","type":"pc"},{"id":1031,"title":"《战斗吧剑灵》不限号删掉开测送QB","image":"http://app.appgame.com/mongofly/image_store/zthd/zdbjl2016.jpg","url":"http://hd.appgame.com/activity/zdbjl2016/","type":"pc"},{"id":1033,"title":"元宵情人节没人约？来游戏灯谜会赢大奖","image":"http://app.appgame.com/mongofly/image_store/zthd/yxj2016.jpg","url":"http://hd.appgame.com/act/yxj2016/","type":"wap"}]
+				},
+				{
+					year:2015,
+					data:[{"id":1001,"title":"打破二次元和三次元的次元壁","image":"http://app.appgame.com/mongofly/image_store/zthd/ecyscy2015.jpg","url":"http://hd.appgame.com/act/ecyvsscy2015/","type":"all"},{"id":1009,"title":"《少年四大名捕》带你到帝都，三包噢！","image":"http://app.appgame.com/mongofly/image_store/zthd/sdmb2015.jpg","url":"http://hd.appgame.com/act/sdmp2015/","type":"wap"},{"id":1016,"title":"《偶像梦幻祭》梦之咲学院知多少国服限号内测激活码、京东卡大放送","image":"http://app.appgame.com/mongofly/image_store/zthd/oxmhj2015.jpg","url":"http://hd.appgame.com/activity/oxmhj/","type":"wap/pc"},{"id":1017,"title":"技术流PK装备党，谁能打造最强战机","image":"http://app.appgame.com/mongofly/image_store/zthd/xhzs2015.jpg","url":"http://hd.appgame.com/activity/xhzszt2015/","type":"wap/pc"},{"id":1020,"title":"天天喂宠物，码上到手！","image":"http://app.appgame.com/mongofly/image_store/zthd/ttzl2015.jpg","url":"http://hd.appgame.com/activity/ttzl2015/","type":"wap"},{"id":1021,"title":"勇士“保卫萝卜3”需要你，拿激活码带萝卜回家！","image":"http://app.appgame.com/mongofly/image_store/zthd/bwlb2015.jpg","url":"http://hd.appgame.com/activity/bwlb2015/","type":"wap"},{"id":1036,"title":"《九龙战》华容道超神大赛","image":"http://app.appgame.com/mongofly/image_store/zthd/jlzzjs2015.jpg","url":"http://jlz.appgame.com/hrdcs-match","type":"wap/pc"},{"id":1039,"title":"任玩堂6周年有奖活动，玩游戏，赢大奖！","image":"http://app.appgame.com/mongofly/image_store/zthd/rwtlzn2015.jpg","url":"http://hd.appgame.com/activity/rwt_pc2015/","type":"pc"},{"id":1042,"title":"无双西游活动专题","image":"http://app.appgame.com/mongofly/image_store/zthd/wsxy2015.jpg","url":"http://hd.appgame.com/activity/wsxy2015/index.html","type":"wap"},{"id":1044,"title":"《战斗吧剑灵》不限号删掉开测送QB","image":"http://app.appgame.com/mongofly/image_store/zthd/zdbjl.png","url":"http://hd.appgame.com/activity/zdbjl2016/","type":"pc"},{"id":1045,"title":"王者荣耀S1外卡赛资格挑战赛","image":"http://app.appgame.com/mongofly/image_store/zthd/wzry.png","url":"http://activity.appgame.com/activity/wzry2016/","type":"wap/pc"},{"id":1053,"title":"2015腾讯游戏嘉年华","image":"http://app.appgame.com/mongofly/image_store/zthd/tgc2015.png","url":"http://activity.appgame.com/activity/tgc2015/","type":"wap/pc"},{"id":1060,"title":"拼尽热血就是传奇，新版大揭秘还能获得大礼","image":"http://app.appgame.com/mongofly/image_store/zthd/rxcq.png","url":"http://activity.appgame.com/activity/rxcq/","type":"pc"},{"id":1009,"title":"《少年四大名捕》带你到帝都，三包噢！","image":"http://app.appgame.com/mongofly/image_store/zthd/sdmb2015.jpg","url":"http://hd.appgame.com/act/sdmp2015/","type":"wap"},{"id":1016,"title":"《偶像梦幻祭》梦之咲学院知多少国服限号内测激活码、京东卡大放送","image":"http://app.appgame.com/mongofly/image_store/zthd/oxmhj2015.jpg","url":"http://hd.appgame.com/activity/oxmhj/","type":"wap/pc"},{"id":1017,"title":"技术流PK装备党，谁能打造最强战机","image":"http://app.appgame.com/mongofly/image_store/zthd/xhzs2015.jpg","url":"http://hd.appgame.com/activity/xhzszt2015/","type":"wap/pc"},{"id":1020,"title":"天天喂宠物，码上到手！","image":"http://app.appgame.com/mongofly/image_store/zthd/ttzl2015.jpg","url":"http://hd.appgame.com/activity/ttzl2015/","type":"wap"},{"id":1021,"title":"勇士“保卫萝卜3”需要你，拿激活码带萝卜回家！","image":"http://app.appgame.com/mongofly/image_store/zthd/bwlb2015.jpg","url":"http://hd.appgame.com/activity/bwlb2015/","type":"wap"},{"id":1036,"title":"《九龙战》华容道超神大赛","image":"http://app.appgame.com/mongofly/image_store/zthd/jlzzjs2015.jpg","url":"http://jlz.appgame.com/hrdcs-match","type":"wap/pc"},{"id":1039,"title":"任玩堂6周年有奖活动，玩游戏，赢大奖！","image":"http://app.appgame.com/mongofly/image_store/zthd/rwtlzn2015.jpg","url":"http://hd.appgame.com/activity/rwt_pc2015/","type":"pc"},{"id":1042,"title":"无双西游活动专题","image":"http://app.appgame.com/mongofly/image_store/zthd/wsxy2015.jpg","url":"http://hd.appgame.com/activity/wsxy2015/index.html","type":"wap"},{"id":1044,"title":"《战斗吧剑灵》不限号删掉开测送QB","image":"http://app.appgame.com/mongofly/image_store/zthd/zdbjl.png","url":"http://hd.appgame.com/activity/zdbjl2016/","type":"pc"},{"id":1045,"title":"王者荣耀S1外卡赛资格挑战赛","image":"http://app.appgame.com/mongofly/image_store/zthd/wzry.png","url":"http://activity.appgame.com/activity/wzry2016/","type":"wap/pc"},{"id":1053,"title":"2015腾讯游戏嘉年华","image":"http://app.appgame.com/mongofly/image_store/zthd/tgc2015.png","url":"http://activity.appgame.com/activity/tgc2015/","type":"wap/pc"},{"id":1060,"title":"拼尽热血就是传奇，新版大揭秘还能获得大礼","image":"http://app.appgame.com/mongofly/image_store/zthd/rxcq.png","url":"http://activity.appgame.com/activity/rxcq/","type":"pc"}]
+				}
+			]
+		},
+		mounted:function(){
+		},
+		methods:{
+			qcode:function(ele,url){
+				jQuery(ele).qrcode({width: 100,height: 100,text:url});
+				return true;
+			}
+		}
+	})
+</script>
 </body>
 </html>
