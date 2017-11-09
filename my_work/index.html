@@ -6,138 +6,29 @@
     <title>作品列表</title>
     <style>
         body{margin: 0;background-color: #f8f8f8;}
-        .title{
-            position: relative;
-            font-size: 32px;
-            height: 36px;
-            line-height: 36px;
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
+        [v-cloak]{display:none}
+        .title{position:relative;font-size:32px;height:36px;line-height:36px;margin-bottom:20px;color:#333;text-align:center}
+        .title::before{content:'';position:absolute;left:0;z-index:-1;top:50%;width:100%;height:2px;background-color:#eee}
+        .title strong{position:relative;display:inline-block;background-color:#f8f8f8;padding:0 20px}
+        .title-h2{padding:0 10px;text-align:center}
+        .text{font-size:14px;color:rgba(0,0,0,.5);text-align:center}
+        .main{margin:0 auto;max-width:1200px;height:auto}
+        .card__box{display:flex;flex-wrap:wrap}
+        .card{margin:0 1% 20px;width:23%}
+        .crad__link{position:relative;display:block;background-position:50% 50%;background-repeat:no-repeat;background-size:cover;border-radius:.2em;overflow:hidden}
+        .crad__link::before{content:'';display:block;padding-top:60%}
+        .crad__id,.crad__type{position:absolute;top:0;padding:10px;font-size:12px;color:#fff;font-style:normal;text-align:center;background-color:rgba(0,0,0,.5)}
+        .crad__id{left:0}
+        .crad__type{right:0}
+        .crad__title{box-sizing:border-box;position:absolute;left:0;bottom:0;width:100%;height:40px;line-height:40px;padding:0 10px;font-size:12px;color:#fff;font-style:normal;background-color:rgba(0,0,0,.5);overflow:hidden}
+        canvas{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+        @media screen and (min-width:640px) and (max-width:1000px){.main{padding:0 1.5em}
+            .card__box{justify-content:space-between}
+            .card{margin:0 0 1.5em;width:48.5%}
+        }@media screen and (max-width:639px){.card__box{max-width:100%;justify-content:center}
+            .card{margin:0 0 20px;width:92%}
+            .crad__link{border-radius:.05em}
         }
-        .title::before{
-            content: '';
-            position: absolute;
-            left: 0;
-            z-index: -1;
-            top: 50%;
-            width: 100%;
-            height: 2px;
-            background-color: #eee;
-        }
-        .title strong{
-            position: relative;
-            display: inline-block;
-            background-color: #f8f8f8;
-            padding: 0 20px;
-        }
-        .title-h2{
-            padding: 0 10px;
-            text-align: center;
-        }
-        .text{
-            font-size: 14px;
-            color: rgba(0,0,0,.5);
-            text-align: center;
-        }
-        .main{
-            margin: 0 auto;
-            max-width: 1200px;
-            height: auto;
-
-        }
-        .card__box{
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .card{
-           margin:0 1% 20px;
-           width: 23%;
-        }
-        [v-cloak]{
-            display: none;
-        }
-        .crad__link{
-            position: relative;
-            display: block;
-            background-position: 50% 50%;
-            background-repeat: no-repeat;
-            background-size: cover;
-            border-radius: .2em;
-            overflow: hidden;
-        }
-        .crad__link::before{
-            content: '';
-            display: block;
-            padding-top: 60%;
-        }
-        .crad__id
-        ,.crad__type{
-            position: absolute;
-            top: 0;
-            padding:10px;
-            font-size: 12px;
-            color: #fff;
-            font-style: normal;
-            text-align: center;
-            background-color:rgba(0,0,0,.5);
-        }
-        .crad__id{
-            left: 0;
-        }
-        .crad__type{
-            right: 0;
-        }
-        .crad__title{
-            box-sizing: border-box;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 40px;
-            line-height: 40px;
-            padding: 0 10px;
-            font-size: 12px;
-            /*text-align: center;*/
-            color: #fff;
-            font-style: normal;
-            background-color:rgba(0,0,0,.5);
-            overflow: hidden;
-        }
-        canvas{
-            position: absolute;
-            top:50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-        }
-        @media screen and (min-width: 640px) and (max-width: 1000px){
-            .main{
-                padding: 0 1.5em;
-            }
-            .card__box{
-                justify-content: space-between;
-            }
-            .card{
-                margin:0 0 1.5em;
-                width: 48.5%;
-            }
-        }
-        @media screen and (max-width: 639px){
-            .card__box{
-                max-width: 100%;
-                justify-content: center;
-            }
-            .card{
-                margin:0 0 20px;
-                width: 92%;
-            }
-            .crad__link{
-                border-radius: .05em;
-            }
-            .crad__title{
-            }
-        }
-
 </style>
 
 </head>
@@ -149,7 +40,8 @@
         <h2 class="title-h2">{{card_row.year}}</h2>
         <div class="card__box">
             <div v-for="card in card_row.data" class="card">
-                <a :href="card.url" :title="card.title" target="_blank" class="crad__link" :style="{backgroundImage: 'url(' +  card.image +' )' }">
+                <!--<a :href="card.url" :title="card.title" target="_blank" class="crad__link lazy-load" :style="{backgroundImage: 'url(' +  card.image +' )' }">-->
+                <a :href="card.url" :title="card.title" target="_blank" class="crad__link lazy-load" :data-original="encodeURI(card.image)">
                     <!--<b v-if="qcode(this,card.url)" class="card__qcode"></b>-->
                     <i class="crad__id">{{card.id}}</i>
                     <i class="crad__type">{{card.type}}</i>
@@ -160,197 +52,11 @@
     </div>
 
 </div>
-<!--<script src="js/jquery.js"></script>-->
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<!--<script src="js/jquery.qrcode.min.js"></script>-->
-<script src="//cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
-<!--<script src="js/vue.js"></script>-->
-<script src="//cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<!--<script src="//cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>-->
+<script type="text/javascript" src="//cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+<script type="text/javascript" src="js/lazyload.min.js"></script>
 <script>
-	var page = {
-		other:{
-			title:'《天命传说》手游官网_踏上命定冒险之旅',
-			src:'http://tmcs.4gvv.com/?src=guanfang'
-		},
-		myListData_2017:{
-			995:{
-				type:'wap/pc'
-			},
-			999:{
-				type:'wap'
-			},
-			1000:{
-				type:'pc'
-			},
-			1002:{
-				type:'wap/pc'
-			},
-			1003:{
-				type:'wap/pc'
-			},
-			1004:{
-				type:'wap/pc'
-			}
-			
-		},
-		myListData_2016:{
-			990:{
-				type:'wap/pc'
-			}
-			,994:{
-				type:'wap'
-			}
-			,996:{
-				type:'wap/pc'
-			}
-			,998:{
-				type:'wap/pc'
-			}
-			,999:{
-				type:'wap/pc'
-			}
-			,1000:{
-				type:'wap'
-			}
-			,1002:{
-				type:'wap/pc'
-			}
-			,1006:{
-				type:'wap/pc'
-			}
-			,1010:{
-				type:'pc'
-			}
-			,1012:{
-				type:'wap/pc'
-			}
-			,1013:{
-				type:'wap'
-			}
-			,1015:{
-				type:'pc'
-			}
-			,1017:{
-				type:'pc'
-			}
-			,1021:{
-				type:'wap'
-			}
-			,1023:{
-				type:'wap'
-			}
-			,1025:{
-				type:'wap'
-			}
-			,1027:{
-				type:'pc'
-			}
-			,1031:{
-				type:'pc'
-			}
-			,1033:{
-				type:'wap'
-			}
-
-		},
-		myListData:{
-			1009:{
-				type:'wap'
-			},
-			1016:{
-				type:'wap/pc'
-			}
-			,1017:{
-				type:'wap/pc'
-			}
-			,1020:{
-				type:'wap'
-			}
-			,1021:{
-				type:'wap'
-			}
-			,1036:{
-				type:'wap/pc'
-			}
-			,1039:{
-				type:'pc'
-			}
-			,1042:{
-				type:'wap'
-			}
-			,1044:{
-				type:'pc'
-			}
-			,1045:{
-				type:'wap/pc'
-			}
-			,1053:{
-				type:'wap/pc'
-			}
-			,1060:{
-				type:'pc'
-			}
-		},
-		localData:null,
-		getLocalData:function(){
-			this.localData =  !!localStorage.getItem('localData') ? JSON.parse(localStorage.getItem('localData')) : null;
-		},
-		setLocalData:function(data){
-			if(!data){return}
-			localStorage.setItem('localData',JSON.stringify(data));
-		},
-		filter:function(data){
-			if(!$.isArray(data)){
-				return data;
-			}
-			var page = this;
-			return data.filter(function(o,i){
-				o.type = page.getDateType(o.id);
-				return o.type !== 'null';
-			});
-		},
-		getDateType:function(id_string){
-			return this.myListData_2017[id_string] ? this.myListData_2017[id_string]['type'] : 'null';
-		},
-		init:function(){
-			var page = this;
-			var temp_data = [];
-			//this.getLocalData();
-			if(!this.localData){
-				this.getDate()
-					.then(function(data){
-						if(data.data.length){
-                            temp_data = data.data;
-//                            console.log(typeof temp_data);
-							temp_data = page.filter(data.data);
-							//all["2016"].push(temp_data);
-							//console.log(all["2016"]);
-							console.log(JSON.stringify(temp_data));
-							//console.log('temp_data:',temp_data);
-							//page.setLocalData(data);
-							//vm.$set(vm,'data',temp_data)
-						}
-
-					})
-					.fail(function(data){
-						console.log('fail:',data);
-					})
-			}
-		},
-		getDate:function(){
-			return $.ajax({
-				type: 'GET',
-				url:'http://app.appgame.com/mongofly/index.php?c=icommon&a=data&n=zthd&t=zhuanti_2017',
-				//url: 'http://app.appgame.com/mongofly/index.php?c=icommon&a=data&n=zthd&t=date2016',
-//                        url: 'http://app.appgame.com/mongofly/index.php?c=icommon&a=data&n=zthd&t=date2015',
-				dataType: 'jsonp',
-				jsonp: "callback",
-				jsonCallback: 'jsonCallback'
-			});
-		}
-	};
-
-	//page.init();
 
 	var vm = new Vue({
 		el:'#app',
@@ -375,6 +81,12 @@
 			]
 		},
 		mounted:function(){
+			$(".lazy-load").not('.background-image-loaded').lazyload({
+				effect : "fadeIn",
+				load:function (ele) {
+					ele.addClass('background-image-loaded')
+				}
+			});
 		},
 		methods:{
 			qcode:function(ele,url){
