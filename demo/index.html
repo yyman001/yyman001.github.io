@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>ajax超时测试</title>
+    <style>
+        body{margin: 0;background-color: #f8f8f8;}
+	</style>
+</head>
+<body>
+<h1 class="title"><strong>ajax超时测试</strong></h1>
+<p class="text">请F12打开调式查看输出，使用联网软件禁用请求已模拟请求响应超时</p>
+<button class="button">ajax超时测试</button>
+<!-- <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script> -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+	
+	function test(timeout){
+		return $.ajax({
+			url : 'https://www.easy-mock.com/mock/590b010787cce4690fecc515/prize/my-list'
+			,timeout : timeout || 0,
+		})
+	}
+	
+	$('.button').on('click',function(){
+		test(1000)
+		.then(function(msg,textStatus){
+			console.log('sccuess:',msg)
+			console.log('sccuess-textStatus:',textStatus)
+		})
+		.fail(function(msg,textStatus){
+			console.log('error:',msg)
+			console.log('error-textStatus:',textStatus)
+		})
+		.always(function(msg,textStatus){
+			//请求成功不输出结果
+			console.log('always:',msg)
+			console.log('always-textStatus:',textStatus)
+		})
+	})
+
+</script>
+</body>
+</html>
