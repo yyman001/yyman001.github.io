@@ -54,6 +54,7 @@ function Adaptation(options) {
 }
 Adaptation.prototype.setLayout = function () {
 	this.canvas = document.querySelector(this.id)
+	console.log('初始化页面的时候设置一次');
 	this.setWH();
 }
 Adaptation.prototype.setWH = function () {

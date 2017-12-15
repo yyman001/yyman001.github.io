@@ -23,12 +23,20 @@
 <body style="background-color:#D4D4D4;margin:0px;">
 	<!-- <canvas id="mainView" width="800" height="1300" style="background-color:#FFFFFF"></canvas> -->
 	<canvas id="mainView" width="800" height="1300" style="background-color:#FFFFFF"></canvas>
-	<script src="main.js"></script>
+	<!--<script src="main.js"></script>-->
 	<script src="lb.js"></script>
 	<script src="Loader.js"></script>
+	<script type="text/javascript" src="dist/rCanvas.js"></script>
 	<script>
-		var canvas, exportRoot;
-		
+		var exportRoot;
+//		console.log('2-ResizeCanvas:',rCanvas);
+		var canvas = new rCanvas({
+			el:'#mainView',
+			w:800,
+			h:1200,
+			minRaio:0.615
+		});
+
 		var manifest = [{ src: "images/保卫萝卜_atlas_.json", type: "spritesheet", id: "保卫萝卜_atlas_" }]
 		var loader = new Loader(manifest);
 		
@@ -40,21 +48,27 @@
 				console.log(evt.result)
 			}
 		})
-			.complete(function (evt) {
-				var queue = evt.target;
-				ss["保卫萝卜_atlas_"] = queue.getResult("保卫萝卜_atlas_");
-				exportRoot = new lib.保卫萝卜();
-				console.log('exportRoot:', exportRoot)
-				canvas.append(exportRoot);
-				canvas.setFPS(lib.properties.fps);
-			})
+		.complete(function (evt) {
+			var queue = evt.target;
+			ss["保卫萝卜_atlas_"] = queue.getResult("保卫萝卜_atlas_");
+			exportRoot = new lib.保卫萝卜();
+			console.log('exportRoot:', exportRoot);
+			exportRoot.loop = false;
+			canvas.append(exportRoot)
+				  .setFPS(lib.properties.fps)
+				.callback(function (e) {
+					console.log(e);
+					console.warn('初始化完成');
+				});
+//			canvas;
+		})
 
 		//画布对象
-		canvas = new Adaptation(def);
-		canvas.init()
-			.callback(function () {
-				console.log('初始化完成')
-			});
+//		canvas = new Adaptation(def);
+//		canvas.init()
+//			.callback(function () {
+//				console.log('初始化完成')
+//			});
 
 		function angleChange() {
 			console.log('angleChange');
@@ -66,8 +80,8 @@
 			//console.log(ss["保卫萝卜_atlas_"])
 			exportRoot = new lib.保卫萝卜();
 			//createjs.Ticker.timingMode = createjs.Ticker.RAF;
-			//exportRoot.loop = false;
-			//exportRoot.paused = true;
+//			exportRoot.loop = false;
+//			exportRoot.paused = true;
 			//exportRoot.gotoAndPlay(0);
 			// console.log('exportRoot:', exportRoot)
 			canvas.append(exportRoot);
