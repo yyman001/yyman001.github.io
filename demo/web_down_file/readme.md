@@ -2,39 +2,35 @@
 
 ---
 ### 前言
-    传统下载压缩包通过后端打包好文件并返回url地址进行下载,目前主流浏览器可以实现在前端下载好文件进行打包
+    传统下载压缩包是通过后端打包好文件并返回url地址进行下载，目前主流浏览器可以实现在前端下载好文件进行打包。对于下载固定类型的文件，使用html5的新特性就可以了（a标签的down 属性，但不支持跨域文件），但是如果是涉及到动态内容，动态生成的文件，而且不止是一个的话，使用后端打包会占用服务器资源，特别是考虑到服务器端压力，所以才使用前端来进行资源打包。
 
 ### 优点
-- 减轻后端压力
-- 减少文件带宽
+- 减轻后端服务器压力
+- 减少文件带宽（资源文件存在阿里云，服务器也需要重新下载，再重新打包上传）
 
 ### 缺点
-- 只支持主流浏览器(不支持ie10以下,其实ie兼容都不好)
+- 只支持主流浏览器(不支持ie10以下，其实ie兼容都不好)
 - 需要额外引入js (前端项目增大)
 - 打包图片文件比原来的大(30%以上[base64])
 
-### 核心原理
-```js
-URL.createObjectURL
-```
-
-### 需要使用的js文件
+### 依赖的js文件
 - [FileSaver.js](https://github.com/eligrey/FileSaver.js/) - 下载
 - [JSZip.js](https://stuk.github.io/jszip/) - 压缩打包文件
 
 ### 实现方式
-下载图片方式有几种
- - `ajax` 直接获取buffer
- - `new` Image()
- - `<img/>`
+  简单版本，可以使用 `URL.createObjectURL` 配合html5的a标签实现，但这里我使用2个js库来实现，分别是用来 生产文件和打包文件。首先我项目需求是打包一组资源图片，那么图片加载方式有下面2种方式
+
+ - `ajax` 直接获取`buffer`
+ - `new Image()`、`<img/>`
  
-   第二种和第三种其实是一样,但第二种不需要在页面上生成dom元素,但可能会存在跨域问题.
- 我实现的方式选用`new Image()` 下载图片,通过`canvas`元素把数据转成`Blob`,然后建立一个压缩包对象,把数据`push`进去
+
+   `new Image()` 和`<img/>` 其实是一样，但`new Image()`不需要在页面上生成dom元素，但可能会存在跨域问题。在常用开发中是很常用，都可以用来加载资源。 我实现的方式选用`new Image()` 下载图片，然后通过`canvas`把`image dom` 转成 `Blob` 数据，再使用`JSZip.js`建立一个压缩包对象，把数据`填充`进去。
 
 1. 获取下载文件
 ```js
   /**
    * 加载图片资源并转成blob
+   *
    * @param {object} object
    * @returns {Promise}
    */
@@ -43,6 +39,7 @@ function getImage (object) {
     return new Promise((resolve, reject) => {
 
       let img = new Image()
+      // 这个必须的,不然canvas 无法获取转换数据
       img.crossOrigin = 'Anonymous'
       img.onload = function () {
 
@@ -68,7 +65,8 @@ function getImage (object) {
       }
 
       img.src = object.url
-
+      
+      // 缓存也触发加载
       if (img.complete || img.complete === undefined) {
         img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
         img.src = object.url
@@ -78,11 +76,11 @@ function getImage (object) {
   }
 ```
 
-2. 打包文件,先实例化一个对象
+2. 打包文件，先实例化一个对象
 ```js
 let zip = new JSZip()
 ```
-为什么这里不用`const`?因为我们还需要清空,重置,初始化这个对象.
+为什么这里不用`const`?因为我们还需要清空，重置，初始化这个对象.
 2.新建一个文件夹对象(可以省略)
 ```js
 // folderName - 文件夹名称
@@ -107,9 +105,9 @@ zip.generateAsync({type: "blob"}).then((content) => {
     })
 ```
 
-上面方法我是封装到一个对象里面的,这样就更加方便了
+上面方法我是封装到一个对象里面的，这样就更加方便了
 
-### 如何使用?
+### 如何使用
 ```js
 // 1. 引入文件
 import { DownClass } from '@/utils/DownClass'
@@ -119,9 +117,13 @@ import { DownClass } from '@/utils/DownClass'
  
 // 3. 传入需要下载的图片对象(指定了格式)
 let testObject = {
+  // 加载锁定资源
  lock: false,
- fullName: 'test.png'
- blob: <Blob>,
+ // 文件名
+ fullName: 'test.png',
+ // 用于下载的blob格式
+ blob: Blob,
+ // 加载文件
  url:'http://test.com/test/test.png'
 }
 
@@ -135,10 +137,11 @@ let fileArray = [testObject...]
 // 传入需要下载图片列表数组
 DownClass.queue = fileArray
 
-// 触发下载打包(是一个异步进程)
+// 触发下载打包(是一个异步)
 // 通过 `toZipLock` 属性是否已经打包完成
 DownClass..toZip(zipName)
 ```
+
 DownClass.js
 ```js
 /* eslint-disable */
@@ -373,7 +376,6 @@ export class DownClass {
 
     this.loaded.forEach((file) => {
       console.log('file:', file);
-      // this.zip.file(`${file.fullName}.png`, file.blob)
       folder.file(`${file.fullName}.png`, file.blob);
     })
 
@@ -408,7 +410,7 @@ export class DownClass {
 ```
 
 ### 题外话
-    h5 有新增的 `download`属性下载, 但不支持`IE系列` 和 `跨域文件`,如果你的需求不用兼容ie和下载文件是同域的话,那么使用这个是最简单的.
+    h5 有新增的 `download`属性下载， 但不支持`IE系列` 和 `跨域文件`，如果你的需求不用兼容ie和下载文件是同域的话，那么使用这个是最简单的.
 
 ### 相关资料    
 - [createObjectURL](https://developer.mozilla.org/zh-CN/docs/Web/API/URL/createObjectURL)
