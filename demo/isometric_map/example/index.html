@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <script src="./lib/pixi-4.5.6.js"></script>
+    <script>
+/**
+ * 获取像素点坐标
+ *
+ * @param {Number} _u U向坐标
+ * @param {Number} _v v向坐标
+ * @param {Number} _tw 网格宽
+ * @param {Number} _th 网格高
+ * @param {Number} _count 网格数量
+ * @returns {Object} 像素点x,y坐标
+ */
+ function getPixelPoint(_u, _v, _tw, _th, _count) {
+  var org_x = 0;
+  var org_y = _count * _th / 2;
+  var x = org_x + _tw / 2 * (_u + _v);
+  var y = org_y + _th / 2 * (_u - _v);
+  return {
+    x,
+    y
+  };
+
+}
+
+/**
+ * 画菱形边框网格(整体也为菱形) 
+ *
+ * @param {Object} graphics 绘制对象
+ * @param {Number} _uCount U轴向网格个数 
+ * @param {Number} _vCount V轴向网格个数 
+ * @param {Number} _tileW 网格宽
+ * @param {Number} _tileH 网格高
+ */
+function drawDiamond(graphics, _uCount, _vCount, _tileW, _tileH) {
+
+  //U向坐标  
+  var u = 0;
+  //V向坐标  
+  var v = 0;
+  //线起始点像素坐标  
+  var originPos;
+  //线途经点像素坐标  
+  var lineToPos;
+
+  //沿V向画线  
+  while (u <= _uCount) {
+    v = 0;
+    // # 起点
+    originPos = getPixelPoint(u, v, _tileW, _tileH, _uCount);
+    graphics.moveTo(originPos.x, originPos.y);
+   // # 终点
+    while (v < _vCount) {
+      ++v;
+      lineToPos = getPixelPoint(u, v, _tileW, _tileH, _uCount);
+      graphics.lineTo(lineToPos.x, lineToPos.y);
+    }
+
+    ++u;
+
+  }
+
+
+  // 重置,画另一半
+  u = 0;
+  v = 0;
+
+  //沿U向画线  
+  while (v <= _vCount) {
+    u = 0;
+    // # 起点
+    originPos = getPixelPoint(u, v, _tileW, _tileH, _uCount);
+    graphics.moveTo(originPos.x, originPos.y);
+    // # 终点
+    while (u < _uCount) {
+      ++u;
+      lineToPos = getPixelPoint(u, v, _tileW, _tileH, _uCount);
+      graphics.lineTo(lineToPos.x, lineToPos.y);
+    }
+
+    ++v;
+  }
+
+}
+
+// 屏幕坐标转换为 格子坐标
+function screen_to_map (screen_x, screen_y, TILE_WIDTH,  TILE_HEIGHT) {
+  return {
+    mx: screen_x / TILE_WIDTH + screen_y / TILE_HEIGHT,
+    my: screen_y / TILE_HEIGHT - screen_x / TILE_WIDTH
+  }
+}
+
+function get_uv (pos, tileWidth, tileHeight, size_W, size_H) {
+    // =====
+    let numberOfTilesInX = size_W
+    let numberOfTilesInY = size_H
+    let virtualTileWidth = tileWidth
+    let virtualTileHeight = tileHeight
+    let TILE_WIDTH_HALF = tileWidth / 2
+    let TILE_HEIGHT_HALF = tileHeight / 2
+    // # x,y 必须减去 0,0 的坐标
+    let  virtualTileX  =  pos.x - size_W / 2
+    let  virtualTileY  =  pos.y - 0// /  virtualTileHeight ;
+    let mx = (virtualTileX / TILE_WIDTH_HALF + virtualTileY / TILE_HEIGHT_HALF) /2
+    let my = (virtualTileY / TILE_HEIGHT_HALF - (virtualTileX / TILE_WIDTH_HALF)) /2;
+    console.log('直接坐标系xy: 实际上', 'mx:', mx, 'my:' ,my)
+    console.log('screen_to_map:', screen_to_map(pos.x - 500 , pos.y, tileWidth, tileHeight))
+    // console.log('取值修正mx:',  (0 - mx > 0 ? Math.floor(mx) : Math.ceil(mx)), )
+    // console.log('取值修正my:', ( 0 - my > 0 ? Math.floor(my) : Math.ceil(my)), )
+}
+
+var app = new PIXI.Application(1000, 500, { antialias: true });
+document.body.appendChild(app.view);
+
+var graphics = new PIXI.Graphics();
+graphics.lineStyle(1, 0xFF0000, 1);
+drawDiamond(graphics, 10, 10, 100, 50)
+app.stage.interactive = true;
+app.stage.on('pointermove', function(e) {
+  let mouseoverTileCoords =  get_cool(e.data.global)
+    console.log('x-y:', e.data.global)
+    console.log('m-n:', get_uv(e.data.global,100 , 50, 1000, 500))
+    // console.log('PointToGrid2', PointToGrid2(0, 0, e.data.global.x, e.data.global.y))
+})
+
+app.stage.addChild(graphics);
+
+let o_x = parseInt(graphics.width / 2)
+let o_y = 0
+
+console.log('graphics:', 'w:', graphics.width, 'h:', graphics.height)
+
+    </script>
+</body>
+</html>

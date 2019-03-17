@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Tiled Kit Example</title>
+    <!-- -------------------- -->
+    <!-- pixi.js -->
+    <!-- <script src="https://pixijs.download/v4.5.6/pixi.js"></script> -->
+
+    <script src="./lib/pixi-4.5.6.js"></script>
+    <script src="./lib/pixi-projection.js"></script>
+
+    <script src="./lib/pixi-tilemap.js"></script>
+    <!-- -------------------- -->
+    <!-- tiled-kit.js ( https://github.com/finscn/tiled-kit.js ) -->
+    <script src="../src/Utils.js"></script>
+    <!--<script src="../src/Collision.js"></script>-->
+    <script src="../src/TileSet.js"></script>
+    <script src="../src/TileLayer.js"></script>
+    <script src="../src/OrthogonalTileLayer.js"></script>
+    <script src="../src/IsometricTileLayer.js"></script>
+    <script src="../src/StaggeredTileLayer.js"></script>
+    <script src="../src/ObjectLayer.js"></script>
+    <script src="../src/Map.js"></script>
+    <!-- <script src="../src/extension/canvas2d.js"></script> -->
+    <script src="../src/extension/pixi-tilemap.js"></script>
+    <!-- <script src="../src/extension/pixi-particlecontainer.js"></script> -->
+    <!-- -------------------- -->
+    <!-- demo -->
+    <!-- (example-1) 2d直图 -->
+    <script src="./map/sewers.js"></script>
+    <!-- (example-2) 2d-->
+    <script src="./map/perspective_walls.js"></script>
+    <!-- (example-3) 45°斜角2.5d -->
+    <script src="./map/isometric_grass_and_water.js"></script>
+    <!-- (example-4/5) 45°斜角交错-->
+    <script src="./map/isometric_staggered_grass_and_water.js"></script>
+    <!-- -------------------- -->
+    <!--  utils  -->
+    <script type="text/javascript">
+    function getUrlParams() {
+        var params = {};
+        var queryStr = window.location.search;
+        if (queryStr) {
+            queryStr = queryStr.substring(1);
+            var args = queryStr.split("&");
+            for (var i = 0, a, nv; a = args[i]; i++) {
+                nv = args[i] = a.split("=");
+                params[nv[0]] = nv.length > 1 ? decodeURIComponent(nv[1]) : true;
+            }
+        }
+        return params;
+    };
+
+    function loadImg(src, callback) {
+        var img = new Image();
+        img.src = src;
+        img.onload = function(event) {
+            loadImg.loaded++;
+            callback && callback(event);
+        };
+        return img;
+    }
+    loadImg.loaded = 0;
+
+    var ImagePool = {
+        "sewer_tileset": loadImg("./map/sewer_tileset.png"),
+        "perspective_walls": loadImg("./map/perspective_walls.png"),
+        "isometric_grass_and_water": loadImg("./map/isometric_grass_and_water.png"),
+    };
+    var game = {};
+
+    </script>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="./main.js"></script>
+    <script>
+    var params = getUrlParams();
+    var idx = parseInt(params.example) || 1;
+    document.write('<script src="./example-' + idx + '.js"></scr' + 'ipt>');
+    </script>
+    <div>
+        <button type="button" onclick="game.scale*=1.1">zoom in</button>
+        <button type="button" onclick="game.scale*=0.9">zoom out</button>
+    </div>
+</body>
+
+</html>
