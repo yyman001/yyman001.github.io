@@ -9,4 +9,4 @@ function test (text: String):void {
 
 
 
-test('编译ts测试!不乱码了吧')
+test('编译ts测试!')
