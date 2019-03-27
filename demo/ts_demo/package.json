@@ -1,0 +1,13 @@
+{
+  "name": "ts_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "server": "live-server --port=6666",
+    "dev": "tsc -w & live-server"
+  },
+  "author": "",
+  "license": "ISC"
+}
