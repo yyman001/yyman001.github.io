@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no">
+    <style>
+        body,
+        html {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background: #ccc;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="//d157l7jdn8e5sf.cloudfront.net/v4.8.4/pixi.js"></script>
+    <script src="js/isometric.js"></script>
+    <script>
+        let app
+        window.onload = function () {
+            app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+            document.body.appendChild(app.view);
+
+            var container = new PIXI.Container();
+
+            app.stage.addChild(container);
+
+            // Move container to the center
+            container.x = app.screen.width / 2;
+            container.y = app.screen.height / 2;
+
+            // Center bunny sprite in local container coordinates
+
+            // container.pivot.x = container.width / 2;
+            // container.pivot.y = container.height / 2;
+
+            // set tile width and height
+            var TILE_WIDTH = 100
+            var TILE_HEIGHT = 50
+            var TILE_WIDTH_HALF = TILE_WIDTH / 2
+            var TILE_HEIGHT_HALF = TILE_HEIGHT / 2
+            var ROW = 6
+            var COL = 6
+
+            container.width = TILE_WIDTH * ROW + 1
+            container.height = TILE_HEIGHT * COL + 1
+
+            initTileMap(container, { TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH_HALF, TILE_HEIGHT_HALF, ROW, COL })
+
+            app.ticker.add(function (delta) {
+                // rotate the container!
+                // use delta to create frame-independent transform
+                // container.rotation -= 0.01 * delta;
+                container.pivot.x = container.width / 2;
+                container.pivot.y = container.height / 2;
+            });
+
+        }
+    </script>
+</body>
+</html>
