@@ -54,12 +54,12 @@
             var TILE_HEIGHT = 50
             var TILE_WIDTH_HALF = TILE_WIDTH / 2
             var TILE_HEIGHT_HALF = TILE_HEIGHT / 2
-            var ROW = 6
-            var COL = 6
+            var ROW = 2
+            var COL = 5
 
             container.width = TILE_WIDTH * ROW + 1
             container.height = TILE_HEIGHT * COL + 1
-
+            console.log('0,0原点相对坐标:', COL * TILE_WIDTH_HALF)
             initTileMap(container, { TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH_HALF, TILE_HEIGHT_HALF, ROW, COL })
 
             app.ticker.add(function (delta) {

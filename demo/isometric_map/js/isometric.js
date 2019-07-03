@@ -32,11 +32,12 @@ function initTileMap(container, { TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH_HALF, TILE
     isometricTileGraphics.lineStyle(1, 0xff0000)
     isometricTileGraphicsBorder.lineStyle(1, 0xff0000)
 
+    let offsetX = []
     for (let u = 0; u < COL; u++) {
         let screenPos = mapCoordToScreen({ x: 0, y: u }, TILE_WIDTH_HALF, TILE_HEIGHT_HALF)
         // TODO 修正绘制起点坐标,当前只适合 等比网格垂直居中
         screenPos.x = screenPos.x + container._width / 2 - TILE_WIDTH_HALF
-
+        offsetX.push(screenPos.x)
         console.log('u:', screenPos)
         for (let v = 0; v < ROW; v++) {
             isometricTileGraphics.drawRect(screenPos.x, screenPos.y, TILE_WIDTH, TILE_HEIGHT)
@@ -46,6 +47,8 @@ function initTileMap(container, { TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH_HALF, TILE
         }
     }
 
+    console.log('offsetX:',offsetX)
+
     isometricTileGraphics.endFill()
     isometricTileGraphicsBorder.endFill()
     isometricContainer.addChild(isometricTileGraphicsBorder)
@@ -53,16 +56,7 @@ function initTileMap(container, { TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH_HALF, TILE
 
 
     container.addChild(isometricContainer)
-
-
-    var tileMapWidth = isometricContainer.width
-    var tileMapHeight = isometricContainer.height
-
-    console.log('container:', container)
-    console.log('isometricContainer:', isometricContainer)
-    console.log('tileMapWidth:', tileMapWidth)
-    console.log('tileMapHeight:', tileMapHeight)
-
+    
     var graphics = new PIXI.Graphics();
     graphics.beginFill(0xDE3249, 0.3);
     graphics.drawRect(0, 0, container.width, container.height);
@@ -71,5 +65,7 @@ function initTileMap(container, { TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH_HALF, TILE
  
     window.container = container
     window.isometricContainer = isometricContainer
-
+    // !! 修正了非等比网格居中对其
+    isometricContainer.x = 0 - offsetX.pop()
+    
 }
