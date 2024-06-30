@@ -1,0 +1,1 @@
+import{u as o}from"./index-6a22476b.js";import{J as s,g as t}from"./index-330ef47a.js";const d=s("goodState",(()=>{const s=t([]);return o("goodsList",s),{goodsList:s,setGoods:o=>{s.value=o},addGood:o=>{s.value.push(o)},getGood:o=>s.value.find((s=>s.objectId===o))||[]}}));export{d as g};
